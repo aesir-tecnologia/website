@@ -38,7 +38,7 @@ function Clients() {
       <Container>
         <FadeIn className="flex items-center gap-x-8">
           <h2 className="text-center font-display text-sm font-semibold tracking-wider text-white sm:text-left">
-            We’ve worked with hundreds of amazing people
+            Trusted by innovative companies across Brazil
           </h2>
           <div className="h-px flex-auto bg-neutral-800" />
         </FadeIn>
@@ -65,13 +65,13 @@ function CaseStudies({ caseStudies }) {
   return (
     <>
       <SectionIntro
-        title="Harnessing technology for a brighter future"
+        title="Transforming businesses through technology"
         className="mt-24 sm:mt-32 lg:mt-40"
       >
         <p>
-          We believe technology is the answer to the world’s greatest
-          challenges. It’s also the cause, so we find ourselves in bit of a
-          catch 22 situation.
+          We leverage cutting-edge technology to solve complex business 
+          challenges and drive digital transformation for our clients across 
+          various industries.
         </p>
       </SectionIntro>
       <Container className="mt-16">
@@ -122,12 +122,12 @@ function Services() {
     <>
       <SectionIntro
         eyebrow="Services"
-        title="We help you identify, explore and respond to new opportunities."
+        title="We help you innovate and grow through technology."
         className="mt-24 sm:mt-32 lg:mt-40"
       >
         <p>
-          As long as those opportunities involve giving us money to re-purpose
-          old projects — we can come up with an endless number of those.
+          Our comprehensive technology services are designed to accelerate your 
+          digital transformation and drive sustainable business growth.
         </p>
       </SectionIntro>
       <Container className="mt-16">
@@ -142,24 +142,24 @@ function Services() {
             </FadeIn>
           </div>
           <List className="mt-16 lg:mt-0 lg:w-1/2 lg:min-w-132 lg:pl-4">
-            <ListItem title="Web development">
-              We specialise in crafting beautiful, high quality marketing pages.
-              The rest of the website will be a shell that uses lorem ipsum
-              everywhere.
+            <ListItem title="Software Development">
+              Full-stack development using modern technologies including React, 
+              Node.js, Python, and cloud-native architectures for scalable 
+              enterprise solutions.
             </ListItem>
-            <ListItem title="Application development">
-              We have a team of skilled developers who are experts in the latest
-              app frameworks, like Angular 1 and Google Web Toolkit.
+            <ListItem title="Digital Transformation">
+              Strategic consulting and implementation of digital solutions to 
+              modernize business processes and enhance operational efficiency.
             </ListItem>
-            <ListItem title="E-commerce">
-              We are at the forefront of modern e-commerce development. Which
-              mainly means adding your logo to the Shopify store template we’ve
-              used for the past six years.
+            <ListItem title="Cloud Solutions">
+              Migration, optimization, and management of cloud infrastructure 
+              using AWS, Azure, and Google Cloud Platform for enhanced 
+              scalability and performance.
             </ListItem>
-            <ListItem title="Custom content management">
-              At Studio we understand the importance of having a robust and
-              customised CMS. That’s why we run all of our client projects out
-              of a single, enormous Joomla instance.
+            <ListItem title="Data Analytics & AI">
+              Advanced data analytics, machine learning, and artificial 
+              intelligence solutions to unlock valuable insights and automate 
+              business processes.
             </ListItem>
           </List>
         </div>
@@ -170,7 +170,7 @@ function Services() {
 
 export const metadata = {
   description:
-    'We are a development studio working at the intersection of design and technology.',
+    'Aesir Tecnologia is a Brazilian technology company specializing in software development, digital transformation, and innovative technology solutions.',
 }
 
 export default async function Home() {
@@ -181,12 +181,12 @@ export default async function Home() {
       <Container className="mt-24 sm:mt-32 md:mt-56">
         <FadeIn className="max-w-3xl">
           <h1 className="font-display text-5xl font-medium tracking-tight text-balance text-neutral-950 sm:text-7xl">
-            Award-winning development studio based in Denmark.
+            Innovative technology solutions for modern businesses.
           </h1>
           <p className="mt-6 text-xl text-neutral-600">
-            We are a development studio working at the intersection of design
-            and technology. It’s a really busy intersection though — a lot of
-            our staff have been involved in hit and runs.
+            Aesir Tecnologia is a Brazilian technology company specializing in 
+            cutting-edge software development, digital transformation, and 
+            innovative technology solutions.
           </p>
         </FadeIn>
       </Container>
@@ -197,11 +197,11 @@ export default async function Home() {
 
       <Testimonial
         className="mt-24 sm:mt-32 lg:mt-40"
-        client={{ name: 'Phobia', logo: logoPhobiaDark }}
+        client={{ name: 'Tech Client', logo: logoPhobiaDark }}
       >
-        The team at Studio went above and beyond with our onboarding, even
-        finding a way to access the user’s microphone without triggering one of
-        those annoying permission dialogs.
+        Aesir Tecnologia transformed our digital infrastructure completely. 
+        Their expertise in cloud migration and modern development practices 
+        helped us scale our operations efficiently while reducing costs by 40%.
       </Testimonial>
 
       <Services />

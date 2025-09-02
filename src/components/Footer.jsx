@@ -82,11 +82,11 @@ function NewsletterForm() {
   return (
     <form className="max-w-sm">
       <h2 className="font-display text-sm font-semibold tracking-wider text-neutral-950">
-        Sign up for our newsletter
+        Stay updated with Aesir
       </h2>
       <p className="mt-4 text-sm text-neutral-700">
-        Subscribe to get the latest design news, articles, resources and
-        inspiration.
+        Subscribe to get the latest technology insights, industry news, and 
+        updates from our team.
       </p>
       <div className="relative mt-6">
         <input
@@ -125,7 +125,7 @@ export function Footer() {
             <Logo className="h-8" fillOnHover />
           </Link>
           <p className="text-sm text-neutral-700">
-            © Studio Agency Inc. {new Date().getFullYear()}
+            © Aesir Tecnologia. {new Date().getFullYear()}
           </p>
         </div>
       </FadeIn>
