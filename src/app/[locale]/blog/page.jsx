@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import Link from 'next/link'
+import { setRequestLocale } from 'next-intl/server'
 
 import { Border } from '@/components/Border'
 import { Button } from '@/components/Button'
@@ -10,14 +10,18 @@ import { PageIntro } from '@/components/PageIntro'
 import { RootLayout } from '@/components/RootLayout'
 import { formatDate } from '@/lib/formatDate'
 import { loadArticles } from '@/lib/mdx'
+import { Link } from '@/i18n/navigation'
 
 export const metadata = {
   title: 'Blog',
   description:
-    'Stay up-to-date with the latest industry news as our marketing teams finds new ways to re-purpose old CSS tricks articles.',
+    'Technical insights, best practices, and lessons learned from our development team. Stay current with web, mobile, and game development trends.',
 }
 
-export default async function Blog() {
+export default async function Blog({ params }) {
+  const { locale } = await params
+  setRequestLocale(locale)
+  
   let articles = await loadArticles()
 
   return (

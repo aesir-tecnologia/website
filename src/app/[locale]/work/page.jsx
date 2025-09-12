@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import Link from 'next/link'
+import { setRequestLocale } from 'next-intl/server'
 
 import { Blockquote } from '@/components/Blockquote'
 import { Border } from '@/components/Border'
@@ -20,6 +20,7 @@ import logoUnseal from '@/images/clients/unseal/logo-dark.svg'
 import { formatDate } from '@/lib/formatDate'
 import { loadCaseStudies } from '@/lib/mdx'
 import { RootLayout } from '@/components/RootLayout'
+import { Link } from '@/i18n/navigation'
 
 function CaseStudies({ caseStudies }) {
   return (
@@ -135,10 +136,13 @@ function Clients() {
 export const metadata = {
   title: 'Our Work',
   description:
-    'We believe in efficiency and maximizing our resources to provide the best value to our clients.',
+    'Explore our portfolio of web, mobile, and game development projects across healthcare, retail, real estate, and hospitality industries.',
 }
 
-export default async function Work() {
+export default async function Work({ params }) {
+  const { locale } = await params
+  setRequestLocale(locale)
+  
   let caseStudies = await loadCaseStudies()
 
   return (

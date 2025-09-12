@@ -10,10 +10,15 @@ import { remarkRehypeWrap } from 'remark-rehype-wrap'
 import rehypeUnwrapImages from 'rehype-unwrap-images'
 import shiki from 'shiki'
 import { unifiedConditional } from 'unified-conditional'
+import createNextIntlPlugin from 'next-intl/plugin'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'mdx'],
+  trailingSlash: true,
+  images: {
+    unoptimized: true,
+  },
 }
 
 function remarkMDXLayout(source, metaName) {
@@ -40,6 +45,8 @@ function remarkMDXLayout(source, metaName) {
     )
   }
 }
+
+const withNextIntl = createNextIntlPlugin('./src/i18n/request.js')
 
 export default async function config() {
   let highlighter = await shiki.getHighlighter({
@@ -79,5 +86,5 @@ export default async function config() {
     },
   })
 
-  return withMDX(nextConfig)
+  return withNextIntl(withMDX(nextConfig))
 }

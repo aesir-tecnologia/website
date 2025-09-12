@@ -1,43 +1,31 @@
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
+import { useTranslations } from 'next-intl'
 
 import { Container } from '@/components/Container'
 import { FadeIn } from '@/components/FadeIn'
 import { Logo } from '@/components/Logo'
 import { socialMediaProfiles } from '@/components/SocialMedia'
 
-const navigation = [
-  {
-    title: 'Work',
-    links: [
-      { title: 'FamilyFund', href: '/work/family-fund' },
-      { title: 'Unseal', href: '/work/unseal' },
-      { title: 'Phobia', href: '/work/phobia' },
-      {
-        title: (
-          <>
-            See all <span aria-hidden="true">&rarr;</span>
-          </>
-        ),
-        href: '/work',
-      },
-    ],
-  },
-  {
-    title: 'Company',
-    links: [
-      { title: 'About', href: '/about' },
-      { title: 'Process', href: '/process' },
-      { title: 'Blog', href: '/blog' },
-      { title: 'Contact us', href: '/contact' },
-    ],
-  },
-  {
-    title: 'Connect',
-    links: socialMediaProfiles,
-  },
-]
-
 function Navigation() {
+  const t = useTranslations('Navigation')
+  const ft = useTranslations('Footer')
+  
+  const navigation = [
+    {
+      title: ft('company'),
+      links: [
+        { title: t('about'), href: '/about' },
+        { title: t('process'), href: '/process' },
+        { title: t('blog'), href: '/blog' },
+        { title: t('contact'), href: '/contact' },
+      ],
+    },
+    {
+      title: ft('connect'),
+      links: socialMediaProfiles,
+    },
+  ]
+
   return (
     <nav>
       <ul role="list" className="grid grid-cols-2 gap-8 sm:grid-cols-3">
@@ -79,21 +67,22 @@ function ArrowIcon(props) {
 }
 
 function NewsletterForm() {
+  const ft = useTranslations('Footer.newsletter')
+  
   return (
     <form className="max-w-sm">
       <h2 className="font-display text-sm font-semibold tracking-wider text-neutral-950">
-        Stay updated with Aesir
+        {ft('title')}
       </h2>
       <p className="mt-4 text-sm text-neutral-700">
-        Subscribe to get the latest technology insights, industry news, and 
-        updates from our team.
+        {ft('description')}
       </p>
       <div className="relative mt-6">
         <input
           type="email"
-          placeholder="Email address"
+          placeholder={ft('placeholder')}
           autoComplete="email"
-          aria-label="Email address"
+          aria-label={ft('placeholder')}
           className="block w-full rounded-2xl border border-neutral-300 bg-transparent py-4 pr-20 pl-6 text-base/6 text-neutral-950 ring-4 ring-transparent transition placeholder:text-neutral-500 focus:border-neutral-950 focus:ring-neutral-950/5 focus:outline-hidden"
         />
         <div className="absolute inset-y-1 right-1 flex justify-end">

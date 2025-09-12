@@ -1,0 +1,85 @@
+{
+  "Navigation": {
+    "about": "About Us",
+    "work": "Work", 
+    "process": "Our Process",
+    "blog": "Blog",
+    "contact": "Contact us"
+  },
+  "HomePage": {
+    "title": "Expert development and staff augmentation services.",
+    "description": "We deliver high-quality web, mobile, and game development solutions while providing skilled developers for your team with remote-first expertise.",
+    "metadata": {
+      "description": "Expert web, mobile, and game development services plus staff augmentation with remote-first expertise."
+    }
+  },
+  "Technologies": {
+    "title": "Technologies we specialize in",
+    "php": {
+      "name": "PHP & Laravel",
+      "description": "Robust backend development with modern PHP frameworks"
+    },
+    "react": {
+      "name": "React & Next.js", 
+      "description": "Dynamic web applications with server-side rendering"
+    },
+    "vue": {
+      "name": "Vue.js & Nuxt",
+      "description": "Progressive web apps with reactive user interfaces"
+    },
+    "node": {
+      "name": "Node.js",
+      "description": "Fast, scalable server-side JavaScript applications"
+    },
+    "python": {
+      "name": "Python & Django",
+      "description": "Data-driven applications and API development"
+    },
+    "reactNative": {
+      "name": "React Native",
+      "description": "Cross-platform mobile apps for iOS and Android"
+    },
+    "flutter": {
+      "name": "Flutter",
+      "description": "Beautiful native mobile applications from single codebase"
+    },
+    "unity": {
+      "name": "Unity & HTML5",
+      "description": "Interactive games and immersive experiences"
+    }
+  },
+  "Services": {
+    "eyebrow": "Services",
+    "title": "Expert development and strategic staff augmentation.",
+    "description": "Whether you need a complete solution built from scratch or skilled developers to join your team, we deliver the expertise and partnership you need to succeed.",
+    "web": {
+      "title": "Web Development",
+      "description": "Full-stack web applications using PHP/Laravel, React, Vue.js, Node.js, and Python. From e-commerce platforms to custom enterprise solutions built for performance and scalability."
+    },
+    "mobile": {
+      "title": "Mobile Development", 
+      "description": "Native and cross-platform mobile applications using React Native and Flutter. iOS and Android apps that deliver exceptional user experiences across all devices."
+    },
+    "game": {
+      "title": "Game Development",
+      "description": "Interactive games and experiences using Unity and HTML5. From mobile games to web-based interactive content that engages and entertains users."
+    },
+    "staff": {
+      "title": "Staff Augmentation",
+      "description": "Skilled developers who integrate seamlessly with your team. Short-term and long-term remote engagements to scale your development capacity with proven expertise."
+    }
+  },
+  "Testimonial": {
+    "client": "Healthcare Partner",
+    "quote": "Aesir's developers integrated perfectly with our team and delivered a complex patient management system on time and within budget. Their expertise in Laravel and React helped us modernize our entire platform."
+  },
+  "Footer": {
+    "company": "Company",
+    "connect": "Connect", 
+    "newsletter": {
+      "title": "Stay updated with Aesir",
+      "description": "Subscribe to get the latest technology insights, industry news, and updates from our team.",
+      "placeholder": "Email address"
+    }
+  }
+}

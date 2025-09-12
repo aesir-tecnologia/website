@@ -1,36 +1,50 @@
-# Studio
+# Aesir Tecnologia Website
 
-Studio is a [Tailwind Plus](https://tailwindcss.com/plus) site template built using [Tailwind CSS](https://tailwindcss.com) and [Next.js](https://nextjs.org).
+The official website for Aesir Tecnologia, a Brazilian technology company specializing in web, mobile, and game development services plus staff augmentation. Built using [Tailwind CSS](https://tailwindcss.com) and [Next.js](https://nextjs.org).
+
+## About Aesir Tecnologia
+
+Since 2017, Aesir Tecnologia has delivered expert development services to companies across Brazil and the United States. We specialize in:
+
+- **Web Development**: PHP/Laravel, React, Vue.js, Node.js, Python
+- **Mobile Development**: React Native, Flutter, iOS, Android  
+- **Game Development**: Unity, HTML5 games
+- **Staff Augmentation**: Skilled developers for remote teams
 
 ## Getting started
 
-To get started with this template, first install the npm dependencies:
+To run the development server locally:
 
 ```bash
 npm install
-```
-
-Next, run the development server:
-
-```bash
 npm run dev
 ```
 
-Finally, open [http://localhost:3000](http://localhost:3000) in your browser to view the website.
+Then open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Customizing
+## Build and Deploy
 
-You can start editing this template by modifying the files in the `/src` folder. The site will auto-update as you edit these files.
+```bash
+npm run build
+npm start
+```
 
-## License
+## Project Structure
 
-This site template is a commercial product and is licensed under the [Tailwind Plus license](https://tailwindcss.com/plus/license).
+- `/src/app` - Next.js App Router pages and layouts
+- `/src/components` - Reusable React components
+- `/src/styles` - Tailwind CSS configuration and custom styles
+- `/src/lib` - Utility functions and MDX configuration
 
-## Learn more
+## Technologies Used
 
-To learn more about the technologies used in this site template, see the following resources:
+- [Next.js 15](https://nextjs.org) - React framework with App Router
+- [Tailwind CSS v4](https://tailwindcss.com) - Utility-first CSS framework
+- [Framer Motion](https://www.framer.com/motion/) - Motion library for React
+- [MDX](https://mdxjs.com/) - Markdown for blog posts and case studies
 
-- [Tailwind CSS](https://tailwindcss.com/docs) - the official Tailwind CSS documentation
-- [Next.js](https://nextjs.org/docs) - the official Next.js documentation
-- [Framer Motion](https://www.framer.com/docs/) - the official Framer Motion documentation
-- [MDX](https://mdxjs.com/) - the official MDX documentation
+## Contact
+
+- Website: [aesirtecnologia.com.br](https://aesirtecnologia.com.br)
+- Email: hello@aesirtecnologia.com.br
+- Business: business@aesirtecnologia.com.br

@@ -1,11 +1,11 @@
 import { useId } from 'react'
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
+import { setRequestLocale } from 'next-intl/server'
 
 import { Border } from '@/components/Border'
 import { Button } from '@/components/Button'
 import { Container } from '@/components/Container'
 import { FadeIn } from '@/components/FadeIn'
-import { Offices } from '@/components/Offices'
 import { PageIntro } from '@/components/PageIntro'
 import { SocialMedia } from '@/components/SocialMedia'
 import { RootLayout } from '@/components/RootLayout'
@@ -71,9 +71,9 @@ function ContactForm() {
             <fieldset>
               <legend className="text-base/6 text-neutral-500">Budget</legend>
               <div className="mt-6 grid grid-cols-1 gap-8 sm:grid-cols-2">
-                <RadioInput label="$25K – $50K" name="budget" value="25" />
-                <RadioInput label="$50K – $100K" name="budget" value="50" />
-                <RadioInput label="$100K – $150K" name="budget" value="100" />
+                <RadioInput label="$20K – $40K" name="budget" value="20" />
+                <RadioInput label="$40K – $80K" name="budget" value="40" />
+                <RadioInput label="$80K – $150K" name="budget" value="80" />
                 <RadioInput label="More than $150K" name="budget" value="150" />
               </div>
             </fieldset>
@@ -90,24 +90,14 @@ function ContactForm() {
 function ContactDetails() {
   return (
     <FadeIn>
-      <h2 className="font-display text-base font-semibold text-neutral-950">
-        Our offices
-      </h2>
-      <p className="mt-6 text-base text-neutral-600">
-        Prefer doing things in person? We don’t but we have to list our
-        addresses here for legal reasons.
-      </p>
-
-      <Offices className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2" />
-
       <Border className="mt-16 pt-16">
         <h2 className="font-display text-base font-semibold text-neutral-950">
           Email us
         </h2>
         <dl className="mt-6 grid grid-cols-1 gap-8 text-sm sm:grid-cols-2">
           {[
-            ['Careers', 'careers@studioagency.com'],
-            ['Press', 'press@studioagency.com'],
+            ['General Inquiries', 'hello@aesirtecnologia.com.br'],
+            ['Business', 'business@aesirtecnologia.com.br'],
           ].map(([label, email]) => (
             <div key={email}>
               <dt className="font-semibold text-neutral-950">{label}</dt>
@@ -136,14 +126,19 @@ function ContactDetails() {
 
 export const metadata = {
   title: 'Contact Us',
-  description: 'Let’s work together. We can’t wait to hear from you.',
+  description: 'Ready to start your next project? Contact Aesir Tecnologia for expert development services and staff augmentation solutions.',
 }
 
-export default function Contact() {
+export const dynamic = 'force-static'
+
+export default async function Contact({ params }) {
+  const { locale } = await params
+  setRequestLocale(locale)
   return (
     <RootLayout>
-      <PageIntro eyebrow="Contact us" title="Let’s work together">
-        <p>We can’t wait to hear from you.</p>
+      <PageIntro eyebrow="Contact us" title="Let&apos;s build something great together">
+        <p>Ready to discuss your project or explore staff augmentation options? 
+        We&apos;d love to hear about your goals and how we can help.</p>
       </PageIntro>
 
       <Container className="mt-24 sm:mt-32 lg:mt-40">

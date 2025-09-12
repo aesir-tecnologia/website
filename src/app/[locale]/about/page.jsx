@@ -1,4 +1,5 @@
-import Image from 'next/image'
+// import Image from 'next/image' - preserved for future use
+import { setRequestLocale } from 'next-intl/server'
 
 import { Border } from '@/components/Border'
 import { ContactSection } from '@/components/ContactSection'
@@ -9,18 +10,19 @@ import { PageIntro } from '@/components/PageIntro'
 import { PageLinks } from '@/components/PageLinks'
 import { SectionIntro } from '@/components/SectionIntro'
 import { StatList, StatListItem } from '@/components/StatList'
-import imageAngelaFisher from '@/images/team/angela-fisher.jpg'
-import imageBenjaminRussel from '@/images/team/benjamin-russel.jpg'
-import imageBlakeReid from '@/images/team/blake-reid.jpg'
-import imageChelseaHagon from '@/images/team/chelsea-hagon.jpg'
-import imageDriesVincent from '@/images/team/dries-vincent.jpg'
-import imageEmmaDorsey from '@/images/team/emma-dorsey.jpg'
-import imageJeffreyWebb from '@/images/team/jeffrey-webb.jpg'
-import imageKathrynMurphy from '@/images/team/kathryn-murphy.jpg'
-import imageLeonardKrasner from '@/images/team/leonard-krasner.jpg'
-import imageLeslieAlexander from '@/images/team/leslie-alexander.jpg'
-import imageMichaelFoster from '@/images/team/michael-foster.jpg'
-import imageWhitneyFrancis from '@/images/team/whitney-francis.jpg'
+// Team images - preserved for future use
+// import imageAngelaFisher from '@/images/team/angela-fisher.jpg'
+// import imageBenjaminRussel from '@/images/team/benjamin-russel.jpg'
+// import imageBlakeReid from '@/images/team/blake-reid.jpg'
+// import imageChelseaHagon from '@/images/team/chelsea-hagon.jpg'
+// import imageDriesVincent from '@/images/team/dries-vincent.jpg'
+// import imageEmmaDorsey from '@/images/team/emma-dorsey.jpg'
+// import imageJeffreyWebb from '@/images/team/jeffrey-webb.jpg'
+// import imageKathrynMurphy from '@/images/team/kathryn-murphy.jpg'
+// import imageLeonardKrasner from '@/images/team/leonard-krasner.jpg'
+// import imageLeslieAlexander from '@/images/team/leslie-alexander.jpg'
+// import imageMichaelFoster from '@/images/team/michael-foster.jpg'
+// import imageWhitneyFrancis from '@/images/team/whitney-francis.jpg'
 import { loadArticles } from '@/lib/mdx'
 import { RootLayout } from '@/components/RootLayout'
 
@@ -28,28 +30,28 @@ function Culture() {
   return (
     <div className="mt-24 rounded-4xl bg-neutral-950 py-24 sm:mt-32 lg:mt-40 lg:py-32">
       <SectionIntro
-        eyebrow="Our culture"
-        title="Excellence, innovation, and collaboration."
+        eyebrow="Our values"
+        title="Partnership, quality, and technical excellence."
         invert
       >
         <p>
-          Our core values drive everything we do and shape how we work with 
-          our clients and each other.
+          These principles guide our remote-first approach and define how we 
+          collaborate with clients and deliver exceptional results.
         </p>
       </SectionIntro>
       <Container className="mt-16">
         <GridList>
-          <GridListItem title="Innovation" invert>
-            We embrace cutting-edge technologies and methodologies to deliver 
-            solutions that keep our clients ahead of the competition.
+          <GridListItem title="Technical Excellence" invert>
+            We maintain the highest standards in code quality, architecture, 
+            and development practices, ensuring robust and scalable solutions.
           </GridListItem>
-          <GridListItem title="Excellence" invert>
-            We maintain the highest standards in everything we do, from code 
-            quality to client communication and project delivery.
+          <GridListItem title="Client Partnership" invert>
+            We work as an extension of your team, understanding your business 
+            goals and delivering solutions that drive real value.
           </GridListItem>
-          <GridListItem title="Partnership" invert>
-            We build lasting relationships with our clients, working as an 
-            extension of their team to achieve shared success.
+          <GridListItem title="Agile Collaboration" invert>
+            Our remote-first approach and Agile methodologies ensure transparent 
+            communication and efficient project delivery.
           </GridListItem>
         </GridList>
       </Container>
@@ -57,6 +59,8 @@ function Culture() {
   )
 }
 
+// Team section - preserved for future use
+/*
 const team = [
   {
     title: 'Leadership',
@@ -178,57 +182,58 @@ function Team() {
     </Container>
   )
 }
+*/
 
 export const metadata = {
   title: 'About Us',
   description:
-    'Learn about Aesir Tecnologia, a Brazilian technology company combining innovation with expertise to deliver transformative business solutions.',
+    'Since 2017, Aesir Tecnologia has delivered web, mobile, and game development services plus staff augmentation.',
 }
 
-export default async function About() {
+export default async function About({ params }) {
+  const { locale } = await params
+  setRequestLocale(locale)
+  
   let blogArticles = (await loadArticles()).slice(0, 2)
 
   return (
     <RootLayout>
-      <PageIntro eyebrow="About us" title="Innovation through expertise">
+      <PageIntro eyebrow="About us" title="Seven years of development excellence">
         <p>
-          At Aesir Tecnologia, we combine cutting-edge technology with deep 
-          industry expertise to deliver transformative solutions for modern 
-          businesses.
+          Since 2017, Aesir Tecnologia has delivered exceptional development 
+          services and strategic staff augmentation to companies worldwide.
         </p>
         <div className="mt-10 max-w-2xl space-y-6 text-base">
           <p>
-            Founded in Brazil with a vision to bridge the gap between emerging 
-            technologies and practical business applications, Aesir Tecnologia 
-            has grown to become a trusted partner for companies looking to 
-            modernize their operations and stay competitive in the digital age.
+            Founded with a commitment to technical excellence and client 
+            partnership, we specialize in web, mobile, and game development 
+            using modern technologies like PHP/Laravel, React, Vue.js, and 
+            React Native. Our remote-first approach allows us to work seamlessly 
+            with teams regardless of location.
           </p>
           <p>
-            Our multidisciplinary team brings together software engineers, cloud 
-            architects, data scientists, and digital strategists who share a 
-            passion for solving complex challenges through innovative technology 
-            solutions. We believe in building long-term partnerships with our 
-            clients, understanding their unique needs and delivering solutions 
-            that drive measurable business outcomes.
+            We serve diverse industries including healthcare, retail, real estate, 
+            hospitality, and content providers, bringing deep technical expertise 
+            to projects starting at $20K USD. Whether you need a complete solution 
+            or skilled developers to augment your team, we deliver quality results 
+            through Agile methodologies and collaborative partnerships.
           </p>
         </div>
       </PageIntro>
       <Container className="mt-16">
         <StatList>
-          <StatListItem value="50+" label="Expert technologists" />
-          <StatListItem value="200+" label="Successful projects" />
-          <StatListItem value="15+" label="Industry verticals" />
+          <StatListItem value="7+" label="Years of experience" />
+          <StatListItem value="20+" label="Projects delivered" />
+          <StatListItem value="5+" label="Industries served" />
         </StatList>
       </Container>
 
       <Culture />
 
-      <Team />
-
       <PageLinks
         className="mt-24 sm:mt-32 lg:mt-40"
         title="From the blog"
-        intro="Stay up to date with the latest insights from our team of technology experts. We share knowledge about emerging technologies, industry trends, and practical solutions for modern business challenges."
+        intro="Get insights from our development team on best practices, emerging technologies, and lessons learned from working with clients across different industries."
         pages={blogArticles}
       />
 

@@ -22,6 +22,7 @@
     "fast-glob": "^3.3.3",
     "framer-motion": "^12.23.11",
     "next": "^15",
+    "next-intl": "^4.3.7",
     "react": "^19",
     "react-dom": "^19",
     "recma-import-images": "0.0.3",
