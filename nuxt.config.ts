@@ -15,5 +15,19 @@ export default defineNuxtConfig({
     '@nuxtjs/robots',
     '@nuxtjs/device',
     '@nuxtjs/seo'
-  ]
+  ],
+
+  i18n: {
+    strategy: 'prefix_except_default',
+    defaultLocale: 'en',
+    locales: [
+      { code: 'en', iso: 'en-US', name: 'English' },
+      { code: 'pt-br', iso: 'pt-BR', name: 'Português (Brasil)' }
+    ],
+    detectBrowserLanguage: {
+      cookieKey: 'i18n_redirected',
+      redirectOn: 'root' // avoids middleware redirects on every route change
+    },
+    vueI18n: './i18n.config.ts'
+  }
 })
