@@ -2,95 +2,93 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Project Overview
+## Common Development Commands
 
-This is a Next.js website for "Studio" (based on Tailwind Plus template) - an award-winning developer studio. The site features a modern design with sophisticated animations using Framer Motion, MDX-powered blog and case studies, and custom Tailwind CSS configuration.
-
-## Essential Development Commands
-
-**Development workflow:**
+**Development Server:**
 ```bash
-npm install          # Install dependencies
-npm run dev          # Start development server (localhost:3000)
-npm run build        # Build for production
-npm start            # Start production server
-npm run lint         # Run ESLint checks
+npm run dev
+```
+Start the development server on `http://localhost:3000`
+
+**Build & Production:**
+```bash
+npm run build          # Build for production
+npm run generate       # Generate static site
+npm run preview        # Preview production build locally
 ```
 
-**No test commands are configured** - verify functionality manually in the browser.
+**Maintenance:**
+```bash
+npm install            # Install dependencies
+npm run postinstall    # Prepare Nuxt (runs automatically after install)
+```
 
-## Architecture & Key Technologies
+**Linting:**
+```bash
+npx eslint .           # Run ESLint (uses .nuxt/eslint.config.mjs)
+```
 
-**Core Stack:**
-- Next.js 15 with App Router
-- React 19
-- Tailwind CSS v4 (uses new @theme syntax in CSS)
-- Framer Motion for animations
-- MDX for blog posts and case studies
+## Architecture Overview
 
-**Content Structure:**
-- Blog posts: `src/app/blog/[slug]/page.mdx` with wrapper layout
-- Case studies: `src/app/work/[slug]/page.mdx` with wrapper layout  
-- MDX automatically uses layouts via `remarkMDXLayout` plugin in `next.config.mjs`
+This is a **Nuxt 4** application being transformed from a Next.js website. The project is currently in transition from a Studio template to an Aesir Tecnologia website focusing on AI-generated code cleanup services ("vibe coding cleanup").
 
-**Component Architecture:**
-- Shared components in `src/components/`
-- Main layout wrapper: `RootLayout.jsx` (sophisticated animated navigation)
-- Import pattern: `@/components/ComponentName` and `@/styles/tailwind.css`
+**Current Status:**
+- On `nuxt` branch (main development branch)
+- Many original Next.js files have been removed (marked as deleted in git status)
+- New Nuxt architecture being implemented
+- Minimal app.vue currently shows NuxtWelcome component
 
-## Styling System
+**Key Technology Stack:**
+- **Framework:** Nuxt 4 with Vue 3
+- **Build:** Vite 7, TypeScript 5
+- **Modules:** Content, UI, ESLint, Image, DevTools, i18n, SEO, Sitemap
+- **Styling:** Tailwind CSS (via @nuxt/ui)
+- **Features:** Color mode, Device detection, Internationalization (EN/PT-BR)
 
-**Tailwind CSS v4 Configuration:**
-- Custom theme variables in `src/styles/tailwind.css` using `@theme` syntax
-- Custom font: Mona Sans for both `font-sans` and `font-display` with width variation
-- Base styles imported from `base.css` and `typography.css`
+**Module Configuration:**
+The app uses these key Nuxt modules (nuxt.config.ts):
+- `@nuxt/content` - Content management
+- `@nuxt/ui` - UI components and Tailwind
+- `@nuxtjs/i18n` - Internationalization
+- `@nuxtjs/seo` - SEO optimization
+- `@nuxtjs/sitemap` - Sitemap generation
+- `@nuxtjs/color-mode` - Dark/light mode
+- `@nuxtjs/device` - Device detection
 
-**Component Patterns:**
-- Uses `clsx` for conditional classes
-- `invert` prop pattern for dark/light theme variants
-- Components typically accept `className` prop for customization
+**Content Strategy:**
+- Marketing copy exists in `docs/COPY-EN.md` and `docs/COPY-PT_BR.md`
+- Detailed component documentation in `VIBE_COMPONENTS.md`
+- Focus on "vibe coding cleanup" services (transforming AI-generated MVPs to production-ready apps)
 
-## Code Conventions
+**File Structure Notes:**
+- Single `app/app.vue` file currently (minimal setup)
+- No pages/ directory structure yet implemented
+- Content and component files from previous Next.js implementation were removed
+- TypeScript configuration references Nuxt's generated configs
 
-**File Structure:**
-- `.jsx` extensions throughout (no TypeScript)
-- Components use PascalCase naming
-- Pages follow Next.js App Router conventions
+## Development Workflow
 
-**Styling Patterns:**
-- Extensive use of Tailwind utility classes
-- Consistent `invert` prop for theme variants
-- Motion components from Framer Motion for animations
+**Branch Strategy:**
+- Main development happens on `nuxt` branch
+- No main branch reference found in git status
 
-**Import Organization:**
-- React imports first
-- Next.js imports second  
-- External libraries third
-- Internal components with `@/` prefix last
+**Code Style:**
+- Uses Nuxt's built-in ESLint configuration
+- TypeScript enabled by default
+- Follows Vue 3 Composition API patterns (implied by Nuxt 4)
 
-**Component Patterns:**
-- Destructured props with defaults: `{ invert = false, className, ...props }`
-- Conditional rendering based on props (e.g., Button component renders Link or button)
-- Consistent use of `clsx` for dynamic className construction
+**Important Notes:**
+- This is a website transformation project, not a greenfield application
+- Previous Next.js components and pages were removed - don't reference them
+- Focus is on Brazilian technology consultancy specializing in AI-generated code cleanup
+- Internationalization (EN/PT-BR) is a key requirement
+- The project targets entrepreneurs and startups with AI-generated MVPs
 
-## Content Management
+## Special Considerations
 
-**MDX Processing:**
-- Blog posts automatically get `article` metadata via wrapper
-- Case studies automatically get `caseStudy` metadata via wrapper
-- Images processed via `recmaImportImages` plugin
-- Syntax highlighting via Shiki with CSS variables theme
-- Custom Typography wrapper for content styling
+- **Content Migration:** Existing content in docs/ folder needs to be integrated into Nuxt Content structure
+- **Component Library:** VIBE_COMPONENTS.md documents custom components that need to be recreated in Vue/Nuxt
+- **SEO Focus:** Website is service-focused with strong SEO requirements (multiple modules installed)
+- **Mobile-First:** Device detection module suggests mobile-first approach is important
 
-## Code Quality Tools
-
-- **ESLint:** Uses `next/core-web-vitals` configuration
-- **Prettier:** Custom config with single quotes, no semicolons, Tailwind plugin enabled
-- **Tailwind Plugin:** Configured with custom stylesheet path
-
-## Development Notes
-
-- Uses Tailwind CSS v4's new `@theme` configuration syntax
-- Complex navigation with Framer Motion layout animations
-- No TypeScript - pure JavaScript/JSX codebase
-- Mobile-responsive design with extensive use of responsive Tailwind classes
+When making changes, always consider the bilingual nature (EN/PT-BR) and the specific service focus on transforming AI-generated applications into production-ready software.
