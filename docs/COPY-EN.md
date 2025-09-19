@@ -1,4 +1,4 @@
-# Marketing-Focused Website Copy for Aesir Tecnologia
+# Website Aesir Tecnologia
 
 ## Site Architecture
 

@@ -1,50 +1,75 @@
-# Aesir Tecnologia Website
+# Nuxt Minimal Starter
 
-The official website for Aesir Tecnologia, a Brazilian technology company specializing in web, mobile, and game development services plus staff augmentation. Built using [Tailwind CSS](https://tailwindcss.com) and [Next.js](https://nextjs.org).
+Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
-## About Aesir Tecnologia
+## Setup
 
-Since 2017, Aesir Tecnologia has delivered expert development services to companies across Brazil and the United States. We specialize in:
-
-- **Web Development**: PHP/Laravel, React, Vue.js, Node.js, Python
-- **Mobile Development**: React Native, Flutter, iOS, Android  
-- **Game Development**: Unity, HTML5 games
-- **Staff Augmentation**: Skilled developers for remote teams
-
-## Getting started
-
-To run the development server locally:
+Make sure to install dependencies:
 
 ```bash
+# npm
 npm install
-npm run dev
+
+# pnpm
+pnpm install
+
+# yarn
+yarn install
+
+# bun
+bun install
 ```
 
-Then open [http://localhost:3000](http://localhost:3000) in your browser.
+## Development Server
 
-## Build and Deploy
+Start the development server on `http://localhost:3000`:
 
 ```bash
-npm run build
-npm start
+# npm
+npm run dev
+
+# pnpm
+pnpm dev
+
+# yarn
+yarn dev
+
+# bun
+bun run dev
 ```
 
-## Project Structure
+## Production
 
-- `/src/app` - Next.js App Router pages and layouts
-- `/src/components` - Reusable React components
-- `/src/styles` - Tailwind CSS configuration and custom styles
-- `/src/lib` - Utility functions and MDX configuration
+Build the application for production:
 
-## Technologies Used
+```bash
+# npm
+npm run build
 
-- [Next.js 15](https://nextjs.org) - React framework with App Router
-- [Tailwind CSS v4](https://tailwindcss.com) - Utility-first CSS framework
-- [Framer Motion](https://www.framer.com/motion/) - Motion library for React
-- [MDX](https://mdxjs.com/) - Markdown for blog posts and case studies
+# pnpm
+pnpm build
 
-## Contact
+# yarn
+yarn build
 
-- Website: [aesirtecnologia.com.br](https://aesirtecnologia.com.br)
-- Email: hello@aesirtecnologia.com.br
-- Business: business@aesirtecnologia.com.br
+# bun
+bun run build
+```
+
+Locally preview production build:
+
+```bash
+# npm
+npm run preview
+
+# pnpm
+pnpm preview
+
+# yarn
+yarn preview
+
+# bun
+bun run preview
+```
+
+Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
