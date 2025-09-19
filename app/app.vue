@@ -9,7 +9,6 @@
           <NuxtLink to="/services" class="nav-link">Services</NuxtLink>
           <NuxtLink to="/about" class="nav-link">About</NuxtLink>
           <NuxtLink to="/process" class="nav-link">Process</NuxtLink>
-          <NuxtLink to="/blog" class="nav-link">Blog</NuxtLink>
           <NuxtLink to="/contact" class="nav-link nav-link--cta">Contact</NuxtLink>
         </nav>
       </div>

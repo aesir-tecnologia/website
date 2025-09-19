@@ -12,7 +12,6 @@ Homepage
 │   └── Game Development
 ├── About
 ├── Process
-├── Blog
 └── Contact
 ```
 

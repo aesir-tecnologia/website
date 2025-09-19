@@ -12,7 +12,6 @@ Página Inicial
 │   └── Desenvolvimento de Jogos
 ├── Sobre
 ├── Processo
-├── Blog
 └── Contato
 ```
 
