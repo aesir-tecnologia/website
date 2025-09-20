@@ -1,36 +1,113 @@
 <template>
-  <div class="app-shell">
-    <NuxtRouteAnnouncer />
-    <header class="site-header">
-      <div class="container header-inner">
-        <NuxtLink to="/" class="logo" aria-label="Aesir Tecnologia homepage">Aesir Tecnologia</NuxtLink>
-        <nav class="nav" aria-label="Primary">
-          <NuxtLink to="/" class="nav-link">Home</NuxtLink>
-          <NuxtLink to="/services" class="nav-link">Services</NuxtLink>
-          <NuxtLink to="/about" class="nav-link">About</NuxtLink>
-          <NuxtLink to="/process" class="nav-link">Process</NuxtLink>
-          <NuxtLink to="/contact" class="nav-link nav-link--cta">Contact</NuxtLink>
-        </nav>
-      </div>
-    </header>
-    <main class="page-content">
-      <NuxtPage />
-    </main>
-    <footer class="site-footer">
-      <div class="container footer-inner">
-        <div>
-          <p class="logo">Aesir Tecnologia</p>
-          <p class="footer-copy">Transforming vibe-coded prototypes into production-ready products.</p>
+  <UApp>
+    <div class="app-shell">
+      <NuxtRouteAnnouncer />
+      <header class="site-header">
+        <UContainer class="header-inner">
+          <NuxtLink to="/" class="logo" aria-label="Aesir Tecnologia homepage">
+            Aesir Tecnologia
+          </NuxtLink>
+
+          <UNavigationMenu
+            :items="navigationItems"
+            highlight
+            class="hidden md:flex"
+          />
+
+          <div class="header-actions">
+            <UButton
+              to="/contact"
+              label="Contact"
+              color="primary"
+              class="hidden md:inline-flex"
+            />
+            <UButton
+              label="Menu"
+              color="neutral"
+              variant="ghost"
+              class="md:hidden"
+              aria-label="Open navigation"
+              @click="isMobileMenuOpen = true"
+            />
+          </div>
+        </UContainer>
+      </header>
+
+      <USlideover v-model="isMobileMenuOpen" side="right" title="Menu" class="mobile-menu">
+        <template #body>
+          <UNavigationMenu
+            :items="navigationItems"
+            color="neutral"
+            variant="link"
+            orientation="vertical"
+            class="mobile-navigation"
+          />
+          <UButton
+            to="/contact"
+            label="Contact"
+            color="primary"
+            block
+            class="mobile-contact"
+            @click="isMobileMenuOpen = false"
+          />
+        </template>
+      </USlideover>
+      <main class="page-content">
+        <NuxtPage />
+      </main>
+      <footer class="site-footer">
+        <div class="container footer-inner">
+          <div>
+            <p class="logo">Aesir Tecnologia</p>
+            <p class="footer-copy">Transforming vibe-coded prototypes into production-ready products.</p>
+          </div>
+          <div class="footer-links">
+            <NuxtLink to="/privacy" class="footer-link">Privacy Policy</NuxtLink>
+            <NuxtLink to="/terms" class="footer-link">Terms</NuxtLink>
+          </div>
         </div>
-        <div class="footer-links">
-          <NuxtLink to="/privacy" class="footer-link">Privacy Policy</NuxtLink>
-          <NuxtLink to="/terms" class="footer-link">Terms</NuxtLink>
-        </div>
-      </div>
-    </footer>
-  </div>
+      </footer>
+    </div>
+  </UApp>
 </template>
 
+<script setup lang="ts">
+import { computed, ref, watch } from 'vue'
+import type { NavigationMenuItem } from '@nuxt/ui'
+
+const route = useRoute()
+const isMobileMenuOpen = ref(false)
+
+const navigationItems = computed<NavigationMenuItem[]>(() => [
+  {
+    label: 'Home',
+    to: '/',
+    active: route.path === '/',
+  },
+  {
+    label: 'Services',
+    to: '/services',
+    active: route.path.startsWith('/services'),
+  },
+  {
+    label: 'About',
+    to: '/about',
+    active: route.path.startsWith('/about'),
+  },
+  {
+    label: 'Process',
+    to: '/process',
+    active: route.path.startsWith('/process'),
+  },
+])
+
+watch(
+  () => route.path,
+  () => {
+    isMobileMenuOpen.value = false
+  }
+)
+</script>
 <style>
 :root {
   color-scheme: light dark;
@@ -83,7 +160,14 @@ a:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 1rem;
   padding: 1rem 0;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
 .logo {
@@ -92,32 +176,12 @@ a:hover {
   letter-spacing: 0.04em;
 }
 
-.nav {
-  display: flex;
-  gap: 1rem;
+.mobile-navigation {
+  margin-top: 1rem;
 }
 
-.nav-link {
-  padding: 0.5rem 0.75rem;
-  border-radius: 999px;
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-.nav-link:hover,
-.nav-link:focus-visible {
-  background: rgba(51, 65, 85, 0.35);
-}
-
-.nav-link--cta {
-  background: linear-gradient(135deg, #38bdf8, #6366f1);
-  color: #0f172a;
-  font-weight: 600;
-}
-
-.nav-link--cta:hover,
-.nav-link--cta:focus-visible {
-  background: linear-gradient(135deg, #22d3ee, #7c3aed);
-  color: #0f172a;
+.mobile-contact {
+  margin-top: 1.5rem;
 }
 
 .page-content {
@@ -156,11 +220,5 @@ a:hover {
 
 .footer-link:hover {
   color: #f8fafc;
-}
-
-@media (max-width: 768px) {
-  .nav {
-    display: none;
-  }
 }
 </style>

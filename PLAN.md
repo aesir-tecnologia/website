@@ -1,17 +1,21 @@
 # Nuxt UI & Shared Component Adoption Plan
 
 ## 1. Goals & Guardrails
-- Replace bespoke CSS-heavy markup with `@nuxt/ui` primitives to guarantee consistent styling and accessibility.
+- Replace bespoke CSS-heavy markup with `@nuxt/ui` primitives to guarantee consistent styling, accessibility, and dark/light parity.
 - Centralize layout, navigation, and section patterns into shared components so every page reuses the same building blocks.
-- Keep English and Portuguese copy in `docs/` and expose via `@nuxtjs/i18n`, eliminating hard-coded text in Vue files.
-- Strengthen default SEO (meta, Open Graph, structured data) using `@nuxtjs/seo` while preserving fast, responsive rendering.
-- Maintain dark/light color modes, keyboard navigation, and performance budgets during the refactor.
+- Reduce global CSS to a slim baseline, relying on Nuxt UI tokens, utility classes, and theme settings for the visual system.
+- Preserve performance budgets (bundle size, CLS) while introducing richer UI patterns.
+- Capture non-UI follow-ups (SEO, i18n) in a deferred backlog for later iterations.
 
 ## 2. Discovery & Inventory (Sprint 0)
 - Catalogue each layout pattern in `app/app.vue` and `app/pages/**`, noting overlapping structures and bespoke variants.
 - Extract color, spacing, and gradient tokens from `app/assets/css/main.css` and map them to Nuxt UI theme variables.
 - Identify all lists (services, processes, testimonials, CTAs, technology logos) and confirm canonical copy in `docs/COPY-*.md`.
 - Flag routes that need dynamic behaviour (forms, accordions, timeline animations) to ensure new components satisfy the requirements.
+- Audit current component auto-imports to understand which bespoke components can be retired or wrapped with Nuxt UI equivalents.
+- Trace every usage of global utility classes (e.g., `.container`, `.nav-link`, `.cta`) so replacements account for spacing and responsive breakpoints already in use.
+- Inventory icons, imagery, and decorative assets referenced across pages to plan `NuxtImg` presets and icon sets before migration.
+- Record layout or typography edge-cases (hero gradients, split backgrounds, custom headings) where Nuxt UI tokens might need extension hooks.
 
 ## 3. Nuxt UI Foundation & Theming
 - Audit existing `nuxt.config.ts` settings and install the Nuxt UI Tailwind preset, ensuring `@nuxt/ui` tokens are active globally.
@@ -23,7 +27,7 @@
 ## 4. Layout Shell & Global UI
 - Replace `app/app.vue` markup with a lightweight wrapper that renders a new `AppShell` layout component built from `UContainer`, `UNavigationMenu`, `UButton`, and `UFooter`.
 - Implement `AppHeader`, `AppFooter`, and `AppMain` components under `app/components/layout/`, each using Nuxt UI primitives and consuming config-driven navigation.
-- Add a `LanguageSwitcher` (using `@nuxtjs/i18n`’s `useSwitchLocalePath`) and a `ColorModeToggle` (wrapping `ColorModeSwitch` from Nuxt UI) inside the header.
+- Add a theme-aware color mode toggle (wrapping `ColorModeSwitch` from Nuxt UI) once the layout stabilizes.
 - Expose top-level metadata (logo text/svg, contact CTA link, social links) via `useAppConfig`, ensuring layout components stay data-driven.
 - Leverage `@nuxt/device` to adjust layout behaviour (e.g., collapse nav into `UButtonGroup`/`USlideover` on mobile) without duplicating markup.
 
@@ -57,8 +61,7 @@
 ## 7. Composables & Data Access
 - Implement `useSiteNavigation`, `useSiteLinks`, and `useSocialLinks` composables that pull structured data from `app.config` for header/footer components.
 - Create `useHomepageContent`, `useServicesContent`, and similar helpers, each hydrating copy blocks from `@nuxt/content` or pre-parsed markdown sections in `docs/`.
-- Add `useSectionCopy(key, locale)` helper that fetches copy by key, falling back to English and logging missing translations during development.
-- Provide `useSeoDefaults` composable that returns base meta (title template, description, canonical) and merges route-specific overrides.
+- Add a `useSectionCopy(key)` helper that fetches copy by key and logs missing sections during development.
 - Expose a `useTechnologyStack` composable returning logos, accessible labels, and links for the marquee component.
 
 ## 8. Page Migration Plan
@@ -68,28 +71,19 @@
 - Phase 4: Align legal pages (Privacy, Terms) with `@nuxt/content` or `UProse` for Markdown rendering, ensuring they use `BaseSection`.
 - Phase 5: Remove legacy CSS classes once all pages consume shared components and run visual regression sweeps to confirm fidelity.
 
-## 9. Localization & Copy Workflow
-- Split `docs/COPY-EN.md` and `docs/COPY-PT_BR.md` into structured blocks (front matter or markdown sections) with machine-readable keys.
-- Generate `locales/en.json` and `locales/pt-br.json` from the docs via a simple sync script, storing section keys such as `homepage.hero.headline`.
-- Replace hard-coded strings with `t('key')` lookups, injecting localized content into shared components via props.
-- Configure `@nuxtjs/i18n` route strategy for services detail pages (e.g., `/pt-br/services/vibe-coding-cleanup`) and ensure `alternate` links are emitted.
-- Establish a translation QA checklist: toggle locales on each route, confirm layout integrity, and cross-check copy with docs before release.
+## 9. Deferred Backlog (Post-UI Refactor)
+- Revisit localization by syncing copy from `docs/COPY-*.md` into `@nuxtjs/i18n` resources and wiring locale switchers.
+- Layer in SEO defaults with `@nuxtjs/seo`, structured data recipes, and sitemap refinements.
+- Expand analytics and experimentation hooks once the shared components stabilize.
 
-## 10. SEO, Metadata & Analytics
-- Define global SEO defaults in `nuxt.config.ts` using `@nuxtjs/seo` (`site` object, trailing slash, canonical host, robots directives).
-- Use `defineOgImageComponent` or static OG templates per page type, driven by section props such as hero title and CTA.
-- Emit structured data (`Article`, `Service`, `Organization`) via `useSchemaOrg` for key pages, matching localized content.
-- Configure `@nuxt/sitemap` to include localized routes and priority weighting for services and contact.
-- Ensure `TechnologyMarquee` and other dynamic sections remain performant (respect `prefers-reduced-motion`, lazy-load heavy assets, and prefetch marquee data).
-
-## 11. Quality, Testing & Verification
+## 10. Quality, Testing & Verification
 - Establish a component playground (Storybook or Nuxt UI preview route) to develop and document shared components in isolation.
 - Write smoke tests or snapshot scripts (Vitest + @testing-library/vue) for critical shared components such as Hero, ProcessTimeline, and SocialProofSection.
-- Document manual QA flows: navigation across locales, dark/light mode toggles, mobile/desktop breakpoints, and form submission paths.
-- Integrate lint rules enforcing component auto-import paths, translation key usage, and disallowing raw copy in templates.
+- Document manual QA flows: navigation (desktop/mobile), dark/light mode toggles, and form submission paths.
+- Integrate lint rules enforcing component auto-import paths and disallowing raw copy in templates.
 
-## 12. Documentation & Governance
+## 11. Documentation & Governance
 - Maintain this plan (`PLAN.md`) as a living document, updating sections as milestones complete and new components emerge.
 - Add usage guidelines for each shared component in `docs/components/` with props, slots, and screenshot references.
-- Create a contributor checklist referencing linting, copy sync, translation verification, accessibility, and SEO validation steps before merging.
+- Create a contributor checklist referencing linting, copy sync, accessibility, and visual regression checks before merging.
 - Schedule periodic reviews with stakeholders to confirm copy accuracy, design alignment, and upcoming feature needs.
