@@ -37,10 +37,10 @@ const tag = computed(() => props.as)
 
 const variantMap: Record<SectionVariant, string> = {
   default: 'bg-transparent',
-  muted: 'bg-slate-900/40 backdrop-blur-sm ring-1 ring-slate-800/60',
-  dark: 'bg-slate-950',
-  gradient: 'bg-gradient-to-b from-slate-950/0 via-slate-950/60 to-slate-950',
-  accent: 'bg-primary-500/10 ring-1 ring-primary-500/20',
+  muted: 'backdrop-blur-sm bg-slate-100/80 ring-1 ring-slate-200/60 dark:bg-slate-900/40 dark:ring-slate-800/60',
+  dark: 'bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100',
+  gradient: 'bg-gradient-to-b from-white via-primary-100/10 to-white dark:from-slate-950/0 dark:via-slate-950/60 dark:to-slate-950',
+  accent: 'ring-1 ring-primary-300/40 bg-primary-100/25 dark:bg-primary-500/10 dark:ring-primary-500/20',
 }
 
 const paddingMap: Record<SectionPadding, string> = {

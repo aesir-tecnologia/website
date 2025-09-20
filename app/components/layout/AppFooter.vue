@@ -1,11 +1,11 @@
 <template>
-  <footer class="border-t border-[color:var(--aesir-border-soft)] bg-[color:var(--aesir-surface-950)]">
+  <footer class="border-t border-slate-200/70 bg-white text-slate-800 dark:border-[color:var(--aesir-border-soft)] dark:bg-[color:var(--aesir-surface-950)] dark:text-[color:var(--aesir-text-primary)]">
     <UContainer class="flex flex-col gap-4 py-8 sm:flex-row sm:items-center sm:justify-between">
       <div>
-        <p class="text-sm font-semibold uppercase tracking-[0.08em] text-[color:var(--aesir-text-primary)]">
+        <p class="text-sm font-semibold uppercase tracking-[0.08em]">
           {{ brand.name }}
         </p>
-        <p class="mt-2 max-w-md text-sm text-[color:var(--aesir-text-soft)]">
+        <p class="mt-2 max-w-md text-sm text-slate-500 dark:text-[color:var(--aesir-text-soft)]">
           {{ brand.tagline }}
         </p>
       </div>
@@ -15,7 +15,7 @@
           <li v-for="link in footerLinks" :key="link.to">
             <NuxtLink
               :to="link.to"
-              class="text-[color:var(--aesir-text-muted)] transition-colors hover:text-[color:var(--aesir-text-inverse)]"
+              class="text-slate-500 transition-colors hover:text-slate-800 dark:text-[color:var(--aesir-text-muted)] dark:hover:text-[color:var(--aesir-text-inverse)]"
             >
               {{ link.label }}
             </NuxtLink>

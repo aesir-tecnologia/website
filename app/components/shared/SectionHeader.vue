@@ -3,15 +3,15 @@
     <div :class="contentClasses">
       <div
         v-if="icon"
-        class="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-500/20 via-primary-400/10 to-transparent text-primary-300 shadow-lg shadow-primary-950/30"
+        class="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-300/20 via-primary-400/15 to-transparent text-primary-500 shadow-lg shadow-primary-200/40 dark:from-primary-500/20 dark:via-primary-400/10 dark:text-primary-300 dark:shadow-primary-950/30"
       >
         <UIcon :name="icon" class="h-6 w-6" aria-hidden="true" />
       </div>
-      <p v-if="eyebrow" class="text-sm font-semibold uppercase tracking-wide text-primary-400">{{ eyebrow }}</p>
-      <component :is="headingTag" class="text-balance font-semibold tracking-tight text-3xl sm:text-4xl text-slate-50">
+      <p v-if="eyebrow" class="text-sm font-semibold uppercase tracking-wide text-primary-500 dark:text-primary-400">{{ eyebrow }}</p>
+      <component :is="headingTag" class="text-balance font-semibold tracking-tight text-3xl sm:text-4xl text-slate-900 dark:text-slate-50">
         <slot name="title">{{ title }}</slot>
       </component>
-      <p v-if="description" class="text-base leading-relaxed text-slate-300">
+      <p v-if="description" class="text-base leading-relaxed text-slate-600 dark:text-slate-300">
         <slot name="description">{{ description }}</slot>
       </p>
     </div>

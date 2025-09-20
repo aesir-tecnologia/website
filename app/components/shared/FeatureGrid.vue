@@ -5,25 +5,25 @@
       :key="feature.id ?? feature.title"
       :ui="cardUi"
     >
-      <div class="pointer-events-none absolute inset-px rounded-[1.4rem] bg-gradient-to-br from-primary-500/10 via-slate-950/0 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+      <div class="pointer-events-none absolute inset-px rounded-[1.4rem] bg-gradient-to-br from-primary-200/40 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:from-primary-500/10" />
       <div class="relative flex h-full flex-col gap-5">
         <div
           v-if="feature.icon"
-          class="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-500/20 via-primary-500/10 to-transparent text-primary-300 shadow-lg shadow-primary-950/40"
+          class="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-200/40 via-primary-400/20 to-transparent text-primary-600 shadow-lg shadow-primary-200/50 dark:from-primary-500/20 dark:via-primary-500/10 dark:text-primary-300 dark:shadow-primary-900/40"
         >
           <UIcon :name="feature.icon" class="h-6 w-6" aria-hidden="true" />
         </div>
         <div class="space-y-3">
-          <p v-if="feature.meta" class="text-xs font-semibold uppercase tracking-[0.2em] text-primary-300/80">{{ feature.meta }}</p>
-          <h3 class="text-2xl font-semibold text-slate-50">{{ feature.title }}</h3>
-          <p v-if="feature.description" class="text-base leading-relaxed text-slate-300">{{ feature.description }}</p>
+          <p v-if="feature.meta" class="text-xs font-semibold uppercase tracking-[0.2em] text-primary-500/80 dark:text-primary-300/80">{{ feature.meta }}</p>
+          <h3 class="text-2xl font-semibold text-slate-900 dark:text-slate-50">{{ feature.title }}</h3>
+          <p v-if="feature.description" class="text-base leading-relaxed text-slate-600 dark:text-slate-300">{{ feature.description }}</p>
         </div>
         <slot name="footer" :feature="feature">
           <NuxtLink
             v-if="feature.to"
             :to="feature.to"
             :target="feature.external ? '_blank' : undefined"
-            class="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-primary-200 transition duration-200 hover:text-primary-100"
+            class="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-primary-600 transition duration-200 hover:text-primary-500 dark:text-primary-200 dark:hover:text-primary-100"
           >
             {{ feature.cta ?? 'Learn more' }}
             <UIcon name="i-lucide-arrow-up-right" class="h-4 w-4" aria-hidden="true" />
@@ -66,7 +66,7 @@ const gap = computed(() => props.gap)
 const columns = computed(() => props.columns)
 
 const cardUi = {
-  base: 'group relative overflow-hidden rounded-3xl border border-slate-900/70 bg-gradient-to-b from-slate-950/90 via-slate-950/40 to-slate-900/60 p-8 shadow-xl shadow-slate-950/60 transition duration-300 hover:border-primary-500/50 hover:shadow-primary-900/40',
+  base: 'group relative overflow-hidden rounded-3xl border border-slate-200/70 bg-white/90 p-8 shadow-xl shadow-slate-200/60 transition duration-300 hover:border-primary-400/50 hover:shadow-primary-200/50 dark:border-slate-900/70 dark:bg-slate-950/50 dark:shadow-slate-950/60 dark:hover:border-primary-500/50 dark:hover:shadow-primary-900/40',
   body: 'flex h-full flex-col gap-5 p-0',
   footer: 'p-0',
   header: 'p-0'

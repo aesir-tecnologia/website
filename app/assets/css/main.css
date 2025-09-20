@@ -46,6 +46,11 @@
 body {
   margin: 0;
   font-family: var(--font-sans);
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+.dark body {
   background: var(--aesir-surface-900);
   color: var(--aesir-text-primary);
 }
@@ -69,7 +74,15 @@ a:hover {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: radial-gradient(circle at top, var(--aesir-highlight), transparent 60%), var(--aesir-surface-900);
+  background:
+    radial-gradient(circle at top, rgba(56, 189, 248, 0.18), transparent 60%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(248, 250, 252, 1));
+}
+
+.dark .app-shell {
+  background:
+    radial-gradient(circle at top, var(--aesir-highlight), transparent 60%),
+    var(--aesir-surface-900);
 }
 
 .container {

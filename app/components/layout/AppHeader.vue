@@ -1,7 +1,7 @@
 <template>
-  <header class="sticky top-0 z-50 border-b border-[color:var(--aesir-border-soft)] bg-[color:var(--aesir-surface-850)]/90 backdrop-blur-lg">
+  <header class="sticky top-0 z-50 border-b border-slate-200/70 bg-white/90 text-slate-900 backdrop-blur-lg dark:border-[color:var(--aesir-border-soft)] dark:bg-[color:var(--aesir-surface-850)]/90 dark:text-[color:var(--aesir-text-primary)]">
     <UContainer class="flex items-center justify-between gap-4 py-4">
-      <NuxtLink :to="brandLink" class="text-base font-semibold tracking-[0.04em] text-[color:var(--aesir-text-primary)]">
+      <NuxtLink :to="brandLink" class="text-base font-semibold tracking-[0.04em] text-inherit">
         {{ brand.name }}
       </NuxtLink>
 

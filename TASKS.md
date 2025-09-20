@@ -62,6 +62,7 @@ Sequential to-do list for a single developer delivering the Nuxt UI adoption pla
 - **Required Checks:** `npx eslint .`; `npm run generate`; Visual QA on playground route (light/dark + mobile).
 
 ## Task 5 – Marketing Modules
+- **Status:** Completed — modules live under `app/components/modules/`, demoed via `/playground/modules`, documented in `docs/components/MODULES.md`, and validated with MCP capture `docs/qa/task-5-marketing-modules.png`.
 - **Goal:** Implement `HeroSection`, `ProblemSolutionSection`, `ServiceShowcase`, `ProcessTimeline`, `TechnologyMarquee`, `SocialProofSection` using structural primitives.
 - **Prerequisites:** Task 4 complete; content structure approved.
 - **Key Activities:**
