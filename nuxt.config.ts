@@ -3,7 +3,7 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
 
-  css: ['~/assets/css/main.css'],
+  css: ['@nuxt/ui/css', '~/assets/css/main.css'],
 
   modules: [
     '@nuxt/content',
@@ -18,6 +18,12 @@ export default defineNuxtConfig({
     '@nuxtjs/device',
     '@nuxtjs/seo'
   ],
+
+  runtimeConfig: {
+    public: {
+      siteUrl: 'https://www.aesir.dev'
+    }
+  },
 
   i18n: {
     strategy: 'prefix_except_default',

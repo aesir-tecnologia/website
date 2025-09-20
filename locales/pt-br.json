@@ -1,0 +1,1161 @@
+{
+  "navigation": {
+    "home": "Início",
+    "services": "Serviços",
+    "about": "Sobre",
+    "process": "Processo",
+    "contact": "Contato",
+    "openMenu": "Abrir menu de navegação",
+    "closeMenu": "Fechar menu de navegação"
+  },
+  "footer": {
+    "contact": "Contato",
+    "navigation": "Navegação",
+    "followUs": "Siga-nos",
+    "privacy": "Política de Privacidade",
+    "terms": "Termos de Serviço"
+  },
+  "homepage": {
+    "meta": {
+      "title": "Aesir Tecnologia — Especialistas em Limpeza de Vibe Coding",
+      "description": "Transformamos MVPs gerados por IA em software pronto para produção com segurança, performance e escalabilidade."
+    },
+    "hero": {
+      "eyebrow": "Especialistas em limpeza de vibe coding",
+      "title": "Transforme Seu MVP Gerado por IA em Software Pronto para Produção",
+      "lead": "Pegamos aplicações desenvolvidas por vibe coding e as transformamos em sistemas seguros e escaláveis, prontos para usuários reais e crescimento de negócios. Além de desenvolvimento full-stack e aumento de equipe especializado.",
+      "primaryCta": {
+        "label": "Auditar Meu App Gerado por IA",
+        "to": "/services/vibe-coding-cleanup"
+      },
+      "secondaryCta": {
+        "label": "Explorar Nossos Serviços",
+        "to": "/services"
+      },
+      "proofPoints": [
+        "Especialistas em limpeza de vibe coding",
+        "Expertise em desenvolvimento full-stack",
+        "Desenvolvedores remotos especialistas"
+      ],
+      "highlightTitle": "Por que fundadores escolhem a Aesir",
+      "highlights": [
+        {
+          "title": "Fundação Segura",
+          "description": "Fortalecimento de segurança e reestruturação de arquitetura para deixar seu app pronto para investidores."
+        },
+        {
+          "title": "Escale com Confiança",
+          "description": "Otimização de performance, monitoramento e pipelines de CI/CD para sustentar o crescimento."
+        },
+        {
+          "title": "Expertise Sob Demanda",
+          "description": "Desenvolvedores seniores que entendem código gerado por IA e código feito à mão."
+        }
+      ]
+    },
+    "problem": {
+      "eyebrow": "A lacuna",
+      "title": "Seu App Gerado por IA Funciona... Mas Está Pronto para Negócios?",
+      "description": "Ferramentas de vibe coding como Cursor, Replit Agent e Lovable criam protótipos funcionais rapidamente. Mas código gerado por IA frequentemente contém vulnerabilidades de segurança, gargalos de performance e problemas arquiteturais que impedem o crescimento.",
+      "challengeTitle": "O Desafio",
+      "outcomeTitle": "O Que Acontece Depois",
+      "challenges": [
+        "Código gerado sem guardrails de segurança",
+        "Arquitetura que falha em uso real",
+        "Ausência de testes e documentação para repasses"
+      ],
+      "outcomes": [
+        "Seu app trava sob carga real de usuários",
+        "Vulnerabilidades expõem dados sensíveis",
+        "Débito técnico bloqueia novas funcionalidades",
+        "Investidores questionam sua base técnica"
+      ]
+    },
+    "services": {
+      "eyebrow": "Como ajudamos",
+      "title": "Três Maneiras de Transformarmos Sua Visão de Software em Realidade",
+      "description": null,
+      "items": [
+        {
+          "title": "Limpeza de Vibe Coding",
+          "description": "Transforme seu MVP gerado por IA em software pronto para produção com nosso processo abrangente de limpeza.",
+          "focus": "Foco Principal · 50%",
+          "cta": {
+            "label": "Auditar Meu App",
+            "to": "/services/vibe-coding-cleanup"
+          }
+        },
+        {
+          "title": "Desenvolvimento Web Personalizado",
+          "description": "Aplicações full-stack construídas para performance e escalabilidade usando tecnologias modernas.",
+          "focus": "Desenvolvimento Web · 25%",
+          "cta": {
+            "label": "Iniciar Seu Projeto",
+            "to": "/services/web-development"
+          }
+        },
+        {
+          "title": "Aumento de Equipe Especializado",
+          "description": "Desenvolvedores qualificados que se integram perfeitamente com sua equipe em projetos de curto ou longo prazo.",
+          "focus": "Escala de Equipe · 25%",
+          "cta": {
+            "label": "Encontrar Seu Desenvolvedor",
+            "to": "/services/staff-augmentation"
+          }
+        }
+      ]
+    },
+    "process": {
+      "eyebrow": "Nosso método",
+      "title": "Do Protótipo à Produção: O Único Serviço de Limpeza de Vibe Coding Que Você Precisa",
+      "description": "Milhares de empreendedores constroem com ferramentas de IA diariamente. A maioria cria MVPs funcionais, mas não tem a expertise de engenharia para torná-los prontos para produção. É aí que entramos.",
+      "steps": [
+        {
+          "title": "Fortalecimento de Segurança",
+          "items": [
+            "Corrigir vulnerabilidades e proteger endpoints",
+            "Implementar autenticação e autorização",
+            "Garantir práticas alinhadas ao OWASP"
+          ]
+        },
+        {
+          "title": "Otimização de Performance",
+          "items": [
+            "Otimizar queries de banco e cache",
+            "Preparar para balanceamento de carga e escala",
+            "Melhorar entrega frontend e uso de assets"
+          ]
+        },
+        {
+          "title": "Reestruturação de Arquitetura",
+          "items": [
+            "Organização limpa de código e design modular",
+            "Padrões documentados que futuros times confiam",
+            "Estrutura maintível pronta para novas features"
+          ]
+        },
+        {
+          "title": "Prontidão para Produção",
+          "items": [
+            "Suítes de teste automatizadas e monitoramento",
+            "Pipelines de deploy e observabilidade",
+            "Documentação para desenvolvimento contínuo"
+          ]
+        }
+      ],
+      "idealTitle": "Perfeito Para",
+      "idealCustomers": [
+        "Empreendedores buscando investimento com due diligence técnica",
+        "Startups passando de MVP para mercado",
+        "Fundadores não técnicos com protótipos funcionais",
+        "Empresas precisando de deploy em produção"
+      ]
+    },
+    "technology": {
+      "eyebrow": "Stack tecnológica",
+      "title": "Tecnologias Modernas, Resultados de Nível Produção",
+      "description": "Uma stack escolhida por confiabilidade, escalabilidade e experiências digitais modernas."
+    },
+    "advantages": {
+      "eyebrow": "Por que nos escolher",
+      "title": "O Parceiro Técnico Que Seu Negócio em Crescimento Precisa",
+      "description": null,
+      "items": [
+        {
+          "title": "Especialistas em Vibe Coding",
+          "description": "Agência focada em transformar código gerado por IA em sistemas de produção."
+        },
+        {
+          "title": "Expertise Full-Stack",
+          "description": "Capacidades completas de desenvolvimento web e mobile quando você precisa de soluções personalizadas."
+        },
+        {
+          "title": "Equipe Remota Comprovada",
+          "description": "Desenvolvedores especialistas que se integram aos seus fluxos de trabalho existentes."
+        },
+        {
+          "title": "Construído para Escalar",
+          "description": "Aplicações projetadas para lidar com crescimento desde o primeiro dia com arquitetura e otimização adequadas."
+        }
+      ]
+    },
+    "socialProof": {
+      "eyebrow": "Prova social",
+      "title": "Resultados Reais para Negócios em Crescimento",
+      "description": "Equipes confiam na Aesir para transformar protótipos vibe-coded em produtos confiáveis.",
+      "quote": "A Aesir pegou nosso protótipo gerado pelo Cursor e o transformou em um sistema que lida com mais de 10.000 usuários diários. Apenas a auditoria de segurança nos salvou de desastres potenciais que nem sabíamos que existiam.",
+      "attribution": "— Fundador de Startup SaaS",
+      "metrics": [
+        {
+          "label": "Usuários diários suportados",
+          "value": "10k+",
+          "description": "Carga de produção sustentada após a limpeza"
+        },
+        {
+          "label": "Falhas de segurança corrigidas",
+          "value": "65",
+          "description": "Vulnerabilidades críticas removidas"
+        },
+        {
+          "label": "Tempo médio até o lançamento",
+          "value": "6 semanas",
+          "description": "Da auditoria à entrega em produção"
+        }
+      ],
+      "ctas": [
+        {
+          "title": "Para MVPs Vibe-Coded",
+          "description": "Obtenha uma auditoria profissional de segurança e escalabilidade da sua aplicação gerada por IA.",
+          "label": "Solicitar Auditoria",
+          "to": "/services/vibe-coding-cleanup#contact"
+        },
+        {
+          "title": "Para Desenvolvimento Personalizado",
+          "description": "Precisa de uma solução construída do zero? Vamos discutir seus requisitos.",
+          "label": "Iniciar Seu Projeto",
+          "to": "/services/web-development#contact"
+        },
+        {
+          "title": "Para Escalonamento de Equipe",
+          "description": "Procurando adicionar desenvolvedores especialistas à sua equipe?",
+          "label": "Encontrar Seu Desenvolvedor",
+          "to": "/services/staff-augmentation#contact"
+        }
+      ]
+    }
+  },
+  "about": {
+    "meta": {
+      "title": "Sobre a Aesir Tecnologia",
+      "description": "A Aesir Tecnologia constrói software seguro e escalável com especialistas em limpeza de vibe coding e parcerias de longo prazo."
+    },
+    "hero": {
+      "title": "Construindo excelência em software há mais de uma década",
+      "lead": "O que começou como uma visão de construir aplicações melhores cresceu para um time dedicado a entregar soluções digitais excepcionais.",
+      "primaryCta": "Trabalhe Conosco",
+      "secondaryCta": "Explorar Nossos Serviços"
+    },
+    "mission": {
+      "eyebrow": "Missão",
+      "title": "Nossa Missão",
+      "body": "Acreditamos que ótimo software deve ser centrado nas pessoas, escalável e feito para durar. Cada aplicação que criamos foi projetada para crescer com o seu negócio enquanto oferece uma experiência excepcional ao usuário."
+    },
+    "approach": {
+      "eyebrow": "Abordagem",
+      "title": "Como Entregamos",
+      "pillars": [
+        {
+          "title": "Qualidade em Primeiro Lugar",
+          "description": "Aplicações construídas com princípios sólidos de engenharia e arquitetura comprovada."
+        },
+        {
+          "title": "Zero Downtime",
+          "description": "Aplicações críticas exigem deploys sem interrupções e infraestrutura resiliente."
+        },
+        {
+          "title": "Tecnologias Modernas",
+          "description": "A stack acompanha frameworks, ferramentas e melhores práticas do mercado."
+        },
+        {
+          "title": "Parceria com o Cliente",
+          "description": "Atuamos como extensão do seu time do discovery ao lançamento."
+        }
+      ]
+    },
+    "values": {
+      "eyebrow": "Valores",
+      "title": "O que guia nosso trabalho",
+      "items": [
+        {
+          "title": "Excelência",
+          "description": "Cada linha de código passa por revisão rigorosa."
+        },
+        {
+          "title": "Confiabilidade",
+          "description": "Aplicações nas quais você pode confiar do lançamento ao scale."
+        },
+        {
+          "title": "Inovação",
+          "description": "Adotamos novas tecnologias com propósito para gerar valor real."
+        },
+        {
+          "title": "Parceria",
+          "description": "Colaboração de longo prazo construída com transparência e confiança."
+        }
+      ]
+    }
+  },
+  "process": {
+    "meta": {
+      "title": "Processo | Aesir Tecnologia",
+      "description": "Conheça o processo da Aesir para transformar protótipos gerados por IA em software pronto para produção."
+    },
+    "hero": {
+      "title": "Um processo construído para confiabilidade e escala",
+      "lead": "Uma metodologia consistente e testada que transforma protótipos vibe-coded em produtos prontos para produção mantendo as equipes alinhadas."
+    },
+    "steps": {
+      "eyebrow": "Três fases",
+      "title": "Do diagnóstico à produção",
+      "description": "Cada parceria segue um fluxo transparente e repetível para que todos saibam o próximo passo.",
+      "items": [
+        {
+          "title": "Auditoria & Avaliação",
+          "description": "Revisamos seu código gerado por IA para identificar riscos e oportunidades.",
+          "items": [
+            "Avaliação de vulnerabilidades de segurança",
+            "Análise de performance e escalabilidade",
+            "Revisão de estrutura e arquitetura de código"
+          ]
+        },
+        {
+          "title": "Fortalecimento & Reestruturação",
+          "description": "Estabilizamos e fortalecemos a base para que seu produto possa escalar com confiança.",
+          "items": [
+            "Melhorias de autenticação, autorização e proteção de dados",
+            "Reestruturação e modularização da arquitetura",
+            "Otimização de cache e banco de dados"
+          ]
+        },
+        {
+          "title": "Prontidão para Produção",
+          "description": "Configuramos ferramentas, automações e documentação para manter lançamentos consistentes.",
+          "items": [
+            "Suítes de testes e pipelines de CI/CD",
+            "Monitoramento, logs e alertas",
+            "Estratégia de deploy e roadmap de escalabilidade"
+          ]
+        }
+      ]
+    },
+    "benefits": {
+      "eyebrow": "Benefícios",
+      "title": "Projetado para escala e confiabilidade",
+      "items": [
+        {
+          "title": "Segurança Primeiro",
+          "description": "Detecte vulnerabilidades antes que impactem usuários ou investidores."
+        },
+        {
+          "title": "Excelência Operacional",
+          "description": "Automatize testes, releases e observabilidade para sucesso de longo prazo."
+        },
+        {
+          "title": "Arquitetura Escalável",
+          "description": "Desenhe sistemas prontos para metas agressivas de crescimento."
+        }
+      ]
+    },
+    "differentiation": {
+      "title": "O que nos diferencia",
+      "items": [
+        "Pioneiros em limpeza de vibe coding com especialização profunda",
+        "Profundidade técnica além de agências tradicionais de desenvolvimento",
+        "Solução completa que cobre limpeza, desenvolvimento sob medida e aumento de equipe"
+      ]
+    },
+    "audience": {
+      "title": "Com quem trabalhamos",
+      "items": [
+        "Empreendedores com MVPs vibe-coded prontos para ir à produção",
+        "Empresas que precisam de desenvolvimento customizado com rigor de engenharia",
+        "Negócios em crescimento que precisam escalar seus times de desenvolvimento"
+      ]
+    }
+  },
+  "contact": {
+    "meta": {
+      "title": "Contato | Aesir Tecnologia",
+      "description": "Fale conosco sobre limpeza de vibe coding, desenvolvimento sob medida ou aumento de equipe."
+    },
+    "hero": {
+      "title": "Vamos construir algo incrível juntos",
+      "lead": "Conte sobre o seu produto, os desafios atuais e como podemos ajudar a entregar a próxima versão."
+    },
+    "projectInquiry": {
+      "title": "Solicitação de Projeto",
+      "lead": "Compartilhe o essencial para prepararmos uma proposta sob medida.",
+      "items": [
+        "Tipo e escopo do projeto",
+        "Cronograma e orçamento",
+        "Requisitos técnicos",
+        "Objetivos de negócio"
+      ]
+    },
+    "engagement": {
+      "title": "Modelos de Engajamento",
+      "items": [
+        {
+          "title": "Projeto Fechado",
+          "description": "Escopo definido com entregáveis claros para resultados previsíveis."
+        },
+        {
+          "title": "Retainer",
+          "description": "Desenvolvimento contínuo e suporte para evolução constante."
+        },
+        {
+          "title": "Consultoria",
+          "description": "Orientação técnica, planejamento e revisões de arquitetura."
+        }
+      ]
+    },
+    "form": {
+      "title": "Envie os detalhes do projeto",
+      "lead": "Respondemos toda solicitação em até um dia útil.",
+      "fields": {
+        "name": "Nome",
+        "email": "Email",
+        "company": "Empresa (opcional)",
+        "projectType": "Tipo de Projeto",
+        "description": "Descrição do Projeto",
+        "timeline": "Cronograma",
+        "budget": "Faixa de Orçamento"
+      },
+      "placeholders": {
+        "name": "Seu nome",
+        "email": "voce@empresa.com",
+        "company": "Nome da empresa",
+        "projectType": "Selecione um tipo de projeto",
+        "description": "Conte sobre o projeto, metas e desafios.",
+        "timeline": "Cronograma desejado",
+        "budget": "Faixa de orçamento estimada"
+      },
+      "projectTypes": [
+        "Limpeza de Vibe Coding",
+        "Desenvolvimento Web Personalizado",
+        "Desenvolvimento Mobile",
+        "Desenvolvimento de Jogos",
+        "Aumento de Equipe",
+        "Consultoria"
+      ],
+      "submit": "Enviar Detalhes do Projeto",
+      "reset": "Limpar",
+      "success": "Obrigado! Vamos responder em até um dia útil.",
+      "error": "Algo deu errado. Tente novamente mais tarde."
+    },
+    "direct": {
+      "title": "Prefere falar direto?",
+      "body": "Agende uma call de consultoria para discutir o projeto em detalhes e planejar os próximos passos.",
+      "scheduleCta": "Agendar uma Call"
+    },
+    "schedule": {
+      "title": "Agende uma Call",
+      "body": "Envie um email com sua disponibilidade ou um convite de agenda. Confirmamos em até um dia útil."
+    }
+  },
+  "services": {
+    "meta": {
+      "title": "Aesir Tecnologia | Serviços",
+      "description": "Explore limpeza de vibe coding, desenvolvimento sob medida, aumento de equipe, mobile e games com a Aesir."
+    },
+    "hero": {
+      "title": "Serviços",
+      "lead": "Da limpeza de vibe coding ao delivery full-stack e escala de times, cobrimos todas as etapas entre protótipo e produção."
+    },
+    "list": [
+      {
+        "slug": "vibe-coding-cleanup",
+        "title": "Limpeza de Vibe Coding",
+        "summary": "Auditorias de segurança, reestruturação de arquitetura e otimização de performance para transformar protótipos gerados por IA em produtos investíveis.",
+        "focus": "Foco Principal · 50%",
+        "cta": "Auditar Meu App Vibe-Coded"
+      },
+      {
+        "slug": "web-development",
+        "title": "Desenvolvimento Web Personalizado",
+        "summary": "Aplicações full-stack projetadas para escala usando Laravel, React, Vue, Node.js e Python.",
+        "focus": "Soluções Sob Medida · 25%",
+        "cta": "Iniciar Meu Projeto Web"
+      },
+      {
+        "slug": "staff-augmentation",
+        "title": "Aumento de Equipe Especializado",
+        "summary": "Desenvolvedores pré-avaliados que se integram ao seu fluxo de trabalho por curtos ou longos períodos.",
+        "focus": "Escala de Time · 25%",
+        "cta": "Encontrar Seu Desenvolvedor"
+      },
+      {
+        "slug": "mobile-development",
+        "title": "Desenvolvimento Mobile",
+        "summary": "Experiências mobile nativas e multiplataforma com React Native, Flutter, Swift e Kotlin.",
+        "focus": "Excelência Mobile",
+        "cta": "Construir Meu App Mobile"
+      },
+      {
+        "slug": "game-development",
+        "title": "Desenvolvimento de Jogos",
+        "summary": "Jogos e experiências imersivas com Unity, HTML5 e WebGL.",
+        "focus": "Experiências de Engajamento",
+        "cta": "Criar Meu Jogo"
+      }
+    ],
+    "callouts": {
+      "primary": {
+        "title": "Limpeza de Vibe Coding",
+        "body": "Transforme MVPs gerados por IA em aplicações prontas para produção com segurança reforçada, reestruturação de arquitetura, otimização de performance e prontidão para deploy.",
+        "cta": {
+          "label": "Auditar Meu App",
+          "slug": "vibe-coding-cleanup"
+        }
+      },
+      "secondary": {
+        "title": "Expertise Tecnológica",
+        "body": "Time multidisciplinar fluente em Laravel, Vue, React, Node.js, Python, Unity, frameworks mobile e práticas modernas de DevOps.",
+        "cta": {
+          "label": "Veja Como Trabalhamos",
+          "to": "/about"
+        }
+      }
+    },
+    "detail": {
+      "vibe-coding-cleanup": {
+        "metaTitle": "Limpeza de Vibe Coding | Aesir Tecnologia",
+        "metaDescription": "Limpeza completa de vibe coding: segurança, performance, reestruturação de arquitetura, testes e prontidão para deploy.",
+        "hero": {
+          "title": "O Primeiro e Único Serviço de Limpeza de Vibe Coding",
+          "lead": "Seu app vibe-coded funciona, mas está pronto para usuários reais e crescimento de negócios? Transformamos aplicações geradas por IA em sistemas seguros, escaláveis e maintíveis prontos para produção.",
+          "primaryCta": {
+            "label": "Auditar Meu App Vibe-Coded",
+            "to": "/services/vibe-coding-cleanup#contact"
+          },
+          "secondaryCta": {
+            "label": "Ver Todos os Serviços",
+            "to": "/services"
+          }
+        },
+        "overview": {
+          "leftTitle": "O Problema que Resolvemos",
+          "leftList": [
+            "Vulnerabilidades de segurança e endpoints expostos",
+            "Arquitetura frágil que não escala",
+            "Ausência de tratamento de erros e validação",
+            "Nenhuma suíte de testes ou documentação",
+            "Gargalos de performance e queries ineficientes",
+            "Débito técnico que bloqueia evolução"
+          ],
+          "rightTitle": "Problemas que Corrigimos",
+          "rightList": [
+            "Painéis de admin e debug expostos",
+            "Credenciais e chaves de API hardcoded",
+            "Falta de validação de entrada gerando brechas",
+            "Consultas de banco lentas que travam a aplicação",
+            "Tratamento de erros insuficiente causando quedas",
+            "Autenticação e autorização frágeis",
+            "Código desorganizado que inviabiliza manutenção"
+          ]
+        },
+        "process": {
+          "title": "Nosso Processo de Limpeza",
+          "primary": [
+            {
+              "title": "Auditoria Abrangente",
+              "items": [
+                "Avaliação de vulnerabilidades",
+                "Análise de performance e escalabilidade",
+                "Revisão de qualidade e estrutura de código",
+                "Oportunidades de otimização de banco",
+                "Avaliação arquitetural"
+              ]
+            },
+            {
+              "title": "Fortalecimento de Segurança",
+              "items": [
+                "Validação e sanitização de entradas",
+                "Correções de autenticação e autorização",
+                "Segurança de API e rate limiting",
+                "Criptografia e armazenamento seguro",
+                "Implementação de práticas OWASP"
+              ]
+            },
+            {
+              "title": "Reestruturação de Arquitetura",
+              "items": [
+                "Organização modular de código",
+                "Separação de responsabilidades",
+                "Design de banco escalável",
+                "Implementação de estratégia de cache",
+                "Preparação para balanceamento de carga"
+              ]
+            }
+          ],
+          "secondary": [
+            {
+              "title": "Otimização de Performance",
+              "items": [
+                "Otimização de queries",
+                "Melhorias de performance frontend",
+                "Redução de tempo de resposta de APIs",
+                "Otimização de uso de memória",
+                "Otimização de CDN e assets"
+              ]
+            },
+            {
+              "title": "Prontidão para Produção",
+              "items": [
+                "Suítes de testes completas",
+                "Tratamento de erros e logging",
+                "Setup de monitoramento e alertas",
+                "Implementação de pipelines CI/CD",
+                "Documentação e comentários de código"
+              ]
+            },
+            {
+              "title": "Preparação para Escala",
+              "items": [
+                "Arquitetura para escala horizontal",
+                "Avaliação de microservices",
+                "Estratégia de sharding de banco",
+                "Implementação de camadas de cache",
+                "Configuração de auto scale"
+              ]
+            }
+          ]
+        },
+        "deliverables": {
+          "title": "O que Você Recebe",
+          "items": [
+            "Relatório de segurança com correções detalhadas",
+            "Benchmarks de performance antes e depois",
+            "Código limpo e estruturado pronto para handoff",
+            "Documentação e guias de desenvolvimento",
+            "Suíte de testes completa",
+            "Estratégia de deploy e monitoramento",
+            "Roadmap de escalabilidade para o futuro"
+          ]
+        },
+        "audiences": {
+          "title": "Perfeito Para",
+          "items": [
+            "Empreendedores com MVP vibe-coded buscando investimento",
+            "Startups saindo do protótipo para o produto",
+            "Empresas com apps gerados por IA precisando de produção",
+            "Fundadores não técnicos com protótipos funcionando",
+            "Companhias migrando de prototipagem para desenvolvimento sério"
+          ]
+        },
+        "value": {
+          "highlights": [
+            "Transforme protótipos gerados por IA em ativos investíveis",
+            "Corrija vulnerabilidades antes que virem incidentes",
+            "Leve código não escalável para padrão enterprise"
+          ],
+          "messages": [
+            "Seus concorrentes estão construindo com IA. Não deixe problemas técnicos atrasarem seu lançamento.",
+            "Investidores vão analisar sua base técnica. Garanta que ela passe no teste.",
+            "Escale com confiança sabendo que sua fundação é sólida."
+          ],
+          "highlightTitle": "Destaques",
+          "messagesTitle": "Mensagens-chave"
+        },
+        "cta": {
+          "title": "Pronto para limpar sua aplicação gerada por IA?",
+          "description": "Solicite uma auditoria completa para entender lacunas de segurança, performance e escalabilidade.",
+          "primary": {
+            "label": "Solicitar Auditoria",
+            "to": "/contact"
+          },
+          "secondary": {
+            "label": "Planejar Roadmap",
+            "to": "/services"
+          }
+        }
+      },
+      "web-development": {
+        "metaTitle": "Desenvolvimento Web Personalizado | Aesir Tecnologia",
+        "metaDescription": "Aplicações web full-stack com Laravel, React, Vue.js, Node.js e Python. Arquitetura escalável, testes e entrega pronta para produção.",
+        "hero": {
+          "title": "Aplicações Web Sob Medida que Escalam com Sua Visão",
+          "lead": "Quando as ferramentas de IA chegam ao limite, nosso time de engenharia constrói aplicações web prontas para produção e alinhadas ao seu negócio.",
+          "primaryCta": {
+            "label": "Iniciar Seu Projeto Web",
+            "to": "/services/web-development#contact"
+          },
+          "secondaryCta": {
+            "label": "Ver Todos os Serviços",
+            "to": "/services"
+          }
+        },
+        "overview": {
+          "leftTitle": "Visão Geral",
+          "leftList": [
+            "Plataformas de e-commerce",
+            "Sistemas de gestão e ERPs",
+            "Portais e dashboards",
+            "Sistemas de gestão de conteúdo",
+            "Aplicações orientadas a APIs",
+            "Progressive web apps"
+          ],
+          "rightTitle": "Proposta de Valor",
+          "rightList": [
+            "Quando as ferramentas de IA não bastam, construímos do zero",
+            "Tecnologias modernas com arquiteturas comprovadas",
+            "Preparado para o crescimento desde o primeiro dia",
+            "Parceria completa no desenvolvimento"
+          ]
+        },
+        "process": {
+          "title": "Nossa Abordagem",
+          "primary": [
+            {
+              "title": "Discovery e Planejamento",
+              "items": [
+                "Entender requisitos, restrições e metas",
+                "Definir escopo, marcos e métricas de sucesso"
+              ]
+            },
+            {
+              "title": "Design de Arquitetura",
+              "items": [
+                "Projetar sistemas escaláveis e seguros",
+                "Selecionar tecnologias alinhadas ao crescimento"
+              ]
+            },
+            {
+              "title": "Desenvolvimento Ágil",
+              "items": [
+                "Entrega iterativa com checkpoints frequentes",
+                "Marcos de release com incrementos prontos para demo"
+              ]
+            }
+          ],
+          "secondary": [
+            {
+              "title": "Qualidade e Testes",
+              "items": [
+                "Cobertura de testes automatizados",
+                "QA manual para fluxos críticos"
+              ]
+            },
+            {
+              "title": "Deploy e Suporte",
+              "items": [
+                "Estratégias de deploy sem downtime",
+                "Manutenção contínua e monitoramento de performance"
+              ]
+            }
+          ]
+        },
+        "deliverables": {
+          "title": "Tecnologias Utilizadas",
+          "items": [
+            "Laravel",
+            "Vue.js",
+            "React",
+            "JavaScript e TypeScript",
+            "Node.js",
+            "MySQL e PostgreSQL"
+          ]
+        },
+        "audiences": {
+          "title": "Mensagens-chave",
+          "items": [
+            "Algumas ideias são únicas demais para ferramentas de IA. Construímos o impossível.",
+            "Pule a fase de protótipo. Vá direto para produção.",
+            "Sua visão merece soluções sob medida, não templates de IA."
+          ]
+        },
+        "value": {
+          "highlights": [
+            "Especialistas full-stack em Laravel, Node.js, Vue e React",
+            "Arquiteturas de produção projetadas para crescimento e confiabilidade",
+            "Parceria de produto que cobre discovery, entrega e suporte contínuo"
+          ],
+          "messages": [
+            "Evolua de protótipos gerados por IA para plataformas prontas para produção.",
+            "Colabore com um time sênior que apresenta progresso a cada sprint.",
+            "Lance com observabilidade, automação de QA e documentação desde o primeiro dia."
+          ],
+          "highlightTitle": "Destaques",
+          "messagesTitle": "Mensagens-chave"
+        },
+        "cta": {
+          "title": "Leve Seu Próximo Projeto Web ao Mercado",
+          "description": "Compartilhe requisitos e arquitetaremos um roadmap do discovery ao deploy.",
+          "primary": {
+            "label": "Iniciar Seu Projeto Web",
+            "to": "/contact"
+          },
+          "secondary": {
+            "label": "Explorar Aumento de Equipe",
+            "to": "/services/staff-augmentation"
+          }
+        }
+      },
+      "common": {
+        "highlights": "Destaques",
+        "messages": "Mensagens-chave"
+      },
+      "staff-augmentation": {
+        "metaTitle": "Aumento de Equipe Especializado | Aesir Tecnologia",
+        "metaDescription": "Desenvolvedores remotos pré-avaliados com experiência em código tradicional e fluxos apoiados por IA. Engajamentos flexíveis de meio período a dedicação total.",
+        "hero": {
+          "title": "Desenvolvedores especialistas em código tradicional e IA",
+          "lead": "Aumente sua capacidade de desenvolvimento com profissionais remote-first que se integram perfeitamente ao seu time e stack de ferramentas.",
+          "primaryCta": {
+            "label": "Encontrar Seu Desenvolvedor",
+            "to": "/services/staff-augmentation#contact"
+          },
+          "secondaryCta": {
+            "label": "Ver Todos os Serviços",
+            "to": "/services"
+          }
+        },
+        "overview": {
+          "leftTitle": "Visão Geral",
+          "leftList": [
+            "Desenvolvedores sênior e pleno pré-avaliados",
+            "Experiência comprovada no seu stack de tecnologia",
+            "Profissionais remotos com comunicação excelente",
+            "Modelos de engajamento flexíveis: meio período ou dedicação total",
+            "Integração direta aos seus fluxos e rituais",
+            "Suporte e gestão de conta contínuos"
+          ],
+          "rightTitle": "Especialidades Técnicas",
+          "rightList": [
+            "Frontend: React, Vue.js, Angular, JavaScript/TypeScript",
+            "Backend: PHP/Laravel, Node.js, Python/Django, .NET",
+            "Mobile: React Native, Flutter, iOS, Android",
+            "DevOps: AWS, Docker, CI/CD, administração Linux",
+            "Bancos: MySQL, PostgreSQL, MongoDB, Redis"
+          ]
+        },
+        "process": {
+          "title": "Modelos de Engajamento",
+          "primary": [
+            {
+              "title": "Projetos de curto prazo",
+              "items": [
+                "Engajamentos de 1-6 meses para entregas específicas e aceleração de produto."
+              ]
+            },
+            {
+              "title": "Parcerias de longo prazo",
+              "items": [
+                "Colaborações de 6+ meses para evolução contínua do produto."
+              ]
+            },
+            {
+              "title": "Extensão de equipe",
+              "items": [
+                "Adicione múltiplos desenvolvedores para aumentar velocidade sem sobrecarga de contratação."
+              ]
+            }
+          ],
+          "secondary": [
+            {
+              "title": "Funções especializadas",
+              "items": [
+                "Arquitetos sênior, tech leads ou especialistas de nicho sob demanda."
+              ]
+            }
+          ]
+        },
+        "deliverables": {
+          "title": "Por que escolher nossos desenvolvedores",
+          "items": [
+            "Processo rigoroso de avaliação técnica",
+            "Habilidades de comunicação de alto nível",
+            "Experiência comprovada em trabalho remoto e autogestão",
+            "Avaliação de fit cultural para cada alocação"
+          ]
+        },
+        "audiences": {
+          "title": "Mensagens-chave",
+          "items": [
+            "Precisa de desenvolvedores que dominem código tradicional e assistência de IA?",
+            "Escale sua equipe com experts que já viram de tudo.",
+            "Profissionais remotos que se integram como se estivessem ao seu lado."
+          ]
+        },
+        "value": {
+          "highlightTitle": "Destaques",
+          "highlights": [
+            "Desenvolvedores experientes em fluxos com e sem IA",
+            "Compromissos flexíveis de projetos rápidos a membros embutidos",
+            "Gestão de conta dedicada para manter a entrega fluindo"
+          ],
+          "messagesTitle": "Mensagens-chave",
+          "messages": [
+            "Escale sua equipe sem pausar entregas para processos de contratação.",
+            "Conecte-se a profissionais que entram direto nos seus rituais e ferramentas.",
+            "Traga expertise nativa em IA sem abrir mão da qualidade do código."
+          ]
+        },
+        "cta": {
+          "title": "Escale sua equipe sem demora",
+          "description": "Conte sobre seu stack, workflows e metas para conectarmos os desenvolvedores ideais.",
+          "primary": {
+            "label": "Encontrar Seu Desenvolvedor",
+            "to": "/contact"
+          },
+          "secondary": {
+            "label": "Auditar Seu App",
+            "to": "/services/vibe-coding-cleanup"
+          }
+        }
+      },
+      "mobile-development": {
+        "metaTitle": "Desenvolvimento Mobile | Aesir Tecnologia",
+        "metaDescription": "Aplicativos mobile nativos e cross-platform construídos com React Native, Flutter e APIs modernas.",
+        "hero": {
+          "title": "Soluções Mobile Nativas e Cross-Platform",
+          "lead": "Aplicativos mobile que entregam experiências excepcionais em iOS e Android, do conceito ao lançamento e crescimento.",
+          "primaryCta": {
+            "label": "Construir Seu App Mobile",
+            "to": "/services/mobile-development#contact"
+          },
+          "secondaryCta": {
+            "label": "Ver Todos os Serviços",
+            "to": "/services"
+          }
+        },
+        "overview": {
+          "leftTitle": "Visão Geral",
+          "leftList": [
+            "Apps nativos para iOS e Android",
+            "Aplicações cross-platform (React Native, Flutter)",
+            "Progressive web apps",
+            "Integrações de API e recursos em tempo real",
+            "Experiências web mobile-first"
+          ],
+          "rightTitle": "Processo de Entrega",
+          "rightList": [
+            "Estratégia: avaliar plataformas e métricas de sucesso",
+            "Design: UX centrado no usuário e prototipagem rápida",
+            "Desenvolvimento: builds nativos ou cross-platform com comunicação constante",
+            "Testes: validação em dispositivos e performance estável",
+            "Lançamento: submissão às lojas e coordenação de release",
+            "Crescimento: analytics, experimentos e atualizações"
+          ]
+        },
+        "process": {
+          "title": "Nosso Framework de Entrega",
+          "primary": [
+            {
+              "title": "Descoberta",
+              "items": [
+                "Definir objetivos, público-alvo e expectativas de plataforma."
+              ]
+            },
+            {
+              "title": "Design da experiência",
+              "items": [
+                "Mapear jornadas, criar protótipos e validar fluxos cedo."
+              ]
+            },
+            {
+              "title": "Sprints de engenharia",
+              "items": [
+                "Construir de forma iterativa com demos frequentes e versões release candidate."
+              ]
+            }
+          ],
+          "secondary": [
+            {
+              "title": "Teste e qualidade",
+              "items": [
+                "Laboratórios de dispositivos, benchmarks de performance e revisões de acessibilidade."
+              ]
+            },
+            {
+              "title": "Lançamento e crescimento",
+              "items": [
+                "Publicação nas lojas, instrumentação de analytics e planos de iteração."
+              ]
+            }
+          ]
+        },
+        "deliverables": {
+          "title": "Tecnologias Utilizadas",
+          "items": [
+            "React Native",
+            "Flutter",
+            "Swift",
+            "Kotlin",
+            "JavaScript e TypeScript",
+            "Integração de APIs"
+          ]
+        },
+        "audiences": {
+          "title": "Mensagens-chave",
+          "items": [
+            "Entregue experiências nativas em todas as plataformas.",
+            "Equilibre velocidade e performance com as ferramentas certas.",
+            "Lance com confiança apoiado por testes rigorosos e analytics."
+          ]
+        },
+        "value": {
+          "highlightTitle": "Destaques",
+          "highlights": [
+            "Estratégia, design, desenvolvimento e crescimento no mesmo parceiro",
+            "Especialistas em iOS, Android e soluções cross-platform",
+            "QA robusto, analytics e monitoramento presentes em cada lançamento"
+          ],
+          "messagesTitle": "Mensagens-chave",
+          "messages": [
+            "Entregue produtos mobile com um parceiro que assume responsabilidade pelo resultado.",
+            "Escolha o stack ideal — nativo ou cross-platform — conforme seus objetivos.",
+            "Continue evoluindo após o lançamento com iteração orientada por dados."
+          ]
+        },
+        "cta": {
+          "title": "Lance sua próxima experiência mobile",
+          "description": "Compartilhe objetivos, funcionalidades prioritárias e cronograma para montarmos o time certo.",
+          "primary": {
+            "label": "Construir Seu App Mobile",
+            "to": "/contact"
+          },
+          "secondary": {
+            "label": "Explorar Desenvolvimento Web",
+            "to": "/services/web-development"
+          }
+        }
+      },
+      "game-development": {
+        "metaTitle": "Desenvolvimento de Jogos | Aesir Tecnologia",
+        "metaDescription": "Desenvolvimento de jogos em Unity e HTML5 para mobile e web, incluindo gamificação e experiências interativas.",
+        "hero": {
+          "title": "Jogos Interativos e Experiências Imersivas",
+          "lead": "Construa jogos e experiências gamificadas com Unity e HTML5 para encantar seu público no web e no mobile.",
+          "primaryCta": {
+            "label": "Criar Seu Jogo",
+            "to": "/services/game-development#contact"
+          },
+          "secondaryCta": {
+            "label": "Ver Todos os Serviços",
+            "to": "/services"
+          }
+        },
+        "overview": {
+          "leftTitle": "Visão Geral",
+          "leftList": [
+            "Jogos mobile para iOS e Android",
+            "Jogos e conteúdos interativos para web",
+            "Jogos educacionais e de treinamento",
+            "Recursos de gamificação para aplicativos",
+            "Jogos e animações em HTML5"
+          ],
+          "rightTitle": "Serviços de Desenvolvimento",
+          "rightList": [
+            "Desenvolvimento de conceito e planejamento narrativo",
+            "Produção de arte e animação",
+            "Engenharia em Unity, HTML5 e JavaScript",
+            "Garantia de qualidade e testes em dispositivos",
+            "Suporte de publicação e analytics"
+          ]
+        },
+        "process": {
+          "title": "Como Construímos Jogos",
+          "primary": [
+            {
+              "title": "Conceito e estratégia",
+              "items": [
+                "Definir mecânicas, público-alvo e métricas de sucesso."
+              ]
+            },
+            {
+              "title": "Arte e protótipos",
+              "items": [
+                "Produzir concept art, protótipos e batidas narrativas."
+              ]
+            },
+            {
+              "title": "Sprints de produção",
+              "items": [
+                "Desenvolver sistemas de gameplay, conteúdo e integrações de forma iterativa."
+              ]
+            }
+          ],
+          "secondary": [
+            {
+              "title": "Garantia de qualidade",
+              "items": [
+                "Testes em dispositivos, perfil de performance e verificações de acessibilidade."
+              ]
+            },
+            {
+              "title": "Lançamento e live ops",
+              "items": [
+                "Publicação nas lojas, analytics e planejamento de atualizações de conteúdo."
+              ]
+            }
+          ]
+        },
+        "deliverables": {
+          "title": "Tecnologias Utilizadas",
+          "items": [
+            "Unity",
+            "HTML5",
+            "JavaScript",
+            "WebGL",
+            "SDKs mobile"
+          ]
+        },
+        "audiences": {
+          "title": "Mensagens-chave",
+          "items": [
+            "Entregue experiências imersivas que geram engajamento.",
+            "Una storytelling, arte e engenharia para lançar jogos marcantes.",
+            "Expanda a estratégia do seu produto com pontos de contato gamificados."
+          ]
+        },
+        "value": {
+          "highlightTitle": "Destaques",
+          "highlights": [
+            "Desenvolvimento de jogos em Unity e HTML5 para mobile e web",
+            "Suporte de ponta a ponta do conceito às operações ao vivo",
+            "Design, arte e engenharia colaborando sob o mesmo teto"
+          ],
+          "messagesTitle": "Mensagens-chave",
+          "messages": [
+            "Crie experiências que fazem o público voltar sempre.",
+            "Combine gamificação e estratégia de produto para gerar resultados mensuráveis.",
+            "Confie em um time que entende storytelling e entrega técnica."
+          ]
+        },
+        "cta": {
+          "title": "Dê vida à sua experiência",
+          "description": "Conte sua ideia, público e plataformas desejadas para iniciarmos o planejamento.",
+          "primary": {
+            "label": "Criar Seu Jogo",
+            "to": "/contact"
+          },
+          "secondary": {
+            "label": "Integrar ao Seu App",
+            "to": "/services/web-development"
+          }
+        }
+      }
+    }
+  },
+  "legal": {
+    "privacy": {
+      "title": "Política de Privacidade",
+      "lead": "Respeitamos sua privacidade e detalhamos como tratamos dados em nossos serviços e site.",
+      "metaTitle": "Política de Privacidade | Aesir Tecnologia",
+      "metaDescription": "Saiba como a Aesir Tecnologia gerencia privacidade de dados, contatos e informações de clientes.",
+      "body": [
+        "Este site coleta apenas as informações necessárias para responder solicitações e entregar os serviços contratados.",
+        "Não vendemos nem compartilhamos seus dados com terceiros fora da prestação direta do serviço.",
+        {
+          "before": "Para dúvidas sobre privacidade, envie email para ",
+          "after": "."
+        }
+      ]
+    },
+    "terms": {
+      "title": "Termos e Condições",
+      "lead": "Os termos a seguir descrevem o engajamento com os serviços da Aesir Tecnologia.",
+      "metaTitle": "Termos e Condições | Aesir Tecnologia",
+      "metaDescription": "Revise os termos e condições de contratação dos serviços da Aesir Tecnologia.",
+      "body": [
+        "Os projetos são regidos por acordos mútuos que detalham escopo, entregáveis e cronogramas.",
+        "Todo o trabalho é realizado com as melhores práticas do mercado em segurança, performance e confiabilidade.",
+        {
+          "before": "Entre em contato pelo ",
+          "after": " para detalhes contratuais ou esclarecimentos."
+        }
+      ]
+    }
+  }
+}

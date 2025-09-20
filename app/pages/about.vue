@@ -1,91 +1,64 @@
 <template>
-  <div class="page">
-    <section class="section hero">
-      <div class="container section-inner">
-        <div class="section-header">
-          <h1>Building Software Excellence for Over a Decade</h1>
-          <p class="section-subhead">
-            We've been passionate about creating software that makes a difference. What started as a vision to build better applications has grown into a team dedicated to delivering exceptional digital solutions.
-          </p>
-          <div class="hero-actions">
-            <NuxtLink to="/contact" class="btn btn--primary">Work With Us</NuxtLink>
-            <NuxtLink to="/services" class="btn btn--ghost">Explore Our Services</NuxtLink>
-          </div>
+  <div class="flex flex-col">
+    <BaseSection id="about-hero" background="gradient">
+      <div class="space-y-10">
+        <SectionHeader
+          :title="t('about.hero.title')"
+          :subhead="t('about.hero.lead')"
+        />
+        <div class="flex flex-wrap gap-4">
+          <AppLinkButton :to="localePath('/contact')" intent="primary">
+            {{ t('about.hero.primaryCta') }}
+          </AppLinkButton>
+          <AppLinkButton :to="localePath('/services')" intent="ghost">
+            {{ t('about.hero.secondaryCta') }}
+          </AppLinkButton>
         </div>
       </div>
-    </section>
+    </BaseSection>
 
-    <section class="section">
-      <div class="container section-inner">
-        <article class="card card--muted">
-          <h2>Our Mission</h2>
-          <p>We believe great software should be human-centered, scalable, and built to last. Every application we create is designed to grow with your business while providing an exceptional user experience.</p>
-        </article>
-      </div>
-    </section>
+    <BaseSection id="mission" background="surface" :eyebrow="t('about.mission.eyebrow')">
+      <UCard :ui="cardUi">
+        <template #header>
+          <h2 class="text-2xl font-semibold text-slate-50">{{ t('about.mission.title') }}</h2>
+        </template>
+        <p class="text-base text-slate-300">{{ t('about.mission.body') }}</p>
+      </UCard>
+    </BaseSection>
 
-    <section class="section section--gradient">
-      <div class="container section-inner">
-        <div class="section-header">
-          <h2>Our Approach</h2>
-        </div>
-        <div class="grid grid--four">
-          <article v-for="pillar in pillars" :key="pillar.title" class="card card--muted">
-            <h3>{{ pillar.title }}</h3>
-            <p>{{ pillar.description }}</p>
-          </article>
-        </div>
+    <BaseSection id="approach" :eyebrow="t('about.approach.eyebrow')">
+      <div class="space-y-10">
+        <SectionHeader :title="t('about.approach.title')" />
+        <FeatureGrid :features="pillars" :columns="4" />
       </div>
-    </section>
+    </BaseSection>
 
-    <section class="section">
-      <div class="container section-inner">
-        <div class="section-header section-header--center">
-          <h2>Values</h2>
-        </div>
-        <div class="grid grid--four">
-          <article v-for="value in values" :key="value.title" class="card card--bright">
-            <h3>{{ value.title }}</h3>
-            <p>{{ value.description }}</p>
-          </article>
-        </div>
+    <BaseSection id="values" background="surface" :eyebrow="t('about.values.eyebrow')">
+      <div class="space-y-10">
+        <SectionHeader :title="t('about.values.title')" align="center" />
+        <FeatureGrid :features="values" :columns="4" />
       </div>
-    </section>
+    </BaseSection>
   </div>
 </template>
 
 <script setup lang="ts">
-useSeoMeta({
-  title: 'About Aesir Tecnologia',
-  description: 'Aesir Tecnologia builds secure, scalable software with a focus on vibe coding cleanup, custom development, and long-term client partnerships.'
+import { computed } from 'vue'
+
+const { t, tm } = useI18n()
+const localePath = useLocalePath()
+
+useSeoDefaults({
+  title: t('about.meta.title'),
+  description: t('about.meta.description')
 })
 
-const pillars = [
-  { title: 'Quality First', description: 'We build applications with strong engineering principles and proven architecture.' },
-  { title: 'Zero Downtime', description: 'Critical applications demand seamless deployments and resilient infrastructure.' },
-  { title: 'Modern Technologies', description: 'We stay current with frameworks, tooling, and best practices so your stack stays modern.' },
-  { title: 'Client Partnership', description: 'Your success is our success. We operate as an embedded extension of your team.' }
-]
+const cardUi = {
+  base: 'border border-slate-800/70 bg-slate-900/60 backdrop-blur rounded-3xl',
+  header: 'p-6 pb-0',
+  body: 'p-6'
+}
 
-const values = [
-  { title: 'Excellence', description: 'Every line of code matters and receives rigorous review.' },
-  { title: 'Reliability', description: 'Applications you can depend on from launch to scale.' },
-  { title: 'Innovation', description: 'We embrace new technologies thoughtfully to deliver meaningful value.' },
-  { title: 'Partnership', description: 'Long-term collaboration built on transparency and trust.' }
-]
+const pillars = computed(() => tm('about.approach.pillars') as Array<{ title: string; description: string }>)
+const values = computed(() => tm('about.values.items') as Array<{ title: string; description: string }>)
 </script>
-
-<style scoped>
-.page {
-  display: flex;
-  flex-direction: column;
-  gap: 4rem;
-  padding-bottom: 6rem;
-}
-
-h1 {
-  font-size: clamp(2.5rem, 3.5vw, 3.25rem);
-  margin: 0;
-}
-
-</style>

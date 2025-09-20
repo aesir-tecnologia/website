@@ -1,184 +1,151 @@
 <template>
-  <div class="page">
-    <section class="section hero">
-      <div class="container section-inner">
-        <div class="section-header">
-          <h1>Let's Build Something Great Together</h1>
-          <p class="section-subhead">
-            Ready to turn your idea into reality? We'd love to hear about your project and discuss how we can help.
-          </p>
-        </div>
-      </div>
-    </section>
+  <div class="flex flex-col">
+    <BaseSection id="contact-hero" background="gradient">
+      <SectionHeader :title="t('contact.hero.title')" :subhead="t('contact.hero.lead')" />
+    </BaseSection>
 
-    <section class="section">
-      <div class="container section-inner">
-        <div class="grid grid--two">
-          <article class="card card--muted">
-            <h2>Project Inquiry</h2>
-            <p>Share the essentials so we can prepare a tailored proposal.</p>
-            <ul>
-              <li v-for="item in projectInquiry" :key="item">{{ item }}</li>
-            </ul>
-          </article>
-          <article class="card card--muted">
-            <h2>Engagement Models</h2>
-            <ul>
-              <li v-for="model in engagementModels" :key="model.title">
-                <strong>{{ model.title }}:</strong> {{ model.description }}
-              </li>
-            </ul>
-          </article>
-        </div>
+    <BaseSection id="contact-overview" background="surface">
+      <div class="grid gap-6 md:grid-cols-2">
+        <UCard :ui="cardUi">
+          <template #header>
+            <h2 class="text-xl font-semibold text-slate-50">{{ t('contact.projectInquiry.title') }}</h2>
+            <p class="mt-2 text-sm text-slate-300">{{ t('contact.projectInquiry.lead') }}</p>
+          </template>
+          <BulletList :items="projectInquiry" />
+        </UCard>
+        <UCard :ui="cardUi">
+          <template #header>
+            <h2 class="text-xl font-semibold text-slate-50">{{ t('contact.engagement.title') }}</h2>
+          </template>
+          <ul class="space-y-3 text-sm text-slate-300">
+            <li v-for="model in engagementModels" :key="model.title">
+              <strong class="text-slate-100">{{ model.title }}</strong>
+              <span class="block text-slate-300">{{ model.description }}</span>
+            </li>
+          </ul>
+        </UCard>
       </div>
-    </section>
+    </BaseSection>
 
-    <section class="section section--gradient">
-      <div class="container section-inner">
-        <div class="grid contact-grid">
-          <form class="card contact-form" @submit.prevent>
-            <h3>Send Project Details</h3>
-            <label>
-              Name
-              <input type="text" name="name" placeholder="Your name" required>
-            </label>
-            <label>
-              Email
-              <input type="email" name="email" placeholder="you@company.com" required>
-            </label>
-            <label>
-              Company (optional)
-              <input type="text" name="company" placeholder="Company name">
-            </label>
-            <label>
-              Project Type
-              <select name="projectType" required>
-                <option value="" disabled selected>Select a project type</option>
-                <option v-for="option in projectTypes" :key="option" :value="option">{{ option }}</option>
-              </select>
-            </label>
-            <label>
-              Project Description
-              <textarea name="description" rows="4" placeholder="Tell us about your project, goals, and challenges." required />
-            </label>
-            <label>
-              Timeline
-              <input type="text" name="timeline" placeholder="Desired timeline">
-            </label>
-            <label>
-              Budget Range
-              <input type="text" name="budget" placeholder="Estimated budget range">
-            </label>
-            <button type="submit" class="btn btn--primary">Send Project Details</button>
-          </form>
-          <article class="card card--bright">
-            <h3>Prefer to talk directly?</h3>
-            <p>Schedule a consultation call to discuss your project in detail and map next steps.</p>
-            <NuxtLink to="/contact#schedule" class="card-cta">Schedule a Call</NuxtLink>
-          </article>
-        </div>
+    <BaseSection id="contact-form" background="gradient">
+      <div class="grid gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] lg:items-start">
+        <UCard :ui="formCardUi">
+          <template #header>
+            <div class="space-y-2">
+              <h3 class="text-xl font-semibold text-slate-50">{{ t('contact.form.title') }}</h3>
+              <p class="text-sm text-slate-300">{{ t('contact.form.lead') }}</p>
+            </div>
+          </template>
+          <UForm :schema="schema" :state="formState" class="space-y-5" @submit="onSubmit">
+            <div class="grid gap-4 md:grid-cols-2">
+              <UFormGroup :label="t('contact.form.fields.name')" name="name">
+                <UInput v-model="formState.name" :placeholder="t('contact.form.placeholders.name')" />
+              </UFormGroup>
+              <UFormGroup :label="t('contact.form.fields.email')" name="email">
+                <UInput v-model="formState.email" type="email" :placeholder="t('contact.form.placeholders.email')" />
+              </UFormGroup>
+            </div>
+            <UFormGroup :label="t('contact.form.fields.company')" name="company">
+              <UInput v-model="formState.company" :placeholder="t('contact.form.placeholders.company')" />
+            </UFormGroup>
+            <UFormGroup :label="t('contact.form.fields.projectType')" name="projectType">
+              <USelectMenu v-model="formState.projectType" :options="projectTypes" :placeholder="t('contact.form.placeholders.projectType')" />
+            </UFormGroup>
+            <UFormGroup :label="t('contact.form.fields.description')" name="description">
+              <UTextarea v-model="formState.description" :placeholder="t('contact.form.placeholders.description')" :rows="4" />
+            </UFormGroup>
+            <div class="grid gap-4 md:grid-cols-2">
+              <UFormGroup :label="t('contact.form.fields.timeline')" name="timeline">
+                <UInput v-model="formState.timeline" :placeholder="t('contact.form.placeholders.timeline')" />
+              </UFormGroup>
+              <UFormGroup :label="t('contact.form.fields.budget')" name="budget">
+                <UInput v-model="formState.budget" :placeholder="t('contact.form.placeholders.budget')" />
+              </UFormGroup>
+            </div>
+            <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div class="flex items-center gap-3">
+                <UButton type="submit" :loading="isSubmitting" size="lg">
+                  {{ t('contact.form.submit') }}
+                </UButton>
+                <UButton v-if="submitted" variant="ghost" size="lg" @click="reset">
+                  {{ t('contact.form.reset') }}
+                </UButton>
+              </div>
+              <UAlert v-if="message" :color="submitted ? 'primary' : 'rose'" variant="soft" icon="i-heroicons-sparkles">
+                {{ message }}
+              </UAlert>
+            </div>
+          </UForm>
+        </UCard>
+        <UCard :ui="formCardUi">
+          <template #header>
+            <h3 class="text-lg font-semibold text-slate-50">{{ t('contact.direct.title') }}</h3>
+          </template>
+          <p class="text-sm text-slate-300">{{ t('contact.direct.body') }}</p>
+          <AppLinkButton :href="`mailto:${contactEmail}`" intent="outline" class="mt-6 w-full justify-center">
+            {{ contactEmail }}
+          </AppLinkButton>
+          <AppLinkButton :to="scheduleLink" intent="ghost" class="mt-2 w-full justify-center">
+            {{ t('contact.direct.scheduleCta') }}
+          </AppLinkButton>
+        </UCard>
       </div>
-    </section>
+    </BaseSection>
 
-    <section id="schedule" class="section">
-      <div class="container section-inner">
-        <div class="card card--muted">
-          <h3>Schedule a Call</h3>
-          <p>Email <a href="mailto:hello@aesir.dev">hello@aesir.dev</a> with your availability or send us a calendar invite. We'll confirm a time within one business day.</p>
-        </div>
-      </div>
-    </section>
+    <BaseSection id="schedule" background="surface">
+      <UCard :ui="cardUi">
+        <template #header>
+          <h3 class="text-lg font-semibold text-slate-50">{{ t('contact.schedule.title') }}</h3>
+        </template>
+        <p class="text-sm text-slate-300">
+          <span>{{ t('contact.schedule.body') }}</span>
+          <br />
+          <a :href="`mailto:${contactEmail}`" class="font-semibold text-sky-300 hover:text-sky-200">{{ contactEmail }}</a>
+        </p>
+      </UCard>
+    </BaseSection>
   </div>
 </template>
 
 <script setup lang="ts">
-useSeoMeta({
-  title: 'Contact | Aesir Tecnologia',
-  description: 'Reach out to Aesir Tecnologia to discuss vibe coding cleanup, custom web and mobile development, and staff augmentation projects.'
+import { computed } from 'vue'
+import type { FormSubmitEvent } from '#ui/types'
+import type { ContactFormValues } from '~/composables/useContactForm'
+
+const { t, tm } = useI18n()
+const localePath = useLocalePath()
+const { site } = useAppConfig()
+
+useSeoDefaults({
+  title: t('contact.meta.title'),
+  description: t('contact.meta.description')
 })
 
-const projectInquiry = [
-  'Project type and scope',
-  'Timeline and budget',
-  'Technical requirements',
-  'Business goals'
-]
+const { schema, values: formState, submit, isSubmitting, submitted, message, reset } = useContactForm()
 
-const engagementModels = [
-  { title: 'Project-Based', description: 'Fixed scope with defined deliverables for predictable outcomes.' },
-  { title: 'Retainer', description: 'Ongoing development and support for continuous improvement.' },
-  { title: 'Consultation', description: 'Technical guidance, planning, and architecture reviews.' }
-]
+const projectInquiry = computed(() => tm('contact.projectInquiry.items') as string[])
+const engagementModels = computed(() => tm('contact.engagement.items') as Array<{ title: string; description: string }>)
+const projectTypes = computed(() => tm('contact.form.projectTypes') as string[])
+const contactEmail = computed(() => site.contactEmail)
+const contactPath = computed(() => localePath('/contact'))
+const scheduleLink = computed(() => `${contactPath.value}#schedule`)
 
-const projectTypes = [
-  'Vibe Coding Cleanup',
-  'Custom Web Development',
-  'Mobile Development',
-  'Game Development',
-  'Staff Augmentation',
-  'Consultation'
-]
+const cardUi = {
+  base: 'border border-slate-800/70 bg-slate-900/60 backdrop-blur rounded-3xl h-full',
+  header: 'p-6 pb-0',
+  body: 'p-6'
+}
+
+const formCardUi = {
+  base: 'border border-slate-800/70 bg-slate-950/80 backdrop-blur rounded-3xl h-full',
+  header: 'p-6 pb-0',
+  body: 'p-6'
+}
+
+const onSubmit = async (event: FormSubmitEvent<ContactFormValues>) => {
+  await submit(event.data, {
+    success: t('contact.form.success'),
+    error: t('contact.form.error')
+  })
+}
 </script>
-
-<style scoped>
-.page {
-  display: flex;
-  flex-direction: column;
-  gap: 4rem;
-  padding-bottom: 6rem;
-}
-
-h1 {
-  font-size: clamp(2.5rem, 3.5vw, 3.25rem);
-  margin: 0;
-}
-
-.contact-grid {
-  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
-}
-
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  background: rgba(15, 23, 42, 0.9);
-}
-
-.contact-form label {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  font-size: 0.95rem;
-  color: rgba(226, 232, 240, 0.85);
-}
-
-.contact-form input,
-.contact-form select,
-.contact-form textarea {
-  background: rgba(15, 23, 42, 0.7);
-  border: 1px solid rgba(148, 163, 184, 0.4);
-  border-radius: 0.75rem;
-  padding: 0.75rem 1rem;
-  color: #e2e8f0;
-  font-size: 0.95rem;
-}
-
-.contact-form input:focus,
-.contact-form select:focus,
-.contact-form textarea:focus {
-  outline: none;
-  border-color: rgba(56, 189, 248, 0.6);
-  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
-}
-
-.contact-form button {
-  align-self: flex-start;
-}
-
-@media (max-width: 900px) {
-  .contact-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-</style>

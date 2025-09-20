@@ -1,41 +1,42 @@
 <template>
-  <div class="page">
-    <section class="section hero">
-      <div class="container section-inner">
-        <div class="section-header">
-          <h1>Privacy Policy</h1>
-          <p class="section-subhead">We respect your privacy and outline how we handle data across our services and website.</p>
-        </div>
-      </div>
-    </section>
+  <div class="flex flex-col">
+    <BaseSection id="privacy-hero" background="gradient">
+      <SectionHeader :title="t('legal.privacy.title')" :subhead="t('legal.privacy.lead')" />
+    </BaseSection>
 
-    <section class="section">
-      <div class="container section-inner">
-        <div class="card card--muted">
-          <p>This website collects the minimum information required to respond to project inquiries and deliver requested services. We do not sell or share your data with third parties outside of direct service delivery. For privacy questions, email <a href="mailto:hello@aesir.dev">hello@aesir.dev</a>.</p>
-        </div>
-      </div>
-    </section>
+    <BaseSection id="privacy-body" background="surface">
+      <UCard :ui="cardUi">
+        <UProse class="max-w-3xl text-slate-300">
+          <template v-for="(paragraph, index) in body" :key="index">
+            <p v-if="typeof paragraph === 'string'">{{ paragraph }}</p>
+            <p v-else>
+              <span>{{ paragraph.before }}</span>
+              <a :href="`mailto:${contactEmail}`" class="font-semibold text-sky-300 hover:text-sky-200">{{ contactEmail }}</a>
+              <span>{{ paragraph.after }}</span>
+            </p>
+          </template>
+        </UProse>
+      </UCard>
+    </BaseSection>
   </div>
 </template>
 
 <script setup lang="ts">
-useSeoMeta({
-  title: 'Privacy Policy | Aesir Tecnologia',
-  description: 'Learn how Aesir Tecnologia manages data privacy, inquiries, and client information.'
+import { computed } from 'vue'
+
+const { t, tm } = useI18n()
+const { site } = useAppConfig()
+
+useSeoDefaults({
+  title: t('legal.privacy.metaTitle'),
+  description: t('legal.privacy.metaDescription')
 })
+
+const cardUi = {
+  base: 'border border-slate-800/70 bg-slate-900/60 backdrop-blur rounded-3xl',
+  body: 'p-6 sm:p-8'
+}
+
+const body = computed(() => tm('legal.privacy.body') as Array<string | { before: string; after: string }>)
+const contactEmail = computed(() => site.contactEmail)
 </script>
-
-<style scoped>
-.page {
-  display: flex;
-  flex-direction: column;
-  gap: 4rem;
-  padding-bottom: 6rem;
-}
-
-h1 {
-  font-size: clamp(2.5rem, 3.5vw, 3.25rem);
-  margin: 0;
-}
-</style>
