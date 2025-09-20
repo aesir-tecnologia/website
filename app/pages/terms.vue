@@ -1,41 +1,42 @@
 <template>
-  <div class="page">
-    <section class="section hero">
-      <div class="container section-inner">
-        <div class="section-header">
-          <h1>Terms & Conditions</h1>
-          <p class="section-subhead">The following outlines the terms for engaging with Aesir Tecnologia's services.</p>
-        </div>
-      </div>
-    </section>
+  <div class="flex flex-col">
+    <BaseSection id="terms-hero" background="gradient">
+      <SectionHeader :title="t('legal.terms.title')" :subhead="t('legal.terms.lead')" />
+    </BaseSection>
 
-    <section class="section">
-      <div class="container section-inner">
-        <div class="card card--muted">
-          <p>Service engagements are governed by mutual agreements detailing scope, deliverables, and timelines. All work is performed on a best-effort basis using industry-leading practices for security, performance, and reliability. Contact <a href="mailto:hello@aesir.dev">hello@aesir.dev</a> for contract details or clarifications.</p>
-        </div>
-      </div>
-    </section>
+    <BaseSection id="terms-body" background="surface">
+      <UCard :ui="cardUi">
+        <UProse class="max-w-3xl text-slate-300">
+          <template v-for="(paragraph, index) in body" :key="index">
+            <p v-if="typeof paragraph === 'string'">{{ paragraph }}</p>
+            <p v-else>
+              <span>{{ paragraph.before }}</span>
+              <a :href="`mailto:${contactEmail}`" class="font-semibold text-sky-300 hover:text-sky-200">{{ contactEmail }}</a>
+              <span>{{ paragraph.after }}</span>
+            </p>
+          </template>
+        </UProse>
+      </UCard>
+    </BaseSection>
   </div>
 </template>
 
 <script setup lang="ts">
-useSeoMeta({
-  title: 'Terms & Conditions | Aesir Tecnologia',
-  description: 'Review the engagement terms and conditions for Aesir Tecnologia services.'
+import { computed } from 'vue'
+
+const { t, tm } = useI18n()
+const { site } = useAppConfig()
+
+useSeoDefaults({
+  title: t('legal.terms.metaTitle'),
+  description: t('legal.terms.metaDescription')
 })
+
+const cardUi = {
+  base: 'border border-slate-800/70 bg-slate-900/60 backdrop-blur rounded-3xl',
+  body: 'p-6 sm:p-8'
+}
+
+const body = computed(() => tm('legal.terms.body') as Array<string | { before: string; after: string }>)
+const contactEmail = computed(() => site.contactEmail)
 </script>
-
-<style scoped>
-.page {
-  display: flex;
-  flex-direction: column;
-  gap: 4rem;
-  padding-bottom: 6rem;
-}
-
-h1 {
-  font-size: clamp(2.5rem, 3.5vw, 3.25rem);
-  margin: 0;
-}
-</style>
