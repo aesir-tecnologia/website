@@ -1,7 +1,7 @@
 <template>
   <BaseSection :id="id" :variant="variant" padding="default">
     <template v-if="background" #background>
-      <div class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,_rgba(168,85,247,0.12),_transparent_75%)]" />
+      <BackgroundVariant :tone="backgroundTone" :align="backgroundAlign" />
     </template>
     <div class="space-y-12">
       <SectionHeader
@@ -13,14 +13,14 @@
       />
       <FeatureGrid :features="features" :columns="columns" :gap="gap">
         <template #footer="{ feature }">
-          <NuxtLink
+          <AppLinkButton
             v-if="feature.to"
             :to="feature.to"
-            class="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-primary-600 transition duration-200 hover:text-primary-500 dark:text-primary-200 dark:hover:text-primary-100"
+            size="sm"
+            class="mt-auto"
           >
             {{ feature.cta ?? 'Learn more' }}
-            <UIcon name="i-lucide-arrow-up-right" class="h-4 w-4" aria-hidden="true" />
-          </NuxtLink>
+          </AppLinkButton>
         </template>
       </FeatureGrid>
       <UCard v-if="testimonial" :ui="testimonialUi">
@@ -41,6 +41,8 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import BackgroundVariant from '~/components/ui/BackgroundVariant.vue'
+import AppLinkButton from '~/components/ui/AppLinkButton.vue'
 import BaseSection from '~/components/shared/BaseSection.vue'
 import SectionHeader from '~/components/shared/SectionHeader.vue'
 import FeatureGrid from '~/components/shared/FeatureGrid.vue'
@@ -79,6 +81,8 @@ const props = withDefaults(defineProps<{
   gap?: FeatureGridGap
   variant?: SectionVariant
   background?: boolean
+  backgroundTone?: InstanceType<typeof BackgroundVariant>['$props']['tone']
+  backgroundAlign?: InstanceType<typeof BackgroundVariant>['$props']['align']
 }>(), {
   id: undefined,
   eyebrow: undefined,
@@ -89,6 +93,8 @@ const props = withDefaults(defineProps<{
   gap: 'default',
   variant: 'default',
   background: true,
+  backgroundTone: 'violet',
+  backgroundAlign: 'top',
 })
 
 const features = computed(() => props.features)
@@ -108,4 +114,6 @@ const title = props.title
 const description = props.description
 const icon = props.icon
 const testimonial = props.testimonial
+const backgroundTone = props.backgroundTone
+const backgroundAlign = props.backgroundAlign
 </script>

@@ -1,7 +1,7 @@
 <template>
   <BaseSection :id="id" :variant="variant" padding="default">
     <template v-if="background" #background>
-      <div class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,_rgba(99,102,241,0.12),_transparent_75%)]" />
+      <BackgroundVariant :tone="backgroundTone" :align="backgroundAlign" />
     </template>
     <div class="space-y-10">
       <SectionHeader
@@ -29,6 +29,7 @@
 </template>
 
 <script setup lang="ts">
+import BackgroundVariant from '~/components/ui/BackgroundVariant.vue'
 import BaseSection from '~/components/shared/BaseSection.vue'
 import SectionHeader from '~/components/shared/SectionHeader.vue'
 import ContentGrid from '~/components/shared/ContentGrid.vue'
@@ -50,6 +51,8 @@ const props = withDefaults(defineProps<{
   impacts: BulletCollection
   variant?: SectionVariant
   background?: boolean
+  backgroundTone?: InstanceType<typeof BackgroundVariant>['$props']['tone']
+  backgroundAlign?: InstanceType<typeof BackgroundVariant>['$props']['align']
 }>(), {
   id: undefined,
   eyebrow: undefined,
@@ -57,6 +60,8 @@ const props = withDefaults(defineProps<{
   icon: undefined,
   variant: 'default',
   background: true,
+  backgroundTone: 'indigo',
+  backgroundAlign: 'top',
 })
 
 const cardUi = {
@@ -75,4 +80,6 @@ const challengeTitle = props.challengeTitle
 const impactTitle = props.impactTitle
 const challenges = props.challenges
 const impacts = props.impacts
+const backgroundTone = props.backgroundTone
+const backgroundAlign = props.backgroundAlign
 </script>

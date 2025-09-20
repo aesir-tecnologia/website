@@ -1,8 +1,7 @@
 <template>
   <BaseSection :id="id" :variant="variant" padding="default">
     <template v-if="background" #background>
-      <div class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_center,_rgba(14,165,233,0.1),_transparent_75%)]" />
-      <div class="pointer-events-none absolute inset-y-0 left-0 -z-10 w-px bg-gradient-to-b from-transparent via-primary-500/30 to-transparent" />
+      <BackgroundVariant variant="process" :tone="backgroundTone" />
     </template>
     <div class="space-y-12">
       <SectionHeader
@@ -19,9 +18,9 @@
         >
           <div class="flex h-full flex-col gap-4">
             <div class="flex items-center gap-3">
-              <span class="flex h-10 w-10 items-center justify-center rounded-full bg-primary-200/40 text-primary-600 font-semibold dark:bg-primary-500/15 dark:text-primary-200">
+              <IconBadge tone="primary">
                 {{ (index + 1).toString().padStart(2, '0') }}
-              </span>
+              </IconBadge>
               <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-50">{{ step.title }}</h3>
             </div>
             <BulletList :items="step.items" />
@@ -43,6 +42,8 @@
 </template>
 
 <script setup lang="ts">
+import BackgroundVariant from '~/components/ui/BackgroundVariant.vue'
+import IconBadge from '~/components/ui/IconBadge.vue'
 import BaseSection from '~/components/shared/BaseSection.vue'
 import SectionHeader from '~/components/shared/SectionHeader.vue'
 import ContentGrid from '~/components/shared/ContentGrid.vue'
@@ -80,6 +81,7 @@ const props = withDefaults(defineProps<{
   gap?: GridGap
   variant?: SectionVariant
   background?: boolean
+  backgroundTone?: InstanceType<typeof BackgroundVariant>['$props']['tone']
 }>(), {
   id: undefined,
   eyebrow: undefined,
@@ -90,6 +92,7 @@ const props = withDefaults(defineProps<{
   gap: 'default',
   variant: 'default',
   background: true,
+  backgroundTone: 'sky',
 })
 
 const stepCardUi = {
@@ -113,4 +116,5 @@ const description = props.description
 const icon = props.icon
 const steps = props.steps
 const highlight = props.highlight
+const backgroundTone = props.backgroundTone
 </script>

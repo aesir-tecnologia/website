@@ -2,8 +2,7 @@
   <div class="space-y-16 pb-16">
     <BaseSection id="structural-overview" padding="tight" variant="gradient">
       <template #background>
-        <div class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.18),_transparent_65%)]" />
-        <div class="pointer-events-none absolute inset-x-0 top-0 -z-10 h-px bg-gradient-to-r from-transparent via-primary-500/60 to-transparent opacity-60" />
+        <BackgroundVariant variant="hero" tone="sky" align="top" intensity="strong" />
       </template>
       <SectionHeader
         eyebrow="Playground"
@@ -16,7 +15,7 @@
 
     <BaseSection id="feature-grid" variant="gradient">
       <template #background>
-        <div class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_center,_rgba(124,58,237,0.16),_transparent_70%)]" />
+        <BackgroundVariant tone="violet" />
       </template>
       <SectionHeader
         eyebrow="Feature grid"
@@ -29,8 +28,7 @@
 
     <BaseSection id="metrics" variant="muted">
       <template #background>
-        <div class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_right,_rgba(45,212,191,0.2),_transparent_70%)]" />
-        <div class="pointer-events-none absolute inset-y-0 left-1/2 -z-10 w-px bg-gradient-to-b from-transparent via-primary-500/40 to-transparent" />
+        <BackgroundVariant variant="process" tone="teal" />
       </template>
       <SectionHeader
         eyebrow="Metric list"
@@ -43,7 +41,7 @@
 
     <BaseSection id="bullet-list">
       <template #background>
-        <div class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_bottom,_rgba(59,130,246,0.18),_transparent_65%)]" />
+        <BackgroundVariant tone="sky" align="bottom" />
       </template>
       <SectionHeader
         eyebrow="Bullet list"
@@ -56,8 +54,7 @@
 
     <BaseSection id="content-grid" variant="accent" padding="tight">
       <template #background>
-        <div class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,_rgba(236,72,153,0.16),_transparent_70%)]" />
-        <div class="pointer-events-none absolute -bottom-32 right-1/4 -z-10 h-64 w-64 rounded-full bg-primary-500/20 blur-3xl" />
+        <BackgroundVariant tone="indigo" align="top" intensity="soft" />
       </template>
       <SectionHeader
         eyebrow="Content grid"
@@ -88,6 +85,7 @@
 </template>
 
 <script setup lang="ts">
+import BackgroundVariant from '~/components/ui/BackgroundVariant.vue'
 import BaseSection from '~/components/shared/BaseSection.vue'
 import SectionHeader from '~/components/shared/SectionHeader.vue'
 import FeatureGrid from '~/components/shared/FeatureGrid.vue'
@@ -128,19 +126,22 @@ const metrics = [
     label: 'Stability rating',
     value: '99.9%',
     description: 'CI + QA coverage for production migrations.',
-    icon: 'i-lucide-activity'
+    icon: 'i-lucide-activity',
+    tone: 'primary'
   },
   {
     label: 'Team experience',
     value: '12yr',
     description: 'Average seniority across the engineering team.',
-    icon: 'i-lucide-users-round'
+    icon: 'i-lucide-users-round',
+    tone: 'secondary'
   },
   {
     label: 'Launch cadence',
     value: '2x',
     description: 'Faster rollouts after vibe coding cleanup.',
-    icon: 'i-lucide-rocket'
+    icon: 'i-lucide-rocket',
+    tone: 'accent'
   }
 ]
 

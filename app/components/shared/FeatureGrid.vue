@@ -14,20 +14,20 @@
           <UIcon :name="feature.icon" class="h-6 w-6" aria-hidden="true" />
         </div>
         <div class="space-y-3">
-          <p v-if="feature.meta" class="text-xs font-semibold uppercase tracking-[0.2em] text-primary-500/80 dark:text-primary-300/80">{{ feature.meta }}</p>
+          <Tag v-if="feature.meta" tone="primary">{{ feature.meta }}</Tag>
           <h3 class="text-2xl font-semibold text-slate-900 dark:text-slate-50">{{ feature.title }}</h3>
           <p v-if="feature.description" class="text-base leading-relaxed text-slate-600 dark:text-slate-300">{{ feature.description }}</p>
         </div>
         <slot name="footer" :feature="feature">
-          <NuxtLink
+          <AppLinkButton
             v-if="feature.to"
             :to="feature.to"
-            :target="feature.external ? '_blank' : undefined"
-            class="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-primary-600 transition duration-200 hover:text-primary-500 dark:text-primary-200 dark:hover:text-primary-100"
+            :external="feature.external"
+            size="sm"
+            class="mt-auto"
           >
             {{ feature.cta ?? 'Learn more' }}
-            <UIcon name="i-lucide-arrow-up-right" class="h-4 w-4" aria-hidden="true" />
-          </NuxtLink>
+          </AppLinkButton>
         </slot>
       </div>
     </UCard>
@@ -36,6 +36,8 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import AppLinkButton from '~/components/ui/AppLinkButton.vue'
+import Tag from '~/components/ui/Tag.vue'
 import ContentGrid from './ContentGrid.vue'
 
 type Feature = {

@@ -75,6 +75,7 @@ Sequential to-do list for a single developer delivering the Nuxt UI adoption pla
 - **Required Checks:** `npx eslint .`; `npm run generate`; Visual QA via playground and baseline comparison.
 
 ## Task 6 – Utility Components
+- **Status:** Completed — App/UI atoms live under `app/components/ui/`, `useAppImage` presets created, modules refactored to consume the new utilities, and docs refreshed (`docs/components/UTILITIES.md`, module notes).
 - **Goal:** Standardize smaller UI atoms (`AppButton`, `AppLinkButton`, `IconBadge`, `Tag`, `StatPill`, `LazyImage`, `BackgroundVariant`).
 - **Prerequisites:** Tasks 4-5 complete.
 - **Key Activities:**

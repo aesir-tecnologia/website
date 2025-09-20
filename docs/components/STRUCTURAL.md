@@ -1,6 +1,6 @@
 # Structural Shared Components
 
-Task 4 introduces a baseline set of structural components backed by Nuxt UI primitives. They replace bespoke section markup while staying ahead of the upcoming localization effort.
+Task 4 introduces a baseline set of structural components backed by Nuxt UI primitives. They replace bespoke section markup while staying ahead of the upcoming localization effort. Task 6 adds utility atoms (documented in `docs/components/UTILITIES.md`) that pair with these layouts for CTAs, backgrounds, and imagery.
 
 ## BaseSection
 - **Purpose:** Wrap content blocks with consistent spacing, background variants, and responsive container widths.
@@ -9,8 +9,7 @@ Task 4 introduces a baseline set of structural components backed by Nuxt UI prim
   - `padding`: `none | tight | default | relaxed` — controls vertical rhythm; default mirrors current landing pages.
   - `width`: `narrow | default | wide | full` — select container max-width.
   - `container`: toggle the built-in `UContainer` if a section needs edge-to-edge content (e.g., marquees).
-- **Usage notes:** pair with `SectionHeader` for top-of-section copy and slot a `background` element when gradients or decorative assets are required.
-- **Usage notes:** pair with `SectionHeader` for top-of-section copy and slot a `background` element when gradients or decorative assets are required (the component now ships with `overflow-hidden` baked in so radial textures stay within bounds).
+- **Usage notes:** Pair with `SectionHeader`; for gradients prefer `<BackgroundVariant>` instead of inline `div`s so tones stay consistent across tasks (the component ships with `overflow-hidden` so radial textures stay contained).
 
 ## SectionHeader
 - **Purpose:** Centralize headings, subheadings, and supporting eyebrow copy.
@@ -39,9 +38,9 @@ Task 4 introduces a baseline set of structural components backed by Nuxt UI prim
 ## MetricList
 - **Purpose:** Display proof points / KPIs in a consistent card layout.
 - **Key props:**
-  - `metrics`: array of `{ label, value, description?, icon? }`.
+  - `metrics`: array of `{ label, value, description?, icon?, tone? }`.
   - `columns` / `gap`: responsive grid configuration.
-- **Usage notes:** pair with `SectionHeader` inside a `BaseSection` variant or inline with hero stats.
+- **Usage notes:** Renders `StatPill` by default (tone optional); slot `metric` or `description` for bespoke layouts. Works well alongside hero stats via a `BaseSection`.
 
 ## BulletList
 - **Purpose:** Drop-in replacement for `.list-check` markup; supports strings or objects.
@@ -53,7 +52,7 @@ Task 4 introduces a baseline set of structural components backed by Nuxt UI prim
 
 ## Playground Route
 Visit [`/playground/sections`](http://localhost:3000/playground/sections) while running `npm run dev` to preview the components with sample data (light/dark, responsive). The playground demonstrates:
-- Gradient/radial backgrounds injected via the `background` slot.
+- `BackgroundVariant` usage across section styles.
 - Elevated card hierarchy with Lucide glyphs.
 - All list/grid variations in one viewport.
 

@@ -1,29 +1,32 @@
 <template>
-  <dl :class="listClasses">
+  <div :class="listClasses" role="list">
     <div
       v-for="metric in metrics"
       :key="metric.id ?? metric.label"
-      class="group relative overflow-hidden rounded-3xl border border-slate-200/70 bg-white/90 p-6 pb-8 shadow-lg shadow-slate-200/50 transition duration-300 hover:border-primary-400/40 hover:shadow-primary-200/50 dark:border-slate-900/70 dark:bg-slate-950/40 dark:shadow-slate-950/50 dark:hover:border-primary-500/40 dark:hover:shadow-primary-900/40"
+      class="group relative overflow-hidden rounded-3xl border border-slate-200/70 bg-white/90 p-6 shadow-lg shadow-slate-200/50 transition duration-300 hover:border-primary-400/40 hover:shadow-primary-200/50 dark:border-slate-900/70 dark:bg-slate-950/40 dark:shadow-slate-950/50 dark:hover:border-primary-500/40 dark:hover:shadow-primary-900/40"
+      role="listitem"
     >
       <div class="pointer-events-none absolute inset-px rounded-[1.4rem] bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.18),_transparent_60%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-      <div v-if="metric.icon" class="relative mb-3 flex h-10 w-10 items-center justify-center rounded-2xl bg-primary-200/30 text-primary-600 dark:bg-primary-500/15 dark:text-primary-200">
-        <UIcon :name="metric.icon" class="h-5 w-5" aria-hidden="true" />
+      <div class="relative space-y-4">
+        <slot name="metric" :metric="metric">
+          <StatPill
+            :value="metric.value"
+            :label="metric.label"
+            :icon="metric.icon"
+            :tone="metric.tone ?? 'primary'"
+          />
+        </slot>
+        <p v-if="metric.description" class="relative text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+          <slot name="description" :metric="metric">{{ metric.description }}</slot>
+        </p>
       </div>
-      <dt class="relative text-xs font-semibold uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
-        <slot name="label" :metric="metric">{{ metric.label }}</slot>
-      </dt>
-      <dd class="relative text-4xl font-semibold text-slate-900 dark:text-slate-50">
-        <slot name="value" :metric="metric">{{ metric.value }}</slot>
-      </dd>
-      <p v-if="metric.description" class="relative text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-        <slot name="description" :metric="metric">{{ metric.description }}</slot>
-      </p>
     </div>
-  </dl>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import StatPill from '~/components/ui/StatPill.vue'
 
 type Metric = {
   id?: string | number
@@ -31,6 +34,7 @@ type Metric = {
   value: string
   description?: string
   icon?: string
+  tone?: InstanceType<typeof StatPill>['$props']['tone']
 }
 
 type MetricColumns = 1 | 2 | 3 | 4

@@ -1,8 +1,11 @@
 <template>
   <BaseSection :id="id" :variant="sectionVariant" padding="relaxed" width="wide">
     <template v-if="showBackground" #background>
-      <div class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.14),_transparent_65%)]" />
-      <div class="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(120deg,rgba(99,102,241,0.08),transparent_55%)]" />
+      <BackgroundVariant
+        :variant="backgroundVariant"
+        :tone="backgroundTone"
+        :align="backgroundAlign"
+      />
     </template>
     <div class="grid gap-12 lg:grid-cols-[1.1fr,0.9fr]">
       <div class="space-y-8">
@@ -14,15 +17,16 @@
         >
           <template #actions>
             <div class="flex flex-wrap gap-3">
-              <UButton
+              <AppButton
                 v-if="primaryCta"
                 :to="primaryCta.to"
                 :color="primaryCta.color ?? 'primary'"
+                :variant="primaryCta.variant ?? 'solid'"
                 size="lg"
               >
                 {{ primaryCta.label }}
-              </UButton>
-              <UButton
+              </AppButton>
+              <AppButton
                 v-if="secondaryCta"
                 :to="secondaryCta.to"
                 :variant="secondaryCta.variant ?? 'ghost'"
@@ -30,7 +34,7 @@
                 size="lg"
               >
                 {{ secondaryCta.label }}
-              </UButton>
+              </AppButton>
             </div>
           </template>
         </SectionHeader>
@@ -40,8 +44,8 @@
 
       <UCard :ui="cardUi">
         <div class="space-y-6">
-          <header class="space-y-2">
-            <p class="text-sm font-semibold uppercase tracking-[0.2em] text-primary-500/80 dark:text-primary-200/70">{{ highlightEyebrow }}</p>
+          <header class="space-y-3">
+            <Tag v-if="highlightEyebrow" tone="accent" size="md">{{ highlightEyebrow }}</Tag>
             <h2 class="text-2xl font-semibold text-slate-900 dark:text-slate-50">{{ highlightTitle }}</h2>
           </header>
           <ul class="space-y-5">
@@ -62,6 +66,9 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import BackgroundVariant from '~/components/ui/BackgroundVariant.vue'
+import AppButton from '~/components/ui/AppButton.vue'
+import Tag from '~/components/ui/Tag.vue'
 import BaseSection from '~/components/shared/BaseSection.vue'
 import SectionHeader from '~/components/shared/SectionHeader.vue'
 import BulletList from '~/components/shared/BulletList.vue'
@@ -83,6 +90,10 @@ type BulletItem = InstanceType<typeof BulletList>['$props']['items'][number]
 
 type SectionVariant = InstanceType<typeof BaseSection>['$props']['variant']
 
+type BackgroundVariantName = InstanceType<typeof BackgroundVariant>['$props']['variant']
+type BackgroundTone = InstanceType<typeof BackgroundVariant>['$props']['tone']
+type BackgroundAlign = InstanceType<typeof BackgroundVariant>['$props']['align']
+
 const props = withDefaults(defineProps<{
   id?: string
   eyebrow?: string
@@ -97,6 +108,9 @@ const props = withDefaults(defineProps<{
   highlightEyebrow?: string
   variant?: SectionVariant
   background?: boolean
+  backgroundVariant?: BackgroundVariantName
+  backgroundTone?: BackgroundTone
+  backgroundAlign?: BackgroundAlign
 }>(), {
   id: undefined,
   eyebrow: undefined,
@@ -106,6 +120,9 @@ const props = withDefaults(defineProps<{
   highlightEyebrow: 'Why it works',
   variant: 'gradient',
   background: true,
+  backgroundVariant: 'hero',
+  backgroundTone: 'sky',
+  backgroundAlign: 'top',
 })
 
 const hasPoints = computed(() => (props.points?.length ?? 0) > 0)
@@ -117,4 +134,7 @@ const cardUi = {
 
 const sectionVariant = computed(() => props.variant)
 const showBackground = computed(() => props.background)
+const backgroundVariant = computed(() => props.backgroundVariant)
+const backgroundTone = computed(() => props.backgroundTone)
+const backgroundAlign = computed(() => props.backgroundAlign)
 </script>

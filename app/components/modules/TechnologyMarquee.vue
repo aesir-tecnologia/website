@@ -1,7 +1,7 @@
 <template>
   <BaseSection :id="id" :variant="variant" padding="tight" :container="false">
     <template v-if="background" #background>
-      <div class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_center,_rgba(45,212,191,0.1),_transparent_80%)]" />
+      <BackgroundVariant :tone="backgroundTone" />
     </template>
     <div class="mx-auto flex max-w-6xl flex-col items-center gap-6 px-6 text-center">
       <SectionHeader
@@ -36,6 +36,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import BackgroundVariant from '~/components/ui/BackgroundVariant.vue'
 import BaseSection from '~/components/shared/BaseSection.vue'
 import SectionHeader from '~/components/shared/SectionHeader.vue'
 
@@ -52,6 +53,7 @@ const props = withDefaults(defineProps<{
   speed?: number
   variant?: SectionVariant
   background?: boolean
+  backgroundTone?: InstanceType<typeof BackgroundVariant>['$props']['tone']
   pauseOnHover?: boolean
 }>(), {
   id: undefined,
@@ -62,6 +64,7 @@ const props = withDefaults(defineProps<{
   speed: 28,
   variant: 'dark',
   background: true,
+  backgroundTone: 'teal',
   pauseOnHover: true,
 })
 
@@ -80,6 +83,7 @@ const description = props.description
 const icon = props.icon
 const caption = props.caption
 const pauseOnHover = props.pauseOnHover
+const backgroundTone = props.backgroundTone
 </script>
 
 <style scoped>
