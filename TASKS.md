@@ -8,6 +8,7 @@ Sequential to-do list for a single developer delivering the Nuxt UI adoption pla
 - Refresh baselines through the tool before large UI sweeps so visual comparisons stay accurate across tasks.
 
 ## Task 1 – Discovery & Inventory
+- **Status:** Completed — inventory stored in `/docs/discovery.md`.
 - **Goal:** Map existing layouts, styles, and content dependencies to guide component work.
 - **Prerequisites:** Access to `docs/COPY-*.md` and any design references.
 - **Key Activities:**
@@ -25,6 +26,7 @@ Sequential to-do list for a single developer delivering the Nuxt UI adoption pla
 - **Key Activities:**
   - Audit `nuxt.config.ts`; enable Nuxt UI Tailwind preset as needed.
   - Create/update `app/app.config.ts` with palette, typography scale, container sizes, and component defaults.
+  - Cross-reference token, layout, and utility notes in `/docs/discovery.md` when defining theme variables and deciding which legacy CSS can be removed.
   - Define `ui` variants (`primary`, `secondary`, `ghost`, etc.) matching existing treatments.
   - Reduce global CSS to reset + critical utilities.
   - Document theme tokens in `docs/DESIGN-TOKENS.md`.
@@ -39,6 +41,7 @@ Sequential to-do list for a single developer delivering the Nuxt UI adoption pla
   - Scaffold components under `app/components/layout/` and update `app/app.vue` to use them.
   - Implement responsive navigation, mobile slide-over, and color-mode toggle.
   - Source navigation links and metadata from `useAppConfig`.
+  - Mirror behaviour documented in `/docs/discovery.md` (header stickiness, slide-over defaults, footer content) before swapping implementations.
 - **Acceptance Criteria:** `app/app.vue` only orchestrates the layout components; header/footer match existing behaviour; mobile menu + color mode functional.
 - **Risks & Mitigations:** Navigation regressions → add temporary console warnings for missing config entries; ensure focus trapping in slide-over.
 - **Required Checks:** `npx eslint .`; `npm run generate`; Visual QA on header/footer (desktop + mobile).
@@ -50,6 +53,7 @@ Sequential to-do list for a single developer delivering the Nuxt UI adoption pla
   - Scaffold components in `app/components/shared/`.
   - Wire props for variant handling and responsive layouts using Nuxt UI primitives.
   - Write minimal docs usage notes in `docs/components/`.
+  - Use `/docs/discovery.md` to identify repeated section layouts and data structures that need shared primitives.
 - **Acceptance Criteria:** Components render in isolation via a temporary playground route; props/slots cover existing needs; documentation stub committed.
 - **Risks & Mitigations:** Over-generalization → start with current page requirements; capture future enhancements in TODOs.
 - **Required Checks:** `npx eslint .`; `npm run generate`; Visual QA on playground route (light/dark + mobile).
@@ -61,6 +65,7 @@ Sequential to-do list for a single developer delivering the Nuxt UI adoption pla
   - Build modules under `app/components/modules/` with typed props and slots.
   - Integrate `@nuxt/ui` components (`UCard`, `USteps`, `UButtonGroup`, etc.).
   - Ensure marquee and timeline handle mobile gracefully.
+  - Align module scope with the home/marketing section inventory captured in `/docs/discovery.md`.
 - **Acceptance Criteria:** Each module demoed in playground; responsive behaviour validated; copy sourced via composables or props, not hard-coded.
 - **Risks & Mitigations:** Performance (auto-scrolling marquee) → add `prefers-reduced-motion` guard; ensure lazy-loading for heavy assets.
 - **Required Checks:** `npx eslint .`; `npm run generate`; Visual QA via playground and baseline comparison.
@@ -72,6 +77,7 @@ Sequential to-do list for a single developer delivering the Nuxt UI adoption pla
   - Implement wrappers mapping semantic intents to theme variants.
   - Centralize background/gradient logic.
   - Add composable for `NuxtImg` presets.
+  - Audit repeated utility usage noted in `/docs/discovery.md` to drive which atoms get formalized.
 - **Acceptance Criteria:** Utilities adopted by modules; no direct `UButton` usage remains in feature components; documentation updated.
 - **Risks & Mitigations:** Variant drift → write unit tests where practical or add snapshots later; monitor bundle size impacts of icon sets.
 - **Required Checks:** `npx eslint .`; `npm run generate`; Visual QA on modules to confirm styling parity.
@@ -83,6 +89,7 @@ Sequential to-do list for a single developer delivering the Nuxt UI adoption pla
   - Build `ContactCard` and refactor `contact.vue` with `UForm`, `UFormGroup`, `UInput`, `UTextarea`, `USelect`.
   - Create `useContactForm` composable to manage submission states and integration.
   - Document accessibility expectations.
+  - Reference the contact section analysis in `/docs/discovery.md` to preserve existing fields, CTAs, and responsive behaviour.
 - **Acceptance Criteria:** Form validates client-side; loading/error states accessible; analytics hooks (if required) preserved.
 - **Risks & Mitigations:** API integration uncertainty → mock endpoints during dev; ensure fallback for JS-disabled users if required.
 - **Required Checks:** `npx eslint .`; `npm run generate`; Visual QA includes form submission path (success + failure).
@@ -94,6 +101,7 @@ Sequential to-do list for a single developer delivering the Nuxt UI adoption pla
   - Implement composables reading from `app.config`, markdown extracted from `docs/`, or other agreed data sources (without relying on `@nuxt/content`).
   - Add `useSectionCopy(key)` with dev-time logging for missing keys.
   - Update modules/pages to consume composables instead of inline data.
+  - Map every composable back to the data structures enumerated in `/docs/discovery.md` so no lists are missed during extraction.
 - **Acceptance Criteria:** No hard-coded copy within Vue templates; missing keys throw warnings; docs updated with copy mapping.
 - **Risks & Mitigations:** Copy drift between docs and i18n → add checklist entry; ensure composables are tree-shakable.
 - **Required Checks:** `npx eslint .`; `npm run generate`; Visual QA verifying content matches `docs/COPY-*.md`.
@@ -104,6 +112,7 @@ Sequential to-do list for a single developer delivering the Nuxt UI adoption pla
 - **Key Activities:**
   - Migrate each section sequentially, validating against baseline visuals.
   - Remove redundant bespoke components/CSS tied to home.
+  - Use the homepage breakdown in `/docs/discovery.md` to ensure all sections and CTAs are represented in the new component stack.
 - **Acceptance Criteria:** `app/pages/index.vue` composed solely of new shared components; Visual QA parity confirmed; legacy CSS for home removed.
 - **Risks & Mitigations:** Regression to hero/layout → compare side-by-side using baseline captures; commit in small increments.
 - **Required Checks:** `npx eslint .`; `npm run generate`; Visual QA (desktop/mobile, light/dark, interactions).
@@ -114,6 +123,7 @@ Sequential to-do list for a single developer delivering the Nuxt UI adoption pla
 - **Key Activities:**
   - Update `services/index.vue` and detail routes to reuse `HeroSection`, `ServiceShowcase`, etc.
   - Ensure dynamic navigation highlighting remains accurate.
+  - Follow the services inventory in `/docs/discovery.md` to migrate every offering, CTA, and messaging block.
 - **Acceptance Criteria:** Services pages fully rely on shared components; QA parity achieved.
 - **Risks & Mitigations:** Detail page uniqueness → extend modules carefully or add props; coordinate copy updates if gaps found.
 - **Required Checks:** `npx eslint .`; `npm run generate`; Visual QA across services routes.
@@ -124,6 +134,7 @@ Sequential to-do list for a single developer delivering the Nuxt UI adoption pla
 - **Key Activities:**
   - Align page structure to modules; introduce any new variants needed (documented immediately).
   - Validate process timelines and contact flows.
+  - Reference the About/Process/Contact summaries in `/docs/discovery.md` so structural elements and form expectations remain intact.
 - **Acceptance Criteria:** About, Process, Contact routes use shared system; forms work end-to-end; copy matches docs.
 - **Risks & Mitigations:** Timeline accessibility → ensure keyboard navigation; contact form backend errors handled gracefully.
 - **Required Checks:** `npx eslint .`; `npm run generate`; Visual QA on each route per guidelines.
@@ -134,6 +145,7 @@ Sequential to-do list for a single developer delivering the Nuxt UI adoption pla
 - **Key Activities:**
   - Integrate a Markdown rendering pipeline (e.g., Markdown-it with `UProse`) for legal copy sourced from `docs/`.
   - Apply `BaseSection` wrappers for consistent spacing.
+  - Reconcile layouts and links with the legal section notes in `/docs/discovery.md` before swapping implementations.
 - **Acceptance Criteria:** Privacy and Terms pages match baseline content; styling unified; links accessible.
 - **Risks & Mitigations:** Markdown parsing differences → preview before commit; watch for SEO regressions (title/meta).
 - **Required Checks:** `npx eslint .`; `npm run generate`; Visual QA on legal pages.
@@ -145,6 +157,7 @@ Sequential to-do list for a single developer delivering the Nuxt UI adoption pla
   - Prune legacy styles from `app/assets/css/main.css`.
   - Run visual regression sweep against baseline captures.
   - Document removed classes in changelog if they affect downstream usage.
+  - Cross-check the global style inventory in `/docs/discovery.md` to confirm tokens/utilities slated for removal are actually unused.
 - **Acceptance Criteria:** No references to removed classes remain; build size reduction measured; QA confirms no regressions.
 - **Risks & Mitigations:** Hidden dependency on CSS → search repo before deletion, deprecate gradually if needed.
 - **Required Checks:** `npx eslint .`; `npm run generate`; Visual QA full site sweep.
