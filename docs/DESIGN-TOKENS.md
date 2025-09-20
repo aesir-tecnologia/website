@@ -32,6 +32,7 @@ Canonical tokens that drive the Nuxt UI theme (`app/app.config.ts`) and supporti
 - **Cards** – use surface tokens with variant overlays: muted (`--surface-600`), highlight (`--accent-surface`), bright (`--secondary-surface`). Borders rely on outline tokens.
 - **Checklist / Icon accents** – checkmarks and CTA links reuse `var(--aesir-primary-500)` for continuity.
 - **Shadow** – `var(--aesir-glow-shadow)` (0 40px 80px rgba(15, 23, 42, 0.35)) anchors elevated panels.
+- **Icons** – Install `@iconify-json/lucide` (already added as a dev dependency) so `UIcon` can resolve the full Lucide set without hitting the network at runtime.
 
 ## Nuxt UI Theme Mapping
 - `app/app.config.ts` registers Tailwind aliases: `primary: 'sky'`, `secondary: 'indigo'`, `accent: 'cyan'`, `neutral: 'slate'`, with semantic fallbacks for `info`, `success`, `warning`, `error`.

@@ -24,6 +24,10 @@ export default defineNuxtConfig({
     }
   },
 
+  site: {
+    url: process.env.NUXT_PUBLIC_SITE_URL || 'https://aesir.dev'
+  },
+
   i18n: {
     strategy: 'prefix_except_default',
     defaultLocale: 'en',

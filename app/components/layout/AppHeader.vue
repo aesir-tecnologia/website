@@ -1,0 +1,156 @@
+<template>
+  <header class="sticky top-0 z-50 border-b border-[color:var(--aesir-border-soft)] bg-[color:var(--aesir-surface-850)]/90 backdrop-blur-lg">
+    <UContainer class="flex items-center justify-between gap-4 py-4">
+      <NuxtLink :to="brandLink" class="text-base font-semibold tracking-[0.04em] text-[color:var(--aesir-text-primary)]">
+        {{ brand.name }}
+      </NuxtLink>
+
+      <UNavigationMenu
+        v-if="navigationItems.length"
+        :items="navigationItems"
+        highlight
+        class="hidden md:flex"
+      />
+
+      <div class="flex items-center gap-3">
+        <ClientOnly>
+          <UButton
+            variant="ghost"
+            color="neutral"
+            class="hidden md:inline-flex"
+            :aria-label="colorModeAriaLabel"
+            @click="toggleColorMode"
+          >
+            <UIcon :name="colorModeIcon" class="size-5" />
+          </UButton>
+        </ClientOnly>
+
+        <UButton
+          v-if="contactLink"
+          class="hidden md:inline-flex"
+          :to="contactLink.to"
+          :label="contactLink.label"
+        />
+
+        <UButton
+          variant="ghost"
+          color="neutral"
+          class="md:hidden"
+          aria-label="Open navigation"
+          @click="isMobileMenuOpen = true"
+        >
+          <UIcon name="i-lucide-menu" class="size-5" />
+        </UButton>
+      </div>
+    </UContainer>
+
+    <USlideover v-model="isMobileMenuOpen" side="right" title="Menu">
+      <template #body>
+        <div class="flex flex-col gap-6">
+          <UNavigationMenu
+            v-if="navigationItems.length"
+            :items="navigationItems"
+            color="neutral"
+            variant="link"
+            orientation="vertical"
+            class="flex flex-col gap-2"
+          />
+
+          <UButton
+            v-if="contactLink"
+            block
+            :to="contactLink.to"
+            :label="contactLink.label"
+            @click="isMobileMenuOpen = false"
+          />
+
+          <ClientOnly>
+            <UButton
+              variant="ghost"
+              color="neutral"
+              :aria-label="colorModeAriaLabel"
+              class="justify-start"
+              @click="toggleColorMode"
+            >
+              <div class="flex items-center gap-3">
+                <UIcon :name="colorModeIcon" class="size-5" />
+                <span>{{ colorModeToggleLabel }}</span>
+              </div>
+            </UButton>
+          </ClientOnly>
+        </div>
+      </template>
+    </USlideover>
+  </header>
+</template>
+
+<script setup lang="ts">
+import { computed, ref, watch } from 'vue'
+import type { NavigationMenuItem } from '@nuxt/ui'
+
+interface ConfigNavigationLink {
+  label: string
+  to: string
+  match?: 'exact' | 'startsWith'
+}
+
+const route = useRoute()
+const localePath = useLocalePath()
+const colorMode = useColorMode()
+const isMobileMenuOpen = ref(false)
+
+const appConfig = useAppConfig()
+
+const brand = computed(() => appConfig.site?.brand ?? { name: 'Aesir Tecnologia', to: '/' })
+const brandLink = computed(() => localePath(brand.value.to))
+
+const navigationLinks = computed<ConfigNavigationLink[]>(
+  () => appConfig.site?.navigation?.links ?? []
+)
+
+const navigationItems = computed<NavigationMenuItem[]>(() =>
+  navigationLinks.value.map((link) => {
+    const target = String(localePath(link.to))
+    const active =
+      link.match === 'exact'
+        ? route.path === target
+        : route.path.startsWith(target)
+
+    return {
+      label: link.label,
+      to: target,
+      active,
+    }
+  })
+)
+
+const contactLink = computed(() => {
+  const cta = appConfig.site?.navigation?.cta
+  if (!cta) {
+    return null
+  }
+
+  return {
+    ...cta,
+    to: String(localePath(cta.to)),
+  }
+})
+
+const colorModeIsDark = computed(() => colorMode.value === 'dark')
+
+const colorModeIcon = computed(() => (colorModeIsDark.value ? 'i-lucide-moon-star' : 'i-lucide-sun'))
+
+const colorModeToggleLabel = computed(() => (colorModeIsDark.value ? 'Switch to light mode' : 'Switch to dark mode'))
+const colorModeAriaLabel = colorModeToggleLabel
+
+const toggleColorMode = () => {
+  colorMode.preference = colorModeIsDark.value ? 'light' : 'dark'
+}
+
+watch(
+  () => route.path,
+  () => {
+    isMobileMenuOpen.value = false
+  }
+)
+</script>

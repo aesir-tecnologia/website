@@ -36,6 +36,7 @@ Sequential to-do list for a single developer delivering the Nuxt UI adoption pla
 - **Required Checks:** `npx eslint .`; `npm run generate`; Visual QA regression check on homepage and services.
 
 ## Task 3 – Layout Shell & Global UI Components
+- **Status:** Completed — `AppShell`, `AppHeader`, `AppFooter`, and `AppMain` use Nuxt UI primitives with navigation + CTA data sourced from `app/app.config.ts`.
 - **Goal:** Introduce `AppShell`, `AppHeader`, `AppFooter`, `AppMain` components built on Nuxt UI primitives.
 - **Prerequisites:** Task 2 complete; navigation copy confirmed.
 - **Key Activities:**

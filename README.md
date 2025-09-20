@@ -1,6 +1,12 @@
-# Nuxt Minimal Starter
+# Aesir Website
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Nuxt 4 marketing site built on Nuxt UI components.
+
+Key resources:
+
+- UI theme tokens live in `docs/DESIGN-TOKENS.md` and are applied through `app/app.config.ts`.
+- Layout shell components (`AppShell`, `AppHeader`, `AppFooter`, `AppMain`) live under `app/components/layout/`.
+- Lucide icons are bundled locally via `@iconify-json/lucide`, so `UIcon` calls work offline and during prerendering.
 
 ## Setup
 
@@ -18,6 +24,12 @@ yarn install
 
 # bun
 bun install
+```
+
+Optionally set your canonical URL (used by sitemap/robots):
+
+```bash
+export NUXT_PUBLIC_SITE_URL="https://example.com"
 ```
 
 ## Development Server
