@@ -109,42 +109,11 @@ watch(
 )
 </script>
 <style>
-:root {
-  color-scheme: light dark;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background-color: #0f172a;
-  color: #e2e8f0;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  background: #0f172a;
-  color: #e2e8f0;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
 .app-shell {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: radial-gradient(circle at top, rgba(30, 64, 175, 0.25), transparent 60%), #0f172a;
-}
-
-.container {
-  width: min(1120px, 100% - 3rem);
-  margin-inline: auto;
+  background: radial-gradient(circle at top, var(--aesir-highlight), transparent 60%), var(--aesir-surface-900);
 }
 
 .site-header {
@@ -152,8 +121,8 @@ a:hover {
   top: 0;
   z-index: 20;
   backdrop-filter: blur(12px);
-  background: rgba(15, 23, 42, 0.85);
-  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+  background: var(--aesir-surface-850);
+  border-bottom: 1px solid var(--aesir-border-soft);
 }
 
 .header-inner {
@@ -189,8 +158,8 @@ a:hover {
 }
 
 .site-footer {
-  border-top: 1px solid rgba(148, 163, 184, 0.2);
-  background: rgba(15, 23, 42, 0.95);
+  border-top: 1px solid var(--aesir-border-soft);
+  background: var(--aesir-surface-950);
 }
 
 .footer-inner {
@@ -203,7 +172,7 @@ a:hover {
 }
 
 .footer-copy {
-  color: rgba(226, 232, 240, 0.7);
+  color: var(--aesir-text-soft);
   margin: 0.25rem 0 0;
   max-width: 24rem;
 }
@@ -214,11 +183,11 @@ a:hover {
 }
 
 .footer-link {
-  color: rgba(226, 232, 240, 0.75);
+  color: var(--aesir-text-muted);
   font-size: 0.95rem;
 }
 
 .footer-link:hover {
-  color: #f8fafc;
+  color: var(--aesir-text-inverse);
 }
 </style>

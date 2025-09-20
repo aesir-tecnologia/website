@@ -21,6 +21,7 @@ Sequential to-do list for a single developer delivering the Nuxt UI adoption pla
 - **Required Checks:** `npx eslint .`; Visual QA spot-check key routes to confirm inventory accuracy.
 
 ## Task 2 – Nuxt UI Foundation & Theming
+- **Status:** Completed — Nuxt UI theme aliases applied via `app/app.config.ts`, global CSS tokens centralized, and tokens documented in `docs/DESIGN-TOKENS.md`.
 - **Goal:** Establish `@nuxt/ui` theme config and trim legacy global CSS baseline.
 - **Prerequisites:** Discovery inventory finalized; confirmation of brand palette/typography decisions.
 - **Key Activities:**

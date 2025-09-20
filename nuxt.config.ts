@@ -18,6 +18,12 @@ export default defineNuxtConfig({
     '@nuxtjs/seo'
   ],
 
+  ui: {
+    theme: {
+      colors: ['primary', 'secondary', 'accent', 'neutral', 'info', 'success', 'warning', 'error']
+    }
+  },
+
   i18n: {
     strategy: 'prefix_except_default',
     defaultLocale: 'en',
