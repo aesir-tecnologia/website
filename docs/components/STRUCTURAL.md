@@ -1,0 +1,60 @@
+# Structural Shared Components
+
+Task 4 introduces a baseline set of structural components backed by Nuxt UI primitives. They replace bespoke section markup while staying ahead of the upcoming localization effort.
+
+## BaseSection
+- **Purpose:** Wrap content blocks with consistent spacing, background variants, and responsive container widths.
+- **Key props:**
+  - `variant`: `default | muted | dark | gradient | accent` — maps to background + border treatments used in legacy CSS sections.
+  - `padding`: `none | tight | default | relaxed` — controls vertical rhythm; default mirrors current landing pages.
+  - `width`: `narrow | default | wide | full` — select container max-width.
+  - `container`: toggle the built-in `UContainer` if a section needs edge-to-edge content (e.g., marquees).
+- **Usage notes:** pair with `SectionHeader` for top-of-section copy and slot a `background` element when gradients or decorative assets are required.
+- **Usage notes:** pair with `SectionHeader` for top-of-section copy and slot a `background` element when gradients or decorative assets are required (the component now ships with `overflow-hidden` baked in so radial textures stay within bounds).
+
+## SectionHeader
+- **Purpose:** Centralize headings, subheadings, and supporting eyebrow copy.
+- **Key props:**
+  - `title` (required) and optional `description`, `eyebrow`.
+  - `align`: `left | center` to flip text alignment and actions placement.
+  - `level`: choose semantic heading tag (`h2 | h3 | h4`).
+  - `icon`: optional Lucide glyph rendered above the eyebrow for quick visual anchoring.
+- **Usage notes:** use the `actions` slot for CTA buttons sourced from `useAppConfig().site.navigation` or page-specific arrays; pair `icon` + eyebrow for stronger hierarchy.
+
+## ContentGrid
+- **Purpose:** Provide responsive grid scaffolding without re-declaring Tailwind utilities in each page.
+- **Key props:**
+  - `columns`: `1-4` large-screen columns with sensible breakpoints (single-column mobile).
+  - `gap`: `tight | default | loose` spacing scale.
+  - `as`: swap the root element (`div`, `ul`, etc.) for semantic markup.
+- **Usage notes:** combine with `UCard`, `UProse`, or custom content when no bespoke styling is needed.
+
+## FeatureGrid
+- **Purpose:** Render feature/benefit cards with optional icons and CTA links.
+- **Key props:**
+  - `features`: array of `{ title, description?, icon?, cta?, to?, external? }`.
+  - `columns` / `gap`: forward to `ContentGrid` props.
+- **Usage notes:** defaults to Lucide icons via `@iconify-json/lucide`; ensure the dependency is installed (`npm i -D @iconify-json/lucide`) so offline builds retain icons. Override the `footer` slot for custom CTA layouts. Each card is wrapped in a gradient border + hover state to provide more hierarchy than the legacy `.card` styles.
+
+## MetricList
+- **Purpose:** Display proof points / KPIs in a consistent card layout.
+- **Key props:**
+  - `metrics`: array of `{ label, value, description?, icon? }`.
+  - `columns` / `gap`: responsive grid configuration.
+- **Usage notes:** pair with `SectionHeader` inside a `BaseSection` variant or inline with hero stats.
+
+## BulletList
+- **Purpose:** Drop-in replacement for `.list-check` markup; supports strings or objects.
+- **Key props:**
+  - `items`: string array or objects with `{ label, description?, icon? }`.
+  - `as`: change root element (`ul` default) when embedding in description lists.
+  - `icon`: override the default `i-lucide-check` glyph.
+- **Usage notes:** when migrating copy, keep strings in `docs/COPY-*.md` as the source of truth until `@nuxtjs/i18n` locale files are in place; these components simply render the provided content.
+
+## Playground Route
+Visit [`/playground/sections`](http://localhost:3000/playground/sections) while running `npm run dev` to preview the components with sample data (light/dark, responsive). The playground demonstrates:
+- Gradient/radial backgrounds injected via the `background` slot.
+- Elevated card hierarchy with Lucide glyphs.
+- All list/grid variations in one viewport.
+
+Use Playwright MCP to capture updated visuals for regression tracking.

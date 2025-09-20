@@ -1,0 +1,204 @@
+<template>
+  <div class="space-y-16 pb-16">
+    <BaseSection id="structural-overview" padding="tight" variant="gradient">
+      <template #background>
+        <div class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.18),_transparent_65%)]" />
+        <div class="pointer-events-none absolute inset-x-0 top-0 -z-10 h-px bg-gradient-to-r from-transparent via-primary-500/60 to-transparent opacity-60" />
+      </template>
+      <SectionHeader
+        eyebrow="Playground"
+        title="Structural Shared Components"
+        description="Snapshot of the shared building blocks introduced in Task 4. These demos use mocked content so you can validate spacing, typography, and responsive behaviour before wiring real data."
+        align="center"
+        icon="i-lucide-cpu"
+      />
+    </BaseSection>
+
+    <BaseSection id="feature-grid" variant="gradient">
+      <template #background>
+        <div class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_center,_rgba(124,58,237,0.16),_transparent_70%)]" />
+      </template>
+      <SectionHeader
+        eyebrow="Feature grid"
+        title="Reusable feature presentation"
+        description="Ideal for home and service pages when highlighting pillars, benefits, or offerings."
+        icon="i-lucide-panels-top-left"
+      />
+      <FeatureGrid :features="features" />
+    </BaseSection>
+
+    <BaseSection id="metrics" variant="muted">
+      <template #background>
+        <div class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_right,_rgba(45,212,191,0.2),_transparent_70%)]" />
+        <div class="pointer-events-none absolute inset-y-0 left-1/2 -z-10 w-px bg-gradient-to-b from-transparent via-primary-500/40 to-transparent" />
+      </template>
+      <SectionHeader
+        eyebrow="Metric list"
+        title="Call out proof points"
+        description="Balance hero stats across themes with automatic grid behaviour."
+        icon="i-lucide-gauge"
+      />
+      <MetricList :metrics="metrics" :columns="3" />
+    </BaseSection>
+
+    <BaseSection id="bullet-list">
+      <template #background>
+        <div class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_bottom,_rgba(59,130,246,0.18),_transparent_65%)]" />
+      </template>
+      <SectionHeader
+        eyebrow="Bullet list"
+        title="Condense dense copy"
+        description="Swap existing list-check markup for a semantic bullet list with icons."
+        icon="i-lucide-list-tree"
+      />
+      <BulletList :items="bulletItems" />
+    </BaseSection>
+
+    <BaseSection id="content-grid" variant="accent" padding="tight">
+      <template #background>
+        <div class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,_rgba(236,72,153,0.16),_transparent_70%)]" />
+        <div class="pointer-events-none absolute -bottom-32 right-1/4 -z-10 h-64 w-64 rounded-full bg-primary-500/20 blur-3xl" />
+      </template>
+      <SectionHeader
+        eyebrow="Content grid"
+        title="Flexible layout wrapper"
+        description="Use with cards, content blocks, or testimonials when you only need responsive columns."
+        icon="i-lucide-grid"
+      />
+      <ContentGrid :columns="3" gap="tight">
+        <UCard
+          v-for="card in sampleCards"
+          :key="card.title"
+          :ui="cardUi"
+        >
+          <div class="flex h-full flex-col gap-4">
+            <div class="flex items-center gap-3 text-slate-300">
+              <span class="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary-500/15 text-primary-200">
+                <UIcon :name="card.icon" class="h-5 w-5" aria-hidden="true" />
+              </span>
+              <h3 class="text-xl font-semibold text-slate-50">{{ card.title }}</h3>
+            </div>
+            <p class="text-base text-slate-300">{{ card.description }}</p>
+            <BulletList :items="card.points" class="mt-auto" />
+          </div>
+        </UCard>
+      </ContentGrid>
+    </BaseSection>
+  </div>
+</template>
+
+<script setup lang="ts">
+import BaseSection from '~/components/shared/BaseSection.vue'
+import SectionHeader from '~/components/shared/SectionHeader.vue'
+import FeatureGrid from '~/components/shared/FeatureGrid.vue'
+import MetricList from '~/components/shared/MetricList.vue'
+import BulletList from '~/components/shared/BulletList.vue'
+import ContentGrid from '~/components/shared/ContentGrid.vue'
+
+useSeoMeta({
+  title: 'Structural Components Playground',
+  description: 'Demos for BaseSection, SectionHeader, ContentGrid, FeatureGrid, MetricList, and BulletList components.'
+})
+
+const features = [
+  {
+    title: 'Production-grade audits',
+    description: 'Security, performance, and code quality checks bundled into a single report.',
+    meta: 'Artifact ready',
+    icon: 'i-lucide-shield-check',
+    cta: 'View services',
+    to: '/services'
+  },
+  {
+    title: 'Nuxt UI foundation',
+    description: 'Shared tokens and primitives keep layout work fast and consistent.',
+    meta: 'Tokens wired',
+    icon: 'i-lucide-layers'
+  },
+  {
+    title: 'Localization ready',
+    description: 'Structure content so the i18n rollout only swaps strings, not markup.',
+    meta: 'i18n friendly',
+    icon: 'i-lucide-languages'
+  }
+]
+
+const metrics = [
+  {
+    label: 'Stability rating',
+    value: '99.9%',
+    description: 'CI + QA coverage for production migrations.',
+    icon: 'i-lucide-activity'
+  },
+  {
+    label: 'Team experience',
+    value: '12yr',
+    description: 'Average seniority across the engineering team.',
+    icon: 'i-lucide-users-round'
+  },
+  {
+    label: 'Launch cadence',
+    value: '2x',
+    description: 'Faster rollouts after vibe coding cleanup.',
+    icon: 'i-lucide-rocket'
+  }
+]
+
+const bulletItems = [
+  {
+    label: 'Highlight pain points without duplicating markup',
+    description: 'Standardized structure keeps reflections aligned across services.',
+    icon: 'i-lucide-sparkles'
+  },
+  {
+    label: 'Keep icons consistent with Nuxt UI + Lucide',
+    description: 'Bundled iconify JSON ensures offline builds match production.',
+    icon: 'i-lucide-scan-face'
+  },
+  {
+    label: 'Supports per-item overrides when you need variety',
+    description: 'Each entry can swap glyphs or copy for localized nuance.',
+    icon: 'i-lucide-shuffle'
+  }
+]
+
+const sampleCards = [
+  {
+    title: 'Migration checklist',
+    description: 'Track component adoption across home and service pages.',
+    icon: 'i-lucide-clipboard-check',
+    points: [
+      'Audit legacy CSS usage',
+      'Swap markup to BaseSection + SectionHeader',
+      'Capture deltas in docs'
+    ]
+  },
+  {
+    title: 'Content reuse',
+    description: 'Extract shared arrays into composables for localization.',
+    icon: 'i-lucide-folders',
+    points: [
+      'Map list structures in discovery doc',
+      'Move sources closer to COPY docs',
+      'Leave TODOs for i18n handoff'
+    ]
+  },
+  {
+    title: 'Visual QA',
+    description: 'Run Playwright MCP to snapshot new sections in both themes.',
+    icon: 'i-lucide-camera',
+    points: [
+      'Update baselines before refactors',
+      'Attach screenshots to docs/qa',
+      'Note responsive quirks early'
+    ]
+  }
+]
+
+const cardUi = {
+  base: 'group relative overflow-hidden rounded-3xl border border-slate-900/60 bg-gradient-to-b from-slate-950/90 via-slate-950/40 to-slate-900/40 p-8 shadow-xl shadow-slate-950/50 transition duration-300 hover:border-primary-500/40 hover:shadow-primary-900/30',
+  body: 'flex h-full flex-col gap-4 p-0',
+  header: 'p-0',
+  footer: 'p-0'
+} as const
+</script>

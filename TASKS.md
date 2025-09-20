@@ -49,6 +49,7 @@ Sequential to-do list for a single developer delivering the Nuxt UI adoption pla
 - **Required Checks:** `npx eslint .`; `npm run generate`; Visual QA on header/footer (desktop + mobile).
 
 ## Task 4 – Structural Shared Components
+- **Status:** Completed — shared section primitives live under `app/components/shared/`, documented in `docs/components/STRUCTURAL.md`, and verified via `/playground/sections` with Playwright MCP capture stored in `docs/qa/task-4-structural-components.png`.
 - **Goal:** Build foundational sections (`BaseSection`, `SectionHeader`, `ContentGrid`, `FeatureGrid`, `MetricList`, `BulletList`).
 - **Prerequisites:** Layout shell merged; tokens available via app config.
 - **Key Activities:**
