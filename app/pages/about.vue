@@ -1,58 +1,50 @@
 <template>
-  <div class="page">
-    <section class="section hero">
-      <div class="container section-inner">
-        <div class="section-header">
-          <h1>{{ hero.title }}</h1>
-          <p class="section-subhead">{{ hero.subheading }}</p>
-          <div class="hero-actions">
-            <NuxtLink :to="hero.primaryCta.to" class="btn btn--primary">{{ hero.primaryCta.label }}</NuxtLink>
-            <NuxtLink :to="hero.secondaryCta.to" class="btn btn--ghost">{{ hero.secondaryCta.label }}</NuxtLink>
+  <div class="flex flex-col">
+    <BaseSection id="about-hero" variant="gradient" padding="relaxed">
+      <SectionHeader
+        level="h1"
+        :title="hero.title"
+        :description="hero.subheading"
+      >
+        <template #actions>
+          <div class="flex flex-wrap gap-3">
+            <AppButton :to="hero.primaryCta.to" size="lg">{{ hero.primaryCta.label }}</AppButton>
+            <AppButton :to="hero.secondaryCta.to" variant="ghost" size="lg">{{ hero.secondaryCta.label }}</AppButton>
           </div>
-        </div>
-      </div>
-    </section>
+        </template>
+      </SectionHeader>
+    </BaseSection>
 
-    <section class="section">
-      <div class="container section-inner">
-        <article class="card card--muted">
-          <h2>{{ mission.title }}</h2>
-          <p>{{ mission.description }}</p>
-        </article>
-      </div>
-    </section>
+    <BaseSection id="mission" variant="muted">
+      <UCard>
+        <div class="space-y-4">
+          <h2 class="text-2xl font-semibold text-slate-900 dark:text-slate-50">{{ mission.title }}</h2>
+          <p class="text-base leading-relaxed text-slate-600 dark:text-slate-300">{{ mission.description }}</p>
+        </div>
+      </UCard>
+    </BaseSection>
 
-    <section class="section section--gradient">
-      <div class="container section-inner">
-        <div class="section-header">
-          <h2>Our Approach</h2>
-        </div>
-        <div class="grid grid--four">
-          <article v-for="pillar in pillars" :key="pillar.title" class="card card--muted">
-            <h3>{{ pillar.title }}</h3>
-            <p>{{ pillar.description }}</p>
-          </article>
-        </div>
+    <BaseSection id="approach" variant="default">
+      <div class="space-y-8">
+        <SectionHeader :title="approachTitle" />
+        <FeatureGrid :features="pillarFeatures" :columns="4" />
       </div>
-    </section>
+    </BaseSection>
 
-    <section class="section">
-      <div class="container section-inner">
-        <div class="section-header section-header--center">
-          <h2>{{ values.headline }}</h2>
-        </div>
-        <div class="grid grid--four">
-          <article v-for="value in values.items" :key="value.title" class="card card--bright">
-            <h3>{{ value.title }}</h3>
-            <p>{{ value.description }}</p>
-          </article>
-        </div>
+    <BaseSection id="values" variant="accent">
+      <div class="space-y-8">
+        <SectionHeader align="center" :title="values.headline" />
+        <FeatureGrid :features="valueFeatures" :columns="4" />
       </div>
-    </section>
+    </BaseSection>
   </div>
 </template>
 
 <script setup lang="ts">
+import AppButton from '~/components/ui/AppButton.vue'
+import BaseSection from '~/components/shared/BaseSection.vue'
+import SectionHeader from '~/components/shared/SectionHeader.vue'
+import FeatureGrid from '~/components/shared/FeatureGrid.vue'
 import { useAboutContent } from '~/composables/useAboutContent'
 
 const content = useAboutContent()
@@ -66,19 +58,17 @@ const hero = content.hero
 const mission = content.mission
 const pillars = content.pillars
 const values = content.values
+
+const approachTitle = 'Our Approach'
+
+const pillarFeatures = pillars.map((pillar) => ({
+  title: pillar.title,
+  description: pillar.description
+}))
+
+const valueFeatures = values.items.map((value) => ({
+  title: value.title,
+  description: value.description,
+  meta: value.meta
+}))
 </script>
-
-<style scoped>
-.page {
-  display: flex;
-  flex-direction: column;
-  gap: 4rem;
-  padding-bottom: 6rem;
-}
-
-h1 {
-  font-size: clamp(2.5rem, 3.5vw, 3.25rem);
-  margin: 0;
-}
-
-</style>

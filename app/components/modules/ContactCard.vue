@@ -9,41 +9,41 @@
 
       <UForm :state="state" :validate="validate" class="space-y-5" @submit="handleSubmit">
         <div class="grid gap-5 md:grid-cols-2">
-          <UFormGroup name="name" label="Name" required>
-            <UInput v-model="state.name" placeholder="Your name" autocomplete="name" />
-          </UFormGroup>
-          <UFormGroup name="email" label="Email" required>
-            <UInput v-model="state.email" placeholder="you@company.com" type="email" autocomplete="email" />
-          </UFormGroup>
-          <UFormGroup name="company" label="Company">
-            <UInput v-model="state.company" placeholder="Company name" autocomplete="organization" />
-          </UFormGroup>
-          <UFormGroup name="projectType" label="Project type" required>
-            <USelect
-              v-model="state.projectType"
-              :items="projectTypeItems"
-              placeholder="Select a project type"
-            />
-          </UFormGroup>
-        </div>
-
-        <UFormGroup name="description" label="Project description" required>
-          <UTextarea
-            v-model="state.description"
-            placeholder="Tell us about your project, goals, and challenges."
-            :rows="5"
-            autoresize
+        <UFormField name="name" label="Name" required>
+          <UInput v-model="state.name" placeholder="Your name" autocomplete="name" />
+        </UFormField>
+        <UFormField name="email" label="Email" required>
+          <UInput v-model="state.email" placeholder="you@company.com" type="email" autocomplete="email" />
+        </UFormField>
+        <UFormField name="company" label="Company">
+          <UInput v-model="state.company" placeholder="Company name" autocomplete="organization" />
+        </UFormField>
+        <UFormField name="projectType" label="Project type" required>
+          <USelect
+            v-model="state.projectType"
+            :items="projectTypeItems"
+            placeholder="Select a project type"
           />
-        </UFormGroup>
+        </UFormField>
+      </div>
 
-        <div class="grid gap-5 md:grid-cols-2">
-          <UFormGroup name="timeline" label="Timeline" hint="Optional">
-            <UInput v-model="state.timeline" placeholder="Desired timeline" />
-          </UFormGroup>
-          <UFormGroup name="budget" label="Budget range" hint="Optional">
-            <UInput v-model="state.budget" placeholder="Estimated budget" />
-          </UFormGroup>
-        </div>
+      <UFormField name="description" label="Project description" required>
+        <UTextarea
+          v-model="state.description"
+          placeholder="Tell us about your project, goals, and challenges."
+          :rows="5"
+          autoresize
+        />
+      </UFormField>
+
+      <div class="grid gap-5 md:grid-cols-2">
+        <UFormField name="timeline" label="Timeline" hint="Optional">
+          <UInput v-model="state.timeline" placeholder="Desired timeline" />
+        </UFormField>
+        <UFormField name="budget" label="Budget range" hint="Optional">
+          <UInput v-model="state.budget" placeholder="Estimated budget" />
+        </UFormField>
+      </div>
 
         <div class="space-y-3">
           <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -82,6 +82,8 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import AppButton from '~/components/ui/AppButton.vue'
+import Tag from '~/components/ui/Tag.vue'
 import { useContactForm } from '~/composables/useContactForm'
 
 const props = withDefaults(defineProps<{

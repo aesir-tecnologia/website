@@ -138,6 +138,7 @@ Sequential to-do list for a single developer delivering the Nuxt UI adoption pla
 - **Required Checks:** `npx eslint .`; `npm run generate`; Visual QA across services routes.
 
 ## Task 11 – Page Migration Phase 3 (About, Process, Contact)
+- **Status:** Completed — About and Process pages now compose BaseSection + shared grids/timeline, Contact retains the Task 7 form with aligned sections, and Playwright captures stored at `docs/qa/task-11-*.png` validate light/dark parity.
 - **Goal:** Refactor remaining marketing pages to shared component stack.
 - **Prerequisites:** Task 10 complete; forms task (Task 7) integrated.
 - **Key Activities:**
