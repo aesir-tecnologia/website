@@ -14,6 +14,7 @@
 <script setup lang="ts">
 import { computed, useAttrs } from 'vue'
 import type { RouteLocationRaw } from 'vue-router'
+import AppButton from '~/components/ui/AppButton.vue'
 
 const props = withDefaults(defineProps<{
   label?: string

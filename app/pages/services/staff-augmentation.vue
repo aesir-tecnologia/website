@@ -1,92 +1,102 @@
 <template>
-  <div class="page">
-    <section class="section hero">
-      <div class="container section-inner">
-        <div class="section-header">
-          <h1>{{ hero.title }}</h1>
-          <p class="section-subhead">{{ hero.subheading }}</p>
-          <div class="hero-actions">
-            <NuxtLink :to="hero.primaryCta.to" class="btn btn--primary">{{ hero.primaryCta.label }}</NuxtLink>
-            <NuxtLink :to="hero.secondaryCta.to" class="btn btn--ghost">{{ hero.secondaryCta.label }}</NuxtLink>
+  <div class="flex flex-col">
+    <BaseSection id="hero" variant="gradient" padding="relaxed">
+      <SectionHeader
+        level="h1"
+        :title="hero.title"
+        :description="hero.subheading"
+      >
+        <template #actions>
+          <div class="flex flex-wrap gap-3">
+            <AppButton :to="hero.primaryCta.to" size="lg">{{ hero.primaryCta.label }}</AppButton>
+            <AppButton :to="hero.secondaryCta.to" variant="ghost" size="lg">{{ hero.secondaryCta.label }}</AppButton>
           </div>
-        </div>
-      </div>
-    </section>
+        </template>
+      </SectionHeader>
+    </BaseSection>
 
-    <section class="section">
-      <div class="container section-inner">
-        <div class="grid grid--two">
-          <article class="card card--muted">
-            <h2>{{ overview.title }}</h2>
-            <p>{{ overview.description }}</p>
-            <ul>
-              <li v-for="item in overview.benefits" :key="item">{{ item }}</li>
-            </ul>
-          </article>
-          <article class="card card--muted">
-            <h2>Developer Expertise</h2>
-            <ul>
-              <li v-for="expertise in overview.expertiseAreas" :key="expertise.title">
-                <strong>{{ expertise.title }}:</strong> {{ expertise.items }}
-              </li>
-            </ul>
-          </article>
-        </div>
+    <BaseSection id="overview">
+      <div class="space-y-10">
+        <SectionHeader :title="overview.title" :description="overview.description" />
+        <ContentGrid :columns="2">
+          <UCard>
+            <div class="space-y-4">
+              <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-50">{{ overview.title }}</h3>
+              <BulletList :items="overview.benefits" />
+            </div>
+          </UCard>
+          <UCard>
+            <div class="space-y-5">
+              <div
+                v-for="area in overview.expertiseAreas"
+                :key="area.title"
+                class="space-y-1"
+              >
+                <h4 class="text-base font-semibold text-slate-900 dark:text-slate-100">{{ area.title }}</h4>
+                <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">{{ area.items }}</p>
+              </div>
+            </div>
+          </UCard>
+        </ContentGrid>
       </div>
-    </section>
+    </BaseSection>
 
-    <section class="section section--gradient">
-      <div class="container section-inner">
-        <div class="section-header">
-          <h2>{{ engagementModels.headline }}</h2>
-        </div>
-        <div class="grid grid--three">
-          <article v-for="model in engagementModels.items" :key="model.title" class="card card--muted">
-            <h3>{{ model.title }}</h3>
-            <p>{{ model.description }}</p>
-          </article>
-        </div>
+    <BaseSection id="engagement" variant="muted">
+      <div class="space-y-8">
+        <SectionHeader :title="engagementModels.headline" />
+        <FeatureGrid :features="engagementFeatures" :columns="2" />
       </div>
-    </section>
+    </BaseSection>
 
-    <section class="section">
-      <div class="container section-inner">
-        <div class="grid grid--two">
-          <article class="card card--bright">
-            <h3>{{ reasons.title }}</h3>
-            <ul>
-              <li v-for="reason in reasons.items" :key="reason">{{ reason }}</li>
-            </ul>
-          </article>
-          <article class="card card--muted">
-            <h3>{{ messaging.title }}</h3>
-            <ul>
-              <li v-for="message in messaging.items" :key="message">{{ message }}</li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
+    <BaseSection id="reasons" variant="accent">
+      <ContentGrid :columns="2">
+        <UCard>
+          <div class="space-y-4">
+            <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-50">{{ reasons.title }}</h3>
+            <BulletList :items="reasons.items" />
+          </div>
+        </UCard>
+        <UCard>
+          <div class="space-y-4">
+            <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-50">{{ messaging.title }}</h3>
+            <BulletList :items="messaging.items" />
+          </div>
+        </UCard>
+      </ContentGrid>
+    </BaseSection>
 
-    <section :id="ctaSectionId" class="section">
-      <div class="container section-inner">
-        <div class="section-header section-header--center">
-          <h2>{{ ctas.headline }}</h2>
-          <p class="section-subhead">{{ ctas.description }}</p>
-        </div>
-        <div class="grid grid--two">
-          <article v-for="card in ctas.cards" :key="card.title" class="card" :class="cardClass(card)">
-            <h3>{{ card.title }}</h3>
-            <p>{{ card.description }}</p>
-            <NuxtLink :to="card.to" class="card-cta">{{ card.cta }}</NuxtLink>
-          </article>
-        </div>
+    <BaseSection :id="ctaSectionId">
+      <div class="space-y-8">
+        <SectionHeader
+          align="center"
+          :title="ctas.headline"
+          :description="ctas.description"
+        />
+        <ContentGrid :columns="2">
+          <UCard v-for="card in ctas.cards" :key="card.title" class="h-full">
+            <div class="flex h-full flex-col gap-5">
+              <div class="space-y-3">
+                <h3 class="text-2xl font-semibold text-slate-900 dark:text-slate-50">{{ card.title }}</h3>
+                <p class="text-base leading-relaxed text-slate-600 dark:text-slate-300">{{ card.description }}</p>
+              </div>
+              <AppButton :to="card.to" size="md" :variant="card.cta === 'Find Your Developer' ? 'solid' : 'soft'">
+                {{ card.cta }}
+              </AppButton>
+            </div>
+          </UCard>
+        </ContentGrid>
       </div>
-    </section>
+    </BaseSection>
   </div>
 </template>
 
 <script setup lang="ts">
+import BaseSection from '~/components/shared/BaseSection.vue'
+import SectionHeader from '~/components/shared/SectionHeader.vue'
+import ContentGrid from '~/components/shared/ContentGrid.vue'
+import FeatureGrid from '~/components/shared/FeatureGrid.vue'
+import BulletList from '~/components/shared/BulletList.vue'
+import AppButton from '~/components/ui/AppButton.vue'
 import { useServiceContent } from '~/composables/useServicesContent'
 
 const service = useServiceContent('staff-augmentation')
@@ -103,28 +113,10 @@ const reasons = service.reasons
 const messaging = service.messaging
 const ctas = service.ctas
 
+const engagementFeatures = engagementModels.items.map((item) => ({
+  title: item.title,
+  description: item.description
+}))
+
 const ctaSectionId = 'contact'
-
-const cardClass = (card: (typeof ctas.cards)[number]) =>
-  card.title === 'Request Talent' ? 'card--bright' : 'card--muted'
 </script>
-
-<style scoped>
-.page {
-  display: flex;
-  flex-direction: column;
-  gap: 4rem;
-  padding-bottom: 6rem;
-}
-
-h1 {
-  font-size: clamp(2.5rem, 3.5vw, 3.25rem);
-  margin: 0;
-}
-
-.card ul {
-  margin: 0;
-  padding-left: 1.25rem;
-  color: rgba(226, 232, 240, 0.85);
-}
-</style>

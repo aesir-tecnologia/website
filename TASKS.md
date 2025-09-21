@@ -126,6 +126,7 @@ Sequential to-do list for a single developer delivering the Nuxt UI adoption pla
 - **Required Checks:** `npx eslint .`; `npm run generate`; Visual QA (desktop/mobile, light/dark, interactions).
 
 ## Task 10 – Page Migration Phase 2 (Services)
+- **Status:** Completed — services landing and all detail routes now compose shared sections/modules, CTA grids and lists consume BulletList/FeatureGrid, and Playwright captures cover each route in light/dark (`docs/qa/task-10-services-*.png`).
 - **Goal:** Apply shared components to services landing and detail pages.
 - **Prerequisites:** Task 9 merged; services copy validated.
 - **Key Activities:**
