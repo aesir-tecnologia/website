@@ -1,97 +1,115 @@
 <template>
-  <div class="page">
-    <section class="section hero">
-      <div class="container section-inner">
-        <div class="section-header">
-          <h1>Let's Build Something Great Together</h1>
-          <p class="section-subhead">
-            Ready to turn your idea into reality? We'd love to hear about your project and discuss how we can help.
-          </p>
-        </div>
-      </div>
-    </section>
+  <div class="space-y-20 pb-20">
+    <BaseSection id="contact-hero" variant="gradient" padding="relaxed" width="wide">
+      <template #background>
+        <BackgroundVariant variant="hero" tone="indigo" align="top" intensity="strong" />
+      </template>
+      <SectionHeader
+        eyebrow="Contact"
+        title="Let's build something great together"
+        description="Ready to turn your idea into reality? Tell us about your project and we'll share how the Aesir team can help."
+        align="center"
+      >
+        <template #actions>
+          <AppLinkButton
+            href="mailto:hello@aesir.dev"
+            trailing-icon="i-lucide-mail"
+            variant="ghost"
+            size="sm"
+          >
+            hello@aesir.dev
+          </AppLinkButton>
+        </template>
+      </SectionHeader>
+    </BaseSection>
 
-    <section class="section">
-      <div class="container section-inner">
-        <div class="grid grid--two">
-          <article class="card card--muted">
-            <h2>Project Inquiry</h2>
-            <p>Share the essentials so we can prepare a tailored proposal.</p>
-            <ul>
-              <li v-for="item in projectInquiry" :key="item">{{ item }}</li>
-            </ul>
-          </article>
-          <article class="card card--muted">
-            <h2>Engagement Models</h2>
-            <ul>
-              <li v-for="model in engagementModels" :key="model.title">
-                <strong>{{ model.title }}:</strong> {{ model.description }}
+    <BaseSection id="contact-overview" variant="muted" width="wide">
+      <ContentGrid :columns="2" gap="loose">
+        <UCard :ui="cardUi">
+          <div class="space-y-4">
+            <Tag tone="primary">Project inquiry</Tag>
+            <h2 class="text-xl font-semibold text-slate-900 dark:text-slate-50">What to share</h2>
+            <p class="text-sm text-slate-600 dark:text-slate-300">
+              Share the essentials so we can prepare a tailored proposal.
+            </p>
+            <BulletList :items="projectInquiryItems" icon="i-lucide-check-circle-2" />
+          </div>
+        </UCard>
+
+        <UCard :ui="cardUi">
+          <div class="space-y-4">
+            <Tag tone="accent">Engagement models</Tag>
+            <h2 class="text-xl font-semibold text-slate-900 dark:text-slate-50">How we collaborate</h2>
+            <ul class="space-y-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+              <li v-for="model in engagementModels" :key="model.title" class="space-y-1">
+                <p class="font-semibold text-slate-900 dark:text-slate-50">{{ model.title }}</p>
+                <p>{{ model.description }}</p>
               </li>
             </ul>
-          </article>
-        </div>
-      </div>
-    </section>
+          </div>
+        </UCard>
+      </ContentGrid>
+    </BaseSection>
 
-    <section class="section section--gradient">
-      <div class="container section-inner">
-        <div class="grid contact-grid">
-          <form class="card contact-form" @submit.prevent>
-            <h3>Send Project Details</h3>
-            <label>
-              Name
-              <input type="text" name="name" placeholder="Your name" required>
-            </label>
-            <label>
-              Email
-              <input type="email" name="email" placeholder="you@company.com" required>
-            </label>
-            <label>
-              Company (optional)
-              <input type="text" name="company" placeholder="Company name">
-            </label>
-            <label>
-              Project Type
-              <select name="projectType" required>
-                <option value="" disabled selected>Select a project type</option>
-                <option v-for="option in projectTypes" :key="option" :value="option">{{ option }}</option>
-              </select>
-            </label>
-            <label>
-              Project Description
-              <textarea name="description" rows="4" placeholder="Tell us about your project, goals, and challenges." required />
-            </label>
-            <label>
-              Timeline
-              <input type="text" name="timeline" placeholder="Desired timeline">
-            </label>
-            <label>
-              Budget Range
-              <input type="text" name="budget" placeholder="Estimated budget range">
-            </label>
-            <button type="submit" class="btn btn--primary">Send Project Details</button>
-          </form>
-          <article class="card card--bright">
-            <h3>Prefer to talk directly?</h3>
-            <p>Schedule a consultation call to discuss your project in detail and map next steps.</p>
-            <NuxtLink to="/contact#schedule" class="card-cta">Schedule a Call</NuxtLink>
-          </article>
-        </div>
-      </div>
-    </section>
+    <BaseSection id="form" variant="gradient" width="wide">
+      <template #background>
+        <BackgroundVariant tone="sky" align="center" intensity="default" />
+      </template>
+      <ContentGrid :columns="2" gap="loose">
+        <ContactCard :project-types="projectTypes" :description="formDescription" :title="formTitle" />
 
-    <section id="schedule" class="section">
-      <div class="container section-inner">
-        <div class="card card--muted">
-          <h3>Schedule a Call</h3>
-          <p>Email <a href="mailto:hello@aesir.dev">hello@aesir.dev</a> with your availability or send us a calendar invite. We'll confirm a time within one business day.</p>
+        <UCard :ui="ctaCardUi">
+          <div class="space-y-4">
+            <Tag tone="neutral">Prefer to talk directly?</Tag>
+            <h3 class="text-2xl font-semibold text-slate-900 dark:text-slate-50">Schedule a consultation</h3>
+            <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+              We can walk through your product goals, current stack, and success criteria in a 30-minute session.
+            </p>
+            <AppButton :to="ctaLink" size="lg">
+              Schedule a call
+            </AppButton>
+            <p class="text-xs text-slate-500 dark:text-slate-400">
+              You can also email
+              <AppLinkButton href="mailto:hello@aesir.dev" variant="link" size="sm">
+                hello@aesir.dev
+              </AppLinkButton>
+              with availability.
+            </p>
+          </div>
+        </UCard>
+      </ContentGrid>
+    </BaseSection>
+
+    <BaseSection id="schedule" variant="default" width="narrow">
+      <UCard :ui="cardUi">
+        <div class="space-y-4">
+          <Tag tone="primary">Need a calendar hold?</Tag>
+          <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-50">Share times that work for you</h3>
+          <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+            Send a calendar invite to
+            <AppLinkButton href="mailto:hello@aesir.dev" variant="link" size="sm">
+              hello@aesir.dev
+            </AppLinkButton>
+            or drop us a note with your availability. We'll confirm within one business day.
+          </p>
         </div>
-      </div>
-    </section>
+      </UCard>
+    </BaseSection>
   </div>
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
+import AppButton from '~/components/ui/AppButton.vue'
+import AppLinkButton from '~/components/ui/AppLinkButton.vue'
+import BackgroundVariant from '~/components/ui/BackgroundVariant.vue'
+import Tag from '~/components/ui/Tag.vue'
+import ContactCard from '~/components/modules/ContactCard.vue'
+import BaseSection from '~/components/shared/BaseSection.vue'
+import SectionHeader from '~/components/shared/SectionHeader.vue'
+import ContentGrid from '~/components/shared/ContentGrid.vue'
+import BulletList from '~/components/shared/BulletList.vue'
+
 useSeoMeta({
   title: 'Contact | Aesir Tecnologia',
   description: 'Reach out to Aesir Tecnologia to discuss vibe coding cleanup, custom web and mobile development, and staff augmentation projects.'
@@ -99,15 +117,15 @@ useSeoMeta({
 
 const projectInquiry = [
   'Project type and scope',
-  'Timeline and budget',
-  'Technical requirements',
-  'Business goals'
+  'Timeline and budget targets',
+  'Technical requirements or constraints',
+  'Primary business goals for the work'
 ]
 
 const engagementModels = [
-  { title: 'Project-Based', description: 'Fixed scope with defined deliverables for predictable outcomes.' },
-  { title: 'Retainer', description: 'Ongoing development and support for continuous improvement.' },
-  { title: 'Consultation', description: 'Technical guidance, planning, and architecture reviews.' }
+  { title: 'Project-based', description: 'Fixed scope with defined deliverables when you need predictable outcomes.' },
+  { title: 'Retainer', description: 'Ongoing development and support to iteratively grow your product.' },
+  { title: 'Consultation', description: 'Architecture reviews, roadmap planning, and guidance for internal teams.' }
 ]
 
 const projectTypes = [
@@ -118,67 +136,20 @@ const projectTypes = [
   'Staff Augmentation',
   'Consultation'
 ]
+
+const projectInquiryItems = computed(() => projectInquiry.map((item) => ({ label: item })))
+
+const formTitle = 'Send project details'
+const formDescription = 'Share context about your product so we can align on outcomes, scope, and the team you need.'
+const ctaLink = '#schedule'
+
+const cardUi = {
+  base: 'relative overflow-hidden rounded-3xl border border-slate-200/70 bg-white/90 p-8 shadow-lg shadow-slate-200/60 dark:border-slate-900/70 dark:bg-slate-950/50 dark:shadow-slate-950/60',
+  body: 'space-y-4 p-0'
+} as const
+
+const ctaCardUi = {
+  base: 'relative overflow-hidden rounded-3xl border border-primary-300/40 bg-gradient-to-b from-white via-primary-50/60 to-white p-8 shadow-xl shadow-primary-200/40 dark:border-primary-500/30 dark:from-slate-950/70 dark:via-slate-950/40 dark:to-slate-900/40 dark:shadow-primary-900/30',
+  body: 'space-y-4 p-0'
+} as const
 </script>
-
-<style scoped>
-.page {
-  display: flex;
-  flex-direction: column;
-  gap: 4rem;
-  padding-bottom: 6rem;
-}
-
-h1 {
-  font-size: clamp(2.5rem, 3.5vw, 3.25rem);
-  margin: 0;
-}
-
-.contact-grid {
-  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
-}
-
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  background: rgba(15, 23, 42, 0.9);
-}
-
-.contact-form label {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  font-size: 0.95rem;
-  color: rgba(226, 232, 240, 0.85);
-}
-
-.contact-form input,
-.contact-form select,
-.contact-form textarea {
-  background: rgba(15, 23, 42, 0.7);
-  border: 1px solid rgba(148, 163, 184, 0.4);
-  border-radius: 0.75rem;
-  padding: 0.75rem 1rem;
-  color: #e2e8f0;
-  font-size: 0.95rem;
-}
-
-.contact-form input:focus,
-.contact-form select:focus,
-.contact-form textarea:focus {
-  outline: none;
-  border-color: rgba(56, 189, 248, 0.6);
-  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
-}
-
-.contact-form button {
-  align-self: flex-start;
-}
-
-@media (max-width: 900px) {
-  .contact-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-</style>

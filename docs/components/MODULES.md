@@ -44,7 +44,18 @@ All modules below compose the structural primitives from Task 4. They accept typ
   - `pauseOnHover`, `caption`, `variant`, `background` toggles.
 - **Notes:** `BackgroundVariant` replaces ad-hoc gradients; animation still respects `prefers-reduced-motion` while exposing tone tweaks when needed.
 
+## SocialProofSection
+- **Purpose:** Combine differentiator grid and testimonial card.
+- **Props:**
+  - `features`: array (`FeatureGrid` schema) for differentiators.
+  - Optional `testimonial`: `{ quote, author, role? }`.
+  - `columns`/`gap` forwarded to `FeatureGrid`.
 - **Notes:** Feature CTA defaults to `AppLinkButton`; gradients handled through `BackgroundVariant`.
+
+## ContactCard *(Task 7)*
+- **Purpose:** Marketing contact form that pairs with `useContactForm` to handle validation, submission states, and feedback.
+- **Props:** `projectTypes` string array plus optional title/description/labels to tailor copy per page.
+- **Notes:** Relies on Nuxt UI form components, shared `Tag`, and `AppButton` atoms. Shows success/error alerts via `UAlert` while `useContactForm` exposes `status` helpers for additional handling if embedded elsewhere.
 
 ## Playground
 Preview all modules at [`/playground/modules`](http://localhost:3000/playground/modules) while running `npm run dev`. Capture visuals through Playwright MCP (stored under `docs/qa/`) and mirror prop structures when migrating real routes.

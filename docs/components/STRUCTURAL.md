@@ -1,6 +1,6 @@
 # Structural Shared Components
 
-Task 4 introduces a baseline set of structural components backed by Nuxt UI primitives. They replace bespoke section markup while staying ahead of the upcoming localization effort. Task 6 adds utility atoms (documented in `docs/components/UTILITIES.md`) that pair with these layouts for CTAs, backgrounds, and imagery.
+Task 4 introduces a baseline set of structural components backed by Nuxt UI primitives. They replace bespoke section markup while staying ahead of the upcoming localization effort. Task 6 adds utility atoms (documented in `docs/components/UTILITIES.md`) that pair with these layouts for CTAs, backgrounds, and imagery, and Task 7 layers on form patterns described in `docs/components/FORMS.md`.
 
 ## BaseSection
 - **Purpose:** Wrap content blocks with consistent spacing, background variants, and responsive container widths.

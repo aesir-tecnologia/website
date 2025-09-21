@@ -88,6 +88,7 @@ Sequential to-do list for a single developer delivering the Nuxt UI adoption pla
 - **Required Checks:** `npx eslint .`; `npm run generate`; Visual QA on modules to confirm styling parity.
 
 ## Task 7 – Forms & Interactive Elements
+- **Status:** Completed — `ContactCard` module, `useContactForm` composable, and the `/contact` page now rely on Nuxt UI form primitives with documented accessibility patterns (`docs/components/FORMS.md`) and MCP captures.
 - **Goal:** Refactor contact form and related CTAs using Nuxt UI form suite and composables.
 - **Prerequisites:** Utility components ready; validation approach (e.g., Zod) agreed.
 - **Key Activities:**
