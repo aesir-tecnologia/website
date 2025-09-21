@@ -1,152 +1,92 @@
 <template>
-  <div class="homepage">
-    <section id="hero" class="hero">
-      <div class="container hero-content">
-        <div class="hero-text">
-          <p class="eyebrow">{{ hero.eyebrow }}</p>
-          <h1>{{ hero.headline }}</h1>
-          <p class="lead">{{ hero.subheadline }}</p>
-          <div class="hero-actions">
-            <NuxtLink :to="hero.primaryCta.to" class="btn btn--primary">{{ hero.primaryCta.label }}</NuxtLink>
-            <NuxtLink :to="hero.secondaryCta.to" class="btn btn--ghost">{{ hero.secondaryCta.label }}</NuxtLink>
-          </div>
-          <ul class="hero-points">
-            <li v-for="point in hero.points" :key="point">{{ point }}</li>
-          </ul>
-        </div>
-        <div class="hero-card">
-          <h2 class="hero-card__title">{{ hero.highlightsTitle }}</h2>
-          <ul>
-            <li v-for="item in hero.highlights" :key="item.title">
-              <h3>{{ item.title }}</h3>
-              <p>{{ item.description }}</p>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
+  <div class="flex flex-col">
+    <HeroSection
+      id="hero"
+      :eyebrow="hero.eyebrow"
+      :title="hero.headline"
+      :description="hero.subheadline"
+      :points="hero.points"
+      :primary-cta="hero.primaryCta"
+      :secondary-cta="hero.secondaryCta"
+      :highlights="hero.highlights"
+      :highlight-title="hero.highlightsTitle"
+    />
 
-    <section id="problem" class="section">
-      <div class="container section-inner">
-        <div class="section-header">
-          <h2>{{ problem.headline }}</h2>
-          <p class="section-subhead">{{ problem.description }}</p>
-        </div>
-        <div class="grid grid--two">
-          <div>
-            <h3>{{ problem.challengeTitle }}</h3>
-            <ul class="list-check">
-              <li v-for="challenge in problem.challenges" :key="challenge">{{ challenge }}</li>
-            </ul>
-          </div>
-          <div>
-            <h3>{{ problem.impactTitle }}</h3>
-            <ul class="list-check">
-              <li v-for="impact in problem.impacts" :key="impact">{{ impact }}</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
+    <ProblemSolutionSection
+      id="problem"
+      :title="problem.headline"
+      :description="problem.description"
+      :challenge-title="problem.challengeTitle"
+      :impact-title="problem.impactTitle"
+      :challenges="problem.challenges"
+      :impacts="problem.impacts"
+    />
 
-    <section id="services" class="section section--gradient">
-      <div class="container section-inner">
-        <div class="section-header">
-          <h2>{{ services.headline }}</h2>
-        </div>
-        <div class="grid grid--three">
-          <article v-for="service in services.items" :key="service.name" class="card service-card">
-            <p class="service-focus">{{ service.focus }}</p>
-            <h3>{{ service.name }}</h3>
-            <p class="service-description">{{ service.description }}</p>
-            <NuxtLink :to="service.to" class="card-cta">{{ service.cta }}</NuxtLink>
-          </article>
-        </div>
-      </div>
-    </section>
+    <ServiceShowcase
+      id="services"
+      :title="services.headline"
+      :services="serviceCards"
+    />
 
-    <section id="process" class="section">
-      <div class="container section-inner">
-        <div class="section-header">
-          <h2>{{ cleanup.headline }}</h2>
-          <p class="section-subhead">{{ cleanup.description }}</p>
-        </div>
-        <div class="grid grid--four">
-          <article v-for="step in cleanup.steps" :key="step.title" class="card card--muted">
-            <h3>{{ step.title }}</h3>
-            <ul>
-              <li v-for="item in step.items" :key="item">{{ item }}</li>
-            </ul>
-          </article>
-        </div>
-        <div class="card card--highlight">
-          <h3>{{ cleanup.highlight.title }}</h3>
-          <ul>
-            <li v-for="item in cleanup.highlight.items" :key="item">{{ item }}</li>
-          </ul>
-        </div>
-      </div>
-    </section>
+    <ProcessTimeline
+      id="process"
+      :title="cleanup.headline"
+      :description="cleanup.description"
+      :steps="cleanup.steps"
+      :highlight="processHighlight"
+    />
 
-    <section id="technology" class="section section--dark">
-      <div class="container section-inner">
-        <div class="section-header section-header--center">
-          <h2>{{ techStack.headline }}</h2>
-          <p class="section-subhead">{{ techStack.description }}</p>
-        </div>
-        <div class="logo-carousel" aria-label="Technology stack logos">
-          <div class="logo-track" :style="trackStyle">
-            <div v-for="(logo, index) in carouselLogos" :key="`${logo}-${index}`" class="logo-item">{{ logo }}</div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <TechnologyMarquee
+      id="technology"
+      :title="techStack.headline"
+      :description="techStack.description"
+      :items="techStack.logos"
+    />
 
-    <section id="why-us" class="section">
-      <div class="container section-inner">
-        <div class="section-header section-header--center">
-          <h2>{{ reasons.headline }}</h2>
-        </div>
-        <div class="grid grid--four">
-          <article v-for="reason in reasons.items" :key="reason.title" class="card card--muted">
-            <h3>{{ reason.title }}</h3>
-            <p>{{ reason.description }}</p>
-          </article>
-        </div>
-      </div>
-    </section>
+    <SocialProofSection
+      id="why-us"
+      :title="reasons.headline"
+      :features="differentiators"
+      :testimonial="testimonial"
+    />
 
-    <section id="results" class="section section--testimonial">
-      <div class="container section-inner">
-        <div class="testimonial">
-          <h2>{{ testimonial.headline }}</h2>
-          <blockquote>
-            {{ testimonial.quote }}
-          </blockquote>
-          <p class="testimonial-author">— {{ testimonial.author }}</p>
-        </div>
+    <BaseSection id="get-started" variant="accent" padding="relaxed">
+      <div class="space-y-10">
+        <SectionHeader
+          align="center"
+          :title="finalCta.headline"
+        />
+        <ContentGrid :columns="3">
+          <UCard
+            v-for="cta in finalCtaCards"
+            :key="cta.title"
+            :ui="finalCtaCardUi"
+          >
+            <div class="flex h-full flex-col gap-5">
+              <div class="space-y-3">
+                <h3 class="text-2xl font-semibold text-slate-900 dark:text-slate-50">{{ cta.title }}</h3>
+                <p class="text-base leading-relaxed text-slate-600 dark:text-slate-300">{{ cta.description }}</p>
+              </div>
+              <AppButton :to="cta.to" size="md" class="mt-auto">{{ cta.cta }}</AppButton>
+            </div>
+          </UCard>
+        </ContentGrid>
       </div>
-    </section>
-
-    <section id="get-started" class="section section--cta">
-      <div class="container section-inner">
-        <div class="section-header section-header--center">
-          <h2>{{ finalCta.headline }}</h2>
-        </div>
-        <div class="grid grid--three">
-          <article v-for="cta in finalCta.items" :key="cta.title" class="card card--bright">
-            <h3>{{ cta.title }}</h3>
-            <p>{{ cta.description }}</p>
-            <NuxtLink :to="cta.to" class="card-cta">{{ cta.cta }}</NuxtLink>
-          </article>
-        </div>
-      </div>
-    </section>
+    </BaseSection>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import HeroSection from '~/components/modules/HeroSection.vue'
+import ProblemSolutionSection from '~/components/modules/ProblemSolutionSection.vue'
+import ServiceShowcase from '~/components/modules/ServiceShowcase.vue'
+import ProcessTimeline from '~/components/modules/ProcessTimeline.vue'
+import TechnologyMarquee from '~/components/modules/TechnologyMarquee.vue'
+import SocialProofSection from '~/components/modules/SocialProofSection.vue'
+import BaseSection from '~/components/shared/BaseSection.vue'
+import SectionHeader from '~/components/shared/SectionHeader.vue'
+import ContentGrid from '~/components/shared/ContentGrid.vue'
+import AppButton from '~/components/ui/AppButton.vue'
 import { useHomepageContent } from '~/composables/useHomepageContent'
 
 const homepage = useHomepageContent()
@@ -158,9 +98,44 @@ useSeoMeta({
 
 const { hero, problem, services, cleanup, techStack, reasons, testimonial, finalCta } = homepage
 
-const carouselLogos = computed(() => [...techStack.logos, ...techStack.logos])
-
-const trackStyle = computed(() => ({
-  '--item-count': String(carouselLogos.value.length)
+type ServiceCard = InstanceType<typeof ServiceShowcase>['$props']['services'][number]
+const serviceCards: ServiceCard[] = services.items.map((service) => ({
+  title: service.name,
+  description: service.description,
+  to: service.to,
+  cta: service.cta,
+  focus: service.focus
 }))
+
+type Differentiator = InstanceType<typeof SocialProofSection>['$props']['features'][number]
+const differentiators: Differentiator[] = reasons.items.map((reason) => ({
+  title: reason.title,
+  description: reason.description
+}))
+
+type ProcessHighlight = NonNullable<InstanceType<typeof ProcessTimeline>['$props']['highlight']>
+const processHighlight: ProcessHighlight = {
+  title: cleanup.highlight.title,
+  items: cleanup.highlight.items,
+  eyebrow: 'Perfect for'
+}
+
+type FinalCtaCard = {
+  title: string
+  description: string
+  cta: string
+  to: string
+}
+
+const finalCtaCards: FinalCtaCard[] = finalCta.items.map((cta) => ({
+  title: cta.title,
+  description: cta.description,
+  cta: cta.cta,
+  to: cta.to
+}))
+
+const finalCtaCardUi = {
+  base: 'relative overflow-hidden rounded-3xl border border-slate-200/70 bg-white/95 p-8 shadow-xl shadow-slate-200/60 dark:border-slate-900/70 dark:bg-slate-950/50 dark:shadow-slate-950/70',
+  body: 'h-full p-0'
+} as const
 </script>

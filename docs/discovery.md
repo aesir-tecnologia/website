@@ -57,22 +57,19 @@
   - Neutral borders: `rgba(148,163,184,0.2–0.8)`.
 - **Spacing & Layout Tokens**:
   - `.container`: `min(1120px, 100% - 3rem)` width; mobile adjustment to `100% - 2.5rem` below 640px.
-  - Section rhythm: `.homepage` gap `4rem`, `.section-inner` padding `4rem 0` (reduced to `3rem` on small screens), `.page` wrappers reuse `gap: 4rem; padding-bottom: 6rem`.
+  - Section rhythm now driven by shared `BaseSection` defaults (`padding: default`, `width: default`); legacy `.page` wrappers remain on routes not yet migrated.
   - Grids: `.grid` base gap `2rem` with responsive `auto-fit` templates for 2/3/4 column layouts.
 - **Utility/Structural Classes**:
-  - `.section`, `.section-inner`, `.section--gradient`, `.section--dark`, `.section--testimonial`, `.section--cta` control backgrounds and borders.
-  - `.section-header`, `.section-header--center`, `.section-subhead` standardize headings/subheadings.
-  - `.hero`, `.hero-content`, `.hero-card`, `.hero-actions`, `.hero-points` define landing hero layout.
-  - `.card` variants (`--muted`, `--highlight`, `--bright`) handle background/border treatments; `.service-card`, `.list-check`, `.logo-carousel`/`.logo-track`, `.testimonial` for specific modules.
+  - `.section`, `.section-inner`, `.section--gradient`, `.section--dark`, `.section--testimonial` still power unmigrated routes; the homepage now composes `BaseSection`, `SectionHeader`, and module wrappers (`HeroSection`, `ProblemSolutionSection`, `ServiceShowcase`, `ProcessTimeline`, `TechnologyMarquee`, `SocialProofSection`).
+  - `.card` variants (`--muted`, `--highlight`, `--bright`) continue supporting legacy pages; module cards lean on Nuxt UI (`UCard`) styles.
   - Button utilities `.btn`, `.btn--primary`, `.btn--ghost` manage CTA styling outside of Nuxt UI components.
 - **Responsive Behaviour**:
-  - Media queries adjust hero layout to single column below 992px, container width adjustments, and faster marquee animation on mobile.
-  - `.logo-track` uses CSS custom property `--item-count` (set in `index.vue`) for marquee width.
+  - BaseSection + ContentGrid handle breakpoints for migrated sections; remaining media queries cover legacy hero layout and container width adjustments.
 
 ## Global Utility & Behaviour Notes
 - Navigation menu state is handled globally in `app/app.vue`; ensures mobile slide-over closes on route change.
-- No shared Vue components under `app/components/`; repeated structures (cards, grids) are currently reproduced per page with CSS utilities.
-- Tailwind utilities are available through Nuxt UI, but the codebase still relies mainly on handcrafted classes from `main.css`.
+- Shared components now live under `app/components/` (layout primitives, shared sections, marketing modules); remaining legacy pages still render handcrafted CSS structures until their migration tasks land.
+- Tailwind utilities are available through Nuxt UI, but the codebase still relies mainly on handcrafted classes from `main.css` on unmigrated routes.
 - `useSeoMeta` invoked in every page to set title/description.
 - Forms and CTAs link to internal routes; no API integrations or composables for data fetching yet.
 

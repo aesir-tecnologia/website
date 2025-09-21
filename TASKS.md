@@ -114,6 +114,7 @@ Sequential to-do list for a single developer delivering the Nuxt UI adoption pla
 - **Required Checks:** `npx eslint .`; `npm run generate`; Visual QA verifying content matches `docs/COPY-*.md`.
 
 ## Task 9 – Page Migration Phase 1 (Home)
+- **Status:** Completed — homepage composes Hero/Problem/Services/Process/Technology/Social Proof modules, final CTA rebuilt on BaseSection, legacy CSS trimmed, docs refreshed, and Playwright captures stored at `docs/qa/task-9-home-light.png` and `docs/qa/task-9-home-dark.png`.
 - **Goal:** Replace homepage sections with new shared components ensuring visual and behavioural parity.
 - **Prerequisites:** Tasks 4–8 complete; homepage copy double-checked.
 - **Key Activities:**
