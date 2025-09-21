@@ -3,13 +3,11 @@
     <section class="section hero">
       <div class="container section-inner">
         <div class="section-header">
-          <h1>Interactive Games and Immersive Experiences</h1>
-          <p class="section-subhead">
-            Build engaging games and gamified experiences with Unity and HTML5 to captivate your audience across web and mobile.
-          </p>
+          <h1>{{ hero.title }}</h1>
+          <p class="section-subhead">{{ hero.subheading }}</p>
           <div class="hero-actions">
-            <NuxtLink to="#contact" class="btn btn--primary">Create Your Game</NuxtLink>
-            <NuxtLink to="/services" class="btn btn--ghost">View All Services</NuxtLink>
+            <NuxtLink :to="hero.primaryCta.to" class="btn btn--primary">{{ hero.primaryCta.label }}</NuxtLink>
+            <NuxtLink :to="hero.secondaryCta.to" class="btn btn--ghost">{{ hero.secondaryCta.label }}</NuxtLink>
           </div>
         </div>
       </div>
@@ -19,17 +17,17 @@
       <div class="container section-inner">
         <div class="grid grid--two">
           <article class="card card--muted">
-            <h2>Overview</h2>
-            <p>Interactive games and experiences using Unity and HTML5. From entertainment to education, we deliver rich, performant content.</p>
+            <h2>{{ overview.title }}</h2>
+            <p>{{ overview.description }}</p>
             <ul>
-              <li v-for="item in offerings" :key="item">{{ item }}</li>
+              <li v-for="item in overview.offerings" :key="item">{{ item }}</li>
             </ul>
           </article>
           <article class="card card--muted">
             <h2>Our Game Development Services</h2>
             <ul>
-              <li v-for="service in servicesList" :key="service.title">
-                <strong>{{ service.title }}:</strong> {{ service.description }}
+              <li v-for="serviceItem in overview.services" :key="serviceItem.title">
+                <strong>{{ serviceItem.title }}:</strong> {{ serviceItem.description }}
               </li>
             </ul>
           </article>
@@ -41,37 +39,32 @@
       <div class="container section-inner">
         <div class="grid grid--two">
           <article class="card card--bright">
-            <h3>Technologies Used</h3>
+            <h3>{{ technology.title }}</h3>
             <ul>
-              <li v-for="tech in technologies" :key="tech">{{ tech }}</li>
+              <li v-for="tech in technology.items" :key="tech">{{ tech }}</li>
             </ul>
           </article>
           <article class="card card--muted">
-            <h3>Target Messaging</h3>
+            <h3>{{ messaging.title }}</h3>
             <ul>
-              <li v-for="message in messages" :key="message">{{ message }}</li>
+              <li v-for="message in messaging.items" :key="message">{{ message }}</li>
             </ul>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="contact" class="section">
+    <section :id="ctaSectionId" class="section">
       <div class="container section-inner">
         <div class="section-header section-header--center">
-          <h2>Bring Your Experience to Life</h2>
-          <p class="section-subhead">Share your concept, audience, and platform needs to start production planning.</p>
+          <h2>{{ ctas.headline }}</h2>
+          <p class="section-subhead">{{ ctas.description }}</p>
         </div>
         <div class="grid grid--two">
-          <article class="card card--bright">
-            <h3>Start a Game Project</h3>
-            <p>We guide you through concept validation, production planning, and deployment.</p>
-            <NuxtLink to="/contact" class="card-cta">Create Your Game</NuxtLink>
-          </article>
-          <article class="card card--muted">
-            <h3>Add Gamification</h3>
-            <p>Enhance existing products with interactive features and retention loops.</p>
-            <NuxtLink to="/services/web-development" class="card-cta">Integrate With Your App</NuxtLink>
+          <article v-for="card in ctas.cards" :key="card.title" class="card" :class="cardClass(card)">
+            <h3>{{ card.title }}</h3>
+            <p>{{ card.description }}</p>
+            <NuxtLink :to="card.to" class="card-cta">{{ card.cta }}</NuxtLink>
           </article>
         </div>
       </div>
@@ -80,41 +73,25 @@
 </template>
 
 <script setup lang="ts">
+import { useServiceContent } from '~/composables/useServicesContent'
+
+const service = useServiceContent('game-development')
+
 useSeoMeta({
-  title: 'Game Development | Aesir Tecnologia',
-  description: 'Unity and HTML5 game development for mobile and web, including gamification, educational experiences, and interactive content.'
+  title: service.seo.title,
+  description: service.seo.description
 })
 
-const offerings = [
-  'Mobile games for iOS and Android',
-  'Web-based games and interactive content',
-  'Educational and training games',
-  'Gamification features for apps',
-  'HTML5 games and animations'
-]
+const hero = service.hero
+const overview = service.overview
+const technology = service.technology
+const messaging = service.messaging
+const ctas = service.ctas
 
-const servicesList = [
-  { title: 'Concept Development', description: 'Game design, mechanics, and narrative planning.' },
-  { title: 'Art and Animation', description: '2D/3D asset production, character design, and motion.' },
-  { title: 'Programming', description: 'Unity, HTML5, and JavaScript engineering for cross-platform delivery.' },
-  { title: 'Testing', description: 'Quality assurance and device testing for smooth experiences.' },
-  { title: 'Publishing', description: 'App store submission and web deployment support.' },
-  { title: 'Analytics', description: 'Player behavior tracking and live ops optimization.' }
-]
+const ctaSectionId = 'contact'
 
-const technologies = [
-  'Unity',
-  'HTML5',
-  'JavaScript',
-  'WebGL',
-  'Mobile SDKs'
-]
-
-const messages = [
-  'Deliver immersive experiences that drive engagement.',
-  'Combine storytelling, art, and engineering to ship compelling games.',
-  'Extend your product strategy with gamified touchpoints.'
-]
+const cardClass = (card: (typeof ctas.cards)[number]) =>
+  card.title === 'Start a Game Project' ? 'card--bright' : 'card--muted'
 </script>
 
 <style scoped>
@@ -135,5 +112,4 @@ h1 {
   padding-left: 1.25rem;
   color: rgba(226, 232, 240, 0.85);
 }
-
 </style>

@@ -1,6 +1,6 @@
 # Marketing Modules (Task 5)
 
-All modules below compose the structural primitives from Task 4. They accept typed props so page migrations can feed data from composables, content files, or `app.config` without touching markup.
+All modules below compose the structural primitives from Task 4. They accept typed props so page migrations can consume the Task 8 content composables (`docs/components/CONTENT.md`) or future localisation sources without touching markup.
 
 ## HeroSection
 - **Purpose:** Replace bespoke homepage hero with CTA buttons, bullet highlights, and a supporting feature list.

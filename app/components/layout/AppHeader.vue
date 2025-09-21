@@ -87,54 +87,32 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
 import type { NavigationMenuItem } from '@nuxt/ui'
-
-interface ConfigNavigationLink {
-  label: string
-  to: string
-  match?: 'exact' | 'startsWith'
-}
+import { useSiteNavigation } from '~/composables/useSiteNavigation'
 
 const route = useRoute()
-const localePath = useLocalePath()
 const colorMode = useColorMode()
 const isMobileMenuOpen = ref(false)
 
-const appConfig = useAppConfig()
+const { brand, links, cta } = useSiteNavigation()
 
-const brand = computed(() => appConfig.site?.brand ?? { name: 'Aesir Tecnologia', to: '/' })
-const brandLink = computed(() => localePath(brand.value.to))
-
-const navigationLinks = computed<ConfigNavigationLink[]>(
-  () => appConfig.site?.navigation?.links ?? []
-)
+const brandLink = computed(() => brand.value.to)
 
 const navigationItems = computed<NavigationMenuItem[]>(() =>
-  navigationLinks.value.map((link) => {
-    const target = String(localePath(link.to))
+  links.value.map((link) => {
     const active =
       link.match === 'exact'
-        ? route.path === target
-        : route.path.startsWith(target)
+        ? route.path === link.to
+        : route.path.startsWith(link.to)
 
     return {
       label: link.label,
-      to: target,
+      to: link.to,
       active,
     }
   })
 )
 
-const contactLink = computed(() => {
-  const cta = appConfig.site?.navigation?.cta
-  if (!cta) {
-    return null
-  }
-
-  return {
-    ...cta,
-    to: String(localePath(cta.to)),
-  }
-})
+const contactLink = computed(() => cta.value)
 
 const colorModeIsDark = computed(() => colorMode.value === 'dark')
 

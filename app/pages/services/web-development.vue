@@ -3,13 +3,11 @@
     <section class="section hero">
       <div class="container section-inner">
         <div class="section-header">
-          <h1>Custom Web Applications That Scale With Your Vision</h1>
-          <p class="section-subhead">
-            When AI tooling reaches its limits, our engineering team builds production-grade web applications tailored to your business.
-          </p>
+          <h1>{{ hero.title }}</h1>
+          <p class="section-subhead">{{ hero.subheading }}</p>
           <div class="hero-actions">
-            <NuxtLink to="#contact" class="btn btn--primary">Start Your Web Project</NuxtLink>
-            <NuxtLink to="/services" class="btn btn--ghost">View All Services</NuxtLink>
+            <NuxtLink :to="hero.primaryCta.to" class="btn btn--primary">{{ hero.primaryCta.label }}</NuxtLink>
+            <NuxtLink :to="hero.secondaryCta.to" class="btn btn--ghost">{{ hero.secondaryCta.label }}</NuxtLink>
           </div>
         </div>
       </div>
@@ -19,16 +17,16 @@
       <div class="container section-inner">
         <div class="grid grid--two">
           <article class="card card--muted">
-            <h2>Overview</h2>
-            <p>Custom web applications using Laravel, React, Vue.js, Node.js, and Python. From e-commerce platforms to enterprise systems built for performance and scalability.</p>
+            <h2>{{ overview.title }}</h2>
+            <p>{{ overview.description }}</p>
             <ul>
-              <li v-for="item in whatWeBuild" :key="item">{{ item }}</li>
+              <li v-for="item in overview.whatWeBuild" :key="item">{{ item }}</li>
             </ul>
           </article>
           <article class="card card--muted">
             <h2>Value Proposition</h2>
             <ul>
-              <li v-for="value in values" :key="value">{{ value }}</li>
+              <li v-for="value in overview.values" :key="value">{{ value }}</li>
             </ul>
           </article>
         </div>
@@ -38,10 +36,10 @@
     <section class="section section--gradient">
       <div class="container section-inner">
         <div class="section-header">
-          <h2>Our Approach</h2>
+          <h2>{{ approach.headline }}</h2>
         </div>
         <div class="grid grid--three">
-          <article v-for="stage in approach" :key="stage.title" class="card card--muted">
+          <article v-for="stage in approach.stages" :key="stage.title" class="card card--muted">
             <h3>{{ stage.title }}</h3>
             <p>{{ stage.description }}</p>
           </article>
@@ -53,37 +51,32 @@
       <div class="container section-inner">
         <div class="grid grid--two">
           <article class="card card--bright">
-            <h3>Technologies Used</h3>
+            <h3>{{ technology.title }}</h3>
             <ul>
-              <li v-for="tech in technologies" :key="tech">{{ tech }}</li>
+              <li v-for="tech in technology.items" :key="tech">{{ tech }}</li>
             </ul>
           </article>
           <article class="card card--muted">
-            <h3>Target Messaging</h3>
+            <h3>{{ messaging.title }}</h3>
             <ul>
-              <li v-for="message in targetMessaging" :key="message">{{ message }}</li>
+              <li v-for="message in messaging.items" :key="message">{{ message }}</li>
             </ul>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="contact" class="section">
+    <section :id="ctaSectionId" class="section">
       <div class="container section-inner">
         <div class="section-header section-header--center">
-          <h2>Bring Your Next Web Application to Market</h2>
-          <p class="section-subhead">Share your requirements and we will architect a roadmap from discovery to deployment.</p>
+          <h2>{{ ctas.headline }}</h2>
+          <p class="section-subhead">{{ ctas.description }}</p>
         </div>
         <div class="grid grid--two">
-          <article class="card card--bright">
-            <h3>Start Your Project</h3>
-            <p>Tell us about your idea, business goals, and timeline so we can design the ideal solution.</p>
-            <NuxtLink to="/contact" class="card-cta">Start Your Web Project</NuxtLink>
-          </article>
-          <article class="card card--muted">
-            <h3>Need a Technical Partner?</h3>
-            <p>Blend custom development with staff augmentation for continuous delivery.</p>
-            <NuxtLink to="/services/staff-augmentation" class="card-cta">Explore Team Augmentation</NuxtLink>
+          <article v-for="card in ctas.cards" :key="card.title" class="card" :class="cardClass(card)">
+            <h3>{{ card.title }}</h3>
+            <p>{{ card.description }}</p>
+            <NuxtLink :to="card.to" class="card-cta">{{ card.cta }}</NuxtLink>
           </article>
         </div>
       </div>
@@ -92,50 +85,26 @@
 </template>
 
 <script setup lang="ts">
+import { useServiceContent } from '~/composables/useServicesContent'
+
+const service = useServiceContent('web-development')
+
 useSeoMeta({
-  title: 'Custom Web Development | Aesir Tecnologia',
-  description: 'Full-stack web applications built with Laravel, React, Vue.js, Node.js, and Python. Scalable architecture, comprehensive testing, and production-ready delivery.'
+  title: service.seo.title,
+  description: service.seo.description
 })
 
-const whatWeBuild = [
-  'E-commerce platforms and online stores',
-  'Business management systems',
-  'Customer portals and dashboards',
-  'Content management systems',
-  'API-driven applications',
-  'Progressive web apps (PWAs)'
-]
+const hero = service.hero
+const overview = service.overview
+const approach = service.approach
+const technology = service.technology
+const messaging = service.messaging
+const ctas = service.ctas
 
-const values = [
-  'When AI tools are not enough, we build from scratch',
-  'Modern technologies with proven architectures',
-  'Built for growth from day one',
-  'Partnership approach to development'
-]
+const ctaSectionId = 'contact'
 
-const approach = [
-  { title: 'Discovery & Planning', description: 'Understand business requirements, constraints, and goals to scope the right solution.' },
-  { title: 'Architecture Design', description: 'Create scalable, secure system designs aligned with your growth plans.' },
-  { title: 'Agile Development', description: 'Iterative delivery with frequent check-ins and release milestones.' },
-  { title: 'Comprehensive Testing', description: 'Reliability through automated and manual QA before every release.' },
-  { title: 'Zero-Downtime Deployment', description: 'Deployment strategies that keep your business running during launches.' },
-  { title: 'Ongoing Support', description: 'Maintenance, feature updates, and performance monitoring on demand.' }
-]
-
-const technologies = [
-  'Laravel',
-  'Vue.js',
-  'React',
-  'JavaScript & TypeScript',
-  'Node.js',
-  'MySQL & PostgreSQL'
-]
-
-const targetMessaging = [
-  'Some ideas are too unique for AI tools. We build the impossible.',
-  'Skip the prototype phase. Go straight to production-ready.',
-  'Your vision deserves custom solutions, not AI templates.'
-]
+const cardClass = (card: (typeof ctas.cards)[number]) =>
+  card.title === 'Start Your Project' ? 'card--bright' : 'card--muted'
 </script>
 
 <style scoped>
@@ -156,5 +125,4 @@ h1 {
   padding-left: 1.25rem;
   color: rgba(226, 232, 240, 0.85);
 }
-
 </style>

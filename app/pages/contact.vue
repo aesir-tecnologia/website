@@ -5,19 +5,19 @@
         <BackgroundVariant variant="hero" tone="indigo" align="top" intensity="strong" />
       </template>
       <SectionHeader
-        eyebrow="Contact"
-        title="Let's build something great together"
-        description="Ready to turn your idea into reality? Tell us about your project and we'll share how the Aesir team can help."
+        :eyebrow="hero.eyebrow"
+        :title="hero.headline"
+        :description="hero.description"
         align="center"
       >
         <template #actions>
           <AppLinkButton
-            href="mailto:hello@aesir.dev"
+            :href="emailHref"
             trailing-icon="i-lucide-mail"
             variant="ghost"
             size="sm"
           >
-            hello@aesir.dev
+            {{ hero.email }}
           </AppLinkButton>
         </template>
       </SectionHeader>
@@ -27,10 +27,10 @@
       <ContentGrid :columns="2" gap="loose">
         <UCard :ui="cardUi">
           <div class="space-y-4">
-            <Tag tone="primary">Project inquiry</Tag>
-            <h2 class="text-xl font-semibold text-slate-900 dark:text-slate-50">What to share</h2>
+            <Tag tone="primary">{{ projectInquiry.tag }}</Tag>
+            <h2 class="text-xl font-semibold text-slate-900 dark:text-slate-50">{{ projectInquiry.title }}</h2>
             <p class="text-sm text-slate-600 dark:text-slate-300">
-              Share the essentials so we can prepare a tailored proposal.
+              {{ projectInquiry.introduction }}
             </p>
             <BulletList :items="projectInquiryItems" icon="i-lucide-check-circle-2" />
           </div>
@@ -38,10 +38,10 @@
 
         <UCard :ui="cardUi">
           <div class="space-y-4">
-            <Tag tone="accent">Engagement models</Tag>
-            <h2 class="text-xl font-semibold text-slate-900 dark:text-slate-50">How we collaborate</h2>
+            <Tag tone="accent">{{ engagementModels.tag }}</Tag>
+            <h2 class="text-xl font-semibold text-slate-900 dark:text-slate-50">{{ engagementModels.title }}</h2>
             <ul class="space-y-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-              <li v-for="model in engagementModels" :key="model.title" class="space-y-1">
+              <li v-for="model in engagementModels.items" :key="model.title" class="space-y-1">
                 <p class="font-semibold text-slate-900 dark:text-slate-50">{{ model.title }}</p>
                 <p>{{ model.description }}</p>
               </li>
@@ -60,20 +60,20 @@
 
         <UCard :ui="ctaCardUi">
           <div class="space-y-4">
-            <Tag tone="neutral">Prefer to talk directly?</Tag>
-            <h3 class="text-2xl font-semibold text-slate-900 dark:text-slate-50">Schedule a consultation</h3>
+            <Tag tone="neutral">{{ consultation.tag }}</Tag>
+            <h3 class="text-2xl font-semibold text-slate-900 dark:text-slate-50">{{ consultation.title }}</h3>
             <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-              We can walk through your product goals, current stack, and success criteria in a 30-minute session.
+              {{ consultation.description }}
             </p>
             <AppButton :to="ctaLink" size="lg">
-              Schedule a call
+              {{ ctaLabel }}
             </AppButton>
             <p class="text-xs text-slate-500 dark:text-slate-400">
-              You can also email
-              <AppLinkButton href="mailto:hello@aesir.dev" variant="link" size="sm">
-                hello@aesir.dev
+              {{ consultation.emailReminderPrefix }}
+              <AppLinkButton :href="emailHref" variant="link" size="sm">
+                {{ hero.email }}
               </AppLinkButton>
-              with availability.
+              {{ consultation.emailReminderSuffix }}
             </p>
           </div>
         </UCard>
@@ -83,14 +83,14 @@
     <BaseSection id="schedule" variant="default" width="narrow">
       <UCard :ui="cardUi">
         <div class="space-y-4">
-          <Tag tone="primary">Need a calendar hold?</Tag>
-          <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-50">Share times that work for you</h3>
+          <Tag tone="primary">{{ schedule.tag }}</Tag>
+          <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-50">{{ schedule.title }}</h3>
           <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-            Send a calendar invite to
-            <AppLinkButton href="mailto:hello@aesir.dev" variant="link" size="sm">
-              hello@aesir.dev
+            {{ schedule.descriptionPrefix }}
+            <AppLinkButton :href="emailHref" variant="link" size="sm">
+              {{ hero.email }}
             </AppLinkButton>
-            or drop us a note with your availability. We'll confirm within one business day.
+            {{ schedule.descriptionSuffix }}
           </p>
         </div>
       </UCard>
@@ -109,39 +109,30 @@ import BaseSection from '~/components/shared/BaseSection.vue'
 import SectionHeader from '~/components/shared/SectionHeader.vue'
 import ContentGrid from '~/components/shared/ContentGrid.vue'
 import BulletList from '~/components/shared/BulletList.vue'
+import { useContactContent } from '~/composables/useContactContent'
+
+const content = useContactContent()
 
 useSeoMeta({
-  title: 'Contact | Aesir Tecnologia',
-  description: 'Reach out to Aesir Tecnologia to discuss vibe coding cleanup, custom web and mobile development, and staff augmentation projects.'
+  title: content.seo.title,
+  description: content.seo.description
 })
 
-const projectInquiry = [
-  'Project type and scope',
-  'Timeline and budget targets',
-  'Technical requirements or constraints',
-  'Primary business goals for the work'
-]
+const hero = content.hero
+const projectInquiry = content.projectInquiry
+const engagementModels = content.engagementModels
+const form = content.form
+const consultation = content.consultation
+const schedule = content.schedule
 
-const engagementModels = [
-  { title: 'Project-based', description: 'Fixed scope with defined deliverables when you need predictable outcomes.' },
-  { title: 'Retainer', description: 'Ongoing development and support to iteratively grow your product.' },
-  { title: 'Consultation', description: 'Architecture reviews, roadmap planning, and guidance for internal teams.' }
-]
+const projectInquiryItems = computed(() => projectInquiry.items.map((item) => ({ label: item })))
 
-const projectTypes = [
-  'Vibe Coding Cleanup',
-  'Custom Web Development',
-  'Mobile Development',
-  'Game Development',
-  'Staff Augmentation',
-  'Consultation'
-]
-
-const projectInquiryItems = computed(() => projectInquiry.map((item) => ({ label: item })))
-
-const formTitle = 'Send project details'
-const formDescription = 'Share context about your product so we can align on outcomes, scope, and the team you need.'
-const ctaLink = '#schedule'
+const projectTypes = form.projectTypes
+const formTitle = form.title
+const formDescription = form.description
+const ctaLink = consultation.cta.to
+const ctaLabel = consultation.cta.label
+const emailHref = `mailto:${hero.email}`
 
 const cardUi = {
   base: 'relative overflow-hidden rounded-3xl border border-slate-200/70 bg-white/90 p-8 shadow-lg shadow-slate-200/60 dark:border-slate-900/70 dark:bg-slate-950/50 dark:shadow-slate-950/60',

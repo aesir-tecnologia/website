@@ -3,10 +3,10 @@
     <UContainer class="flex flex-col gap-4 py-8 sm:flex-row sm:items-center sm:justify-between">
       <div>
         <p class="text-sm font-semibold uppercase tracking-[0.08em]">
-          {{ brand.name }}
+          {{ siteBrand.name }}
         </p>
         <p class="mt-2 max-w-md text-sm text-slate-500 dark:text-[color:var(--aesir-text-soft)]">
-          {{ brand.tagline }}
+          {{ siteBrand.tagline }}
         </p>
       </div>
 
@@ -28,24 +28,14 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useSiteNavigation } from '~/composables/useSiteNavigation'
+import { useSiteFooterLinks } from '~/composables/useSiteFooterLinks'
 
-interface ConfigFooterLink {
-  label: string
-  to: string
-}
+const { brand } = useSiteNavigation()
+const footerLinks = useSiteFooterLinks()
 
-const appConfig = useAppConfig()
-const localePath = useLocalePath()
-
-const brand = computed(() => ({
-  name: appConfig.site?.brand?.name ?? 'Aesir Tecnologia',
-  tagline: appConfig.site?.brand?.tagline ?? 'Transforming vibe-coded prototypes into production-ready products.',
+const siteBrand = computed(() => ({
+  name: brand.value.name,
+  tagline: brand.value.tagline ?? 'Transforming vibe-coded prototypes into production-ready products.'
 }))
-
-const footerLinks = computed<ConfigFooterLink[]>(() =>
-  (appConfig.site?.footer?.links ?? []).map((link) => ({
-    label: link.label,
-    to: String(localePath(link.to)),
-  }))
-)
 </script>

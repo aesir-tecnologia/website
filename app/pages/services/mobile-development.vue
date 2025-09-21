@@ -3,13 +3,11 @@
     <section class="section hero">
       <div class="container section-inner">
         <div class="section-header">
-          <h1>Native and Cross-Platform Mobile Solutions</h1>
-          <p class="section-subhead">
-            Mobile applications that deliver exceptional user experiences across iOS and Android, from concept to launch and growth.
-          </p>
+          <h1>{{ hero.title }}</h1>
+          <p class="section-subhead">{{ hero.subheading }}</p>
           <div class="hero-actions">
-            <NuxtLink to="#contact" class="btn btn--primary">Build Your Mobile App</NuxtLink>
-            <NuxtLink to="/services" class="btn btn--ghost">View All Services</NuxtLink>
+            <NuxtLink :to="hero.primaryCta.to" class="btn btn--primary">{{ hero.primaryCta.label }}</NuxtLink>
+            <NuxtLink :to="hero.secondaryCta.to" class="btn btn--ghost">{{ hero.secondaryCta.label }}</NuxtLink>
           </div>
         </div>
       </div>
@@ -19,16 +17,16 @@
       <div class="container section-inner">
         <div class="grid grid--two">
           <article class="card card--muted">
-            <h2>Overview</h2>
-            <p>Whether you need a native app or cross-platform experience, we build mobile products users love with reliable performance and maintainability.</p>
+            <h2>{{ overview.title }}</h2>
+            <p>{{ overview.description }}</p>
             <ul>
-              <li v-for="item in offerings" :key="item">{{ item }}</li>
+              <li v-for="item in overview.offerings" :key="item">{{ item }}</li>
             </ul>
           </article>
           <article class="card card--muted">
             <h2>Our Process</h2>
             <ul>
-              <li v-for="step in process" :key="step.title">
+              <li v-for="step in overview.process" :key="step.title">
                 <strong>{{ step.title }}:</strong> {{ step.description }}
               </li>
             </ul>
@@ -41,37 +39,32 @@
       <div class="container section-inner">
         <div class="grid grid--two">
           <article class="card card--bright">
-            <h3>Technologies Used</h3>
+            <h3>{{ technology.title }}</h3>
             <ul>
-              <li v-for="tech in technologies" :key="tech">{{ tech }}</li>
+              <li v-for="tech in technology.items" :key="tech">{{ tech }}</li>
             </ul>
           </article>
           <article class="card card--muted">
-            <h3>Target Messaging</h3>
+            <h3>{{ messaging.title }}</h3>
             <ul>
-              <li v-for="message in messages" :key="message">{{ message }}</li>
+              <li v-for="message in messaging.items" :key="message">{{ message }}</li>
             </ul>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="contact" class="section">
+    <section :id="ctaSectionId" class="section">
       <div class="container section-inner">
         <div class="section-header section-header--center">
-          <h2>Launch Your Next Mobile Experience</h2>
-          <p class="section-subhead">Share your platform goals, priority features, and schedule so we can assemble the right mobile team.</p>
+          <h2>{{ ctas.headline }}</h2>
+          <p class="section-subhead">{{ ctas.description }}</p>
         </div>
         <div class="grid grid--two">
-          <article class="card card--bright">
-            <h3>Project Kickoff</h3>
-            <p>We help refine scope, choose the right technology stack, and plan for launch.</p>
-            <NuxtLink to="/contact" class="card-cta">Build Your Mobile App</NuxtLink>
-          </article>
-          <article class="card card--muted">
-            <h3>Need Web Support Too?</h3>
-            <p>Extend your mobile experience with backend and web app development.</p>
-            <NuxtLink to="/services/web-development" class="card-cta">Explore Web Development</NuxtLink>
+          <article v-for="card in ctas.cards" :key="card.title" class="card" :class="cardClass(card)">
+            <h3>{{ card.title }}</h3>
+            <p>{{ card.description }}</p>
+            <NuxtLink :to="card.to" class="card-cta">{{ card.cta }}</NuxtLink>
           </article>
         </div>
       </div>
@@ -80,42 +73,25 @@
 </template>
 
 <script setup lang="ts">
+import { useServiceContent } from '~/composables/useServicesContent'
+
+const service = useServiceContent('mobile-development')
+
 useSeoMeta({
-  title: 'Mobile Development | Aesir Tecnologia',
-  description: 'Native iOS, Android, and cross-platform mobile applications built with React Native, Flutter, and modern APIs.'
+  title: service.seo.title,
+  description: service.seo.description
 })
 
-const offerings = [
-  'iOS and Android native apps',
-  'Cross-platform applications (React Native, Flutter)',
-  'Progressive web apps (PWAs)',
-  'API integrations and real-time features',
-  'Mobile-first web experiences'
-]
+const hero = service.hero
+const overview = service.overview
+const technology = service.technology
+const messaging = service.messaging
+const ctas = service.ctas
 
-const process = [
-  { title: 'Strategy', description: 'Evaluate platform fit, feature set, and success metrics.' },
-  { title: 'Design', description: 'User-centered design and rapid prototyping.' },
-  { title: 'Development', description: 'Native or cross-platform development with continuous communication.' },
-  { title: 'Testing', description: 'Device testing and performance optimization for stability.' },
-  { title: 'Launch', description: 'App store submission, deployment, and release coordination.' },
-  { title: 'Growth', description: 'Analytics integration, A/B testing, and feature updates.' }
-]
+const ctaSectionId = 'contact'
 
-const technologies = [
-  'React Native',
-  'Flutter',
-  'Swift',
-  'Kotlin',
-  'JavaScript & TypeScript',
-  'API integration'
-]
-
-const messages = [
-  'Deliver native-quality experiences across platforms.',
-  'Balance speed and performance with cross-platform tooling.',
-  'Launch with confidence backed by rigorous testing and analytics.'
-]
+const cardClass = (card: (typeof ctas.cards)[number]) =>
+  card.title === 'Project Kickoff' ? 'card--bright' : 'card--muted'
 </script>
 
 <style scoped>
@@ -136,5 +112,4 @@ h1 {
   padding-left: 1.25rem;
   color: rgba(226, 232, 240, 0.85);
 }
-
 </style>

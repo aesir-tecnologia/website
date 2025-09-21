@@ -101,6 +101,7 @@ Sequential to-do list for a single developer delivering the Nuxt UI adoption pla
 - **Required Checks:** `npx eslint .`; `npm run generate`; Visual QA includes form submission path (success + failure).
 
 ## Task 8 – Content Composables & Data Access
+- **Status:** Completed — marketing pages now pull from typed composables (`useHomepageContent`, `useServiceContent`, `useAboutContent`, `useProcessContent`, `useContactContent`, `useSiteNavigation`, `useSiteFooterLinks`), copy is centralised under `app/data/content/`, and documentation added in `docs/components/CONTENT.md`.
 - **Goal:** Centralize site data retrieval via composables (`useSiteNavigation`, `useSiteLinks`, `useSocialLinks`, `useHomepageContent`, etc.).
 - **Prerequisites:** Modules needing data identified; copy keys agreed with localization owners.
 - **Key Activities:**
