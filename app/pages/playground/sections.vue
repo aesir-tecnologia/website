@@ -2,7 +2,7 @@
   <div class="space-y-16 pb-16">
     <BaseSection id="structural-overview" padding="tight" variant="gradient">
       <template #background>
-        <BackgroundVariant variant="hero" tone="sky" align="top" intensity="strong" />
+        <BackgroundVariant variant="hero" tone="primary" align="top" intensity="strong" />
       </template>
       <SectionHeader
         eyebrow="Playground"
@@ -15,7 +15,7 @@
 
     <BaseSection id="feature-grid" variant="gradient">
       <template #background>
-        <BackgroundVariant tone="violet" />
+        <BackgroundVariant tone="accent" />
       </template>
       <SectionHeader
         eyebrow="Feature grid"
@@ -28,7 +28,7 @@
 
     <BaseSection id="metrics" variant="muted">
       <template #background>
-        <BackgroundVariant variant="process" tone="teal" />
+        <BackgroundVariant variant="process" tone="accent" />
       </template>
       <SectionHeader
         eyebrow="Metric list"
@@ -41,7 +41,7 @@
 
     <BaseSection id="bullet-list">
       <template #background>
-        <BackgroundVariant tone="sky" align="bottom" />
+        <BackgroundVariant tone="neutral" align="bottom" />
       </template>
       <SectionHeader
         eyebrow="Bullet list"
@@ -54,7 +54,7 @@
 
     <BaseSection id="content-grid" variant="accent" padding="tight">
       <template #background>
-        <BackgroundVariant tone="indigo" align="top" intensity="soft" />
+        <BackgroundVariant tone="primary" align="top" intensity="soft" />
       </template>
       <SectionHeader
         eyebrow="Content grid"
@@ -67,15 +67,19 @@
           v-for="card in sampleCards"
           :key="card.title"
           :ui="cardUi"
+          :style="cardStyle"
         >
           <div class="flex h-full flex-col gap-4">
-            <div class="flex items-center gap-3 text-slate-300">
-              <span class="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary-500/15 text-primary-200">
+            <div class="flex items-center gap-3" :style="headerStyle">
+              <span
+                class="flex h-10 w-10 items-center justify-center rounded-2xl border"
+                :style="iconStyle"
+              >
                 <UIcon :name="card.icon" class="h-5 w-5" aria-hidden="true" />
               </span>
-              <h3 class="text-xl font-semibold text-slate-50">{{ card.title }}</h3>
+              <h3 class="text-xl font-semibold" :style="titleStyle">{{ card.title }}</h3>
             </div>
-            <p class="text-base text-slate-300">{{ card.description }}</p>
+            <p class="text-base" :style="descriptionStyle">{{ card.description }}</p>
             <BulletList :items="card.points" class="mt-auto" />
           </div>
         </UCard>
@@ -85,6 +89,7 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import BackgroundVariant from '~/components/ui/BackgroundVariant.vue'
 import BaseSection from '~/components/shared/BaseSection.vue'
 import SectionHeader from '~/components/shared/SectionHeader.vue'
@@ -97,6 +102,8 @@ useSeoMeta({
   title: 'Structural Components Playground',
   description: 'Demos for BaseSection, SectionHeader, ContentGrid, FeatureGrid, MetricList, and BulletList components.'
 })
+
+const { surfaceColor, borderColor, shadow, gradient, tone, textColor, tokens, mode } = useUiTokens()
 
 const features = [
   {
@@ -196,8 +203,41 @@ const sampleCards = [
   }
 ]
 
+const cardStyle = computed(() => ({
+  backgroundImage: gradient('accent'),
+  backgroundColor: surfaceColor('overlay'),
+  borderColor: borderColor('strong'),
+  boxShadow: shadow('strong'),
+  color: textColor('inverse'),
+  '--playground-hover-border': borderColor('accent'),
+  '--playground-hover-shadow': shadow('strong'),
+}))
+
+const headerStyle = computed(() => ({
+  color: textColor('inverse'),
+}))
+
+const iconStyle = computed(() => {
+  const accentTone = tone('accent')
+
+  return {
+    backgroundColor: accentTone.background,
+    borderColor: accentTone.border,
+    color: mode.value === 'dark' ? textColor('inverse') : tokens.value.text.onAccent,
+    boxShadow: shadow('glow'),
+  }
+})
+
+const titleStyle = computed(() => ({
+  color: textColor('inverse'),
+}))
+
+const descriptionStyle = computed(() => ({
+  color: textColor('muted'),
+}))
+
 const cardUi = {
-  base: 'group relative overflow-hidden rounded-3xl border border-slate-900/60 bg-gradient-to-b from-slate-950/90 via-slate-950/40 to-slate-900/40 p-8 shadow-xl shadow-slate-950/50 transition duration-300 hover:border-primary-500/40 hover:shadow-primary-900/30',
+  base: 'group relative overflow-hidden rounded-3xl border p-8 transition duration-300 hover:[border-color:var(--playground-hover-border)] hover:[box-shadow:var(--playground-hover-shadow)]',
   body: 'flex h-full flex-col gap-4 p-0',
   header: 'p-0',
   footer: 'p-0'

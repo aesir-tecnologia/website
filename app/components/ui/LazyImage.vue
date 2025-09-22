@@ -6,7 +6,11 @@
     :style="wrapperStyle"
   >
     <NuxtImg v-bind="imageAttrs" />
-    <figcaption v-if="$slots.caption" class="lazy-image__caption mt-3 text-sm text-slate-500 dark:text-slate-400">
+    <figcaption
+      v-if="$slots.caption"
+      class="lazy-image__caption mt-3 text-sm"
+      :style="captionStyle"
+    >
       <slot name="caption" />
     </figcaption>
   </component>
@@ -62,7 +66,26 @@ const imageConfig = useAppImage(() => props.preset, () => props.overrides ?? {})
 
 const wrapperTag = computed(() => props.wrapperTag)
 
-const wrapperStyle = computed(() => (props.ratio ? { aspectRatio: String(props.ratio) } : undefined))
+const wrapperStyle = computed(() => {
+  const style: Record<string, string> = {}
+
+  if (props.ratio) {
+    style.aspectRatio = String(props.ratio)
+  }
+
+  const configStyle = imageConfig.value.wrapperStyle
+  if (configStyle) {
+    Object.assign(style, configStyle)
+  }
+
+  return Object.keys(style).length ? style : undefined
+})
+
+const { textColor } = useUiTokens()
+
+const captionStyle = computed(() => ({
+  color: textColor('subtle'),
+}))
 
 const normalizeClass = (input: unknown): string[] => {
   if (!input) {

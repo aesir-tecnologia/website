@@ -39,23 +39,24 @@
           </template>
         </SectionHeader>
 
-        <BulletList v-if="hasPoints" :items="points" class="text-base text-slate-200" />
+        <BulletList v-if="hasPoints" :items="points" />
       </div>
 
-      <UCard :ui="cardUi">
+      <UCard :ui="cardUi" :style="cardStyle">
         <div class="space-y-6">
           <header class="space-y-3">
             <Tag v-if="highlightEyebrow" tone="accent" size="md">{{ highlightEyebrow }}</Tag>
-            <h2 class="text-2xl font-semibold text-slate-900 dark:text-slate-50">{{ highlightTitle }}</h2>
+            <h2 class="text-2xl font-semibold" :style="highlightTitleStyle">{{ highlightTitle }}</h2>
           </header>
           <ul class="space-y-5">
             <li
               v-for="item in highlights"
               :key="item.id ?? item.title"
-              class="flex flex-col gap-2 rounded-2xl border border-slate-200/70 bg-white/90 p-4 dark:border-slate-900/60 dark:bg-slate-950/40"
+              class="flex flex-col gap-2 rounded-2xl border p-4 transition-colors"
+              :style="highlightItemStyle"
             >
-              <h3 class="text-lg font-semibold text-slate-900 dark:text-slate-50">{{ item.title }}</h3>
-              <p class="text-base leading-relaxed text-slate-600 dark:text-slate-300">{{ item.description }}</p>
+              <h3 class="text-lg font-semibold" :style="highlightItemTitleStyle">{{ item.title }}</h3>
+              <p class="text-base leading-relaxed" :style="highlightItemDescriptionStyle">{{ item.description }}</p>
             </li>
           </ul>
         </div>
@@ -121,14 +122,44 @@ const props = withDefaults(defineProps<{
   variant: 'gradient',
   background: true,
   backgroundVariant: 'hero',
-  backgroundTone: 'sky',
+  backgroundTone: 'primary',
   backgroundAlign: 'top',
 })
 
 const hasPoints = computed(() => (props.points?.length ?? 0) > 0)
 
+const { surfaceColor, borderColor, shadow, textColor } = useUiTokens()
+
+const cardStyle = computed(() => ({
+  backgroundColor: surfaceColor('elevated'),
+  borderColor: borderColor('soft'),
+  boxShadow: shadow('soft'),
+  color: textColor('primary'),
+  '--hero-card-hover-border': borderColor('strong'),
+  '--hero-card-hover-shadow': shadow('strong'),
+}))
+
+const highlightTitleStyle = computed(() => ({
+  color: textColor('primary'),
+}))
+
+const highlightItemStyle = computed(() => ({
+  backgroundColor: surfaceColor('muted'),
+  borderColor: borderColor('soft'),
+  color: textColor('primary'),
+  boxShadow: shadow('soft'),
+}))
+
+const highlightItemTitleStyle = computed(() => ({
+  color: textColor('primary'),
+}))
+
+const highlightItemDescriptionStyle = computed(() => ({
+  color: textColor('muted'),
+}))
+
 const cardUi = {
-  base: 'relative overflow-hidden rounded-3xl border border-slate-200/70 bg-white/90 p-8 shadow-xl shadow-slate-200/60 dark:border-slate-900/70 dark:bg-slate-950/50 dark:shadow-slate-950/60',
+  base: 'relative overflow-hidden rounded-3xl border p-8 transition duration-300 hover:[border-color:var(--hero-card-hover-border)] hover:[box-shadow:var(--hero-card-hover-shadow)]',
   body: 'space-y-6 p-0'
 } as const
 

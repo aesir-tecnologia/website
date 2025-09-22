@@ -4,19 +4,24 @@
       v-for="feature in features"
       :key="feature.id ?? feature.title"
       :ui="cardUi"
+      :style="cardStyle"
     >
-      <div class="pointer-events-none absolute inset-px rounded-[1.4rem] bg-gradient-to-br from-primary-200/40 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:from-primary-500/10" />
+      <div
+        class="pointer-events-none absolute inset-px rounded-[1.4rem] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        :style="cardHighlightStyle"
+      />
       <div class="relative flex h-full flex-col gap-5">
         <div
           v-if="feature.icon"
-          class="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-200/40 via-primary-400/20 to-transparent text-primary-600 shadow-lg shadow-primary-200/50 dark:from-primary-500/20 dark:via-primary-500/10 dark:text-primary-300 dark:shadow-primary-900/40"
+          class="flex h-12 w-12 items-center justify-center rounded-2xl border"
+          :style="iconStyle"
         >
           <UIcon :name="feature.icon" class="h-6 w-6" aria-hidden="true" />
         </div>
         <div class="space-y-3">
           <Tag v-if="feature.meta" tone="primary">{{ feature.meta }}</Tag>
-          <h3 class="text-2xl font-semibold text-slate-900 dark:text-slate-50">{{ feature.title }}</h3>
-          <p v-if="feature.description" class="text-base leading-relaxed text-slate-600 dark:text-slate-300">{{ feature.description }}</p>
+          <h3 class="text-2xl font-semibold" :style="titleStyle">{{ feature.title }}</h3>
+          <p v-if="feature.description" class="text-base leading-relaxed" :style="descriptionStyle">{{ feature.description }}</p>
         </div>
         <slot name="footer" :feature="feature">
           <AppLinkButton
@@ -67,8 +72,45 @@ const features = computed(() => props.features)
 const gap = computed(() => props.gap)
 const columns = computed(() => props.columns)
 
+const { surfaceColor, borderColor, shadow, gradient, tone, textColor, tokens } = useUiTokens()
+
+const cardStyle = computed(() => ({
+  backgroundColor: surfaceColor('elevated'),
+  color: textColor('primary'),
+  borderColor: borderColor('soft'),
+  boxShadow: shadow('soft'),
+  backdropFilter: 'blur(12px)',
+  '--card-hover-border': borderColor('strong'),
+  '--card-hover-shadow': shadow('strong'),
+}))
+
+const cardHighlightStyle = computed(() => ({
+  backgroundImage: gradient('spotlight'),
+  backgroundColor: tokens.value.accents.highlight,
+}))
+
+const iconStyle = computed(() => {
+  const accentTone = tone('accent')
+
+  return {
+    backgroundImage: gradient('accent'),
+    backgroundColor: accentTone.background,
+    color: tokens.value.text.onAccent,
+    borderColor: accentTone.border,
+    boxShadow: shadow('glow'),
+  }
+})
+
+const titleStyle = computed(() => ({
+  color: textColor('primary'),
+}))
+
+const descriptionStyle = computed(() => ({
+  color: textColor('muted'),
+}))
+
 const cardUi = {
-  base: 'group relative overflow-hidden rounded-3xl border border-slate-200/70 bg-white/90 p-8 shadow-xl shadow-slate-200/60 transition duration-300 hover:border-primary-400/50 hover:shadow-primary-200/50 dark:border-slate-900/70 dark:bg-slate-950/50 dark:shadow-slate-950/60 dark:hover:border-primary-500/50 dark:hover:shadow-primary-900/40',
+  base: 'group relative overflow-hidden rounded-3xl border p-8 transition duration-300 hover:[border-color:var(--card-hover-border)] hover:[box-shadow:var(--card-hover-shadow)]',
   body: 'flex h-full flex-col gap-5 p-0',
   footer: 'p-0',
   header: 'p-0'

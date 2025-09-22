@@ -3,10 +3,14 @@
     <div
       v-for="metric in metrics"
       :key="metric.id ?? metric.label"
-      class="group relative overflow-hidden rounded-3xl border border-slate-200/70 bg-white/90 p-6 shadow-lg shadow-slate-200/50 transition duration-300 hover:border-primary-400/40 hover:shadow-primary-200/50 dark:border-slate-900/70 dark:bg-slate-950/40 dark:shadow-slate-950/50 dark:hover:border-primary-500/40 dark:hover:shadow-primary-900/40"
+      class="group relative overflow-hidden rounded-3xl border p-6 transition duration-300 hover:[border-color:var(--metric-hover-border)] hover:[box-shadow:var(--metric-hover-shadow)]"
+      :style="metricStyle"
       role="listitem"
     >
-      <div class="pointer-events-none absolute inset-px rounded-[1.4rem] bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.18),_transparent_60%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+      <div
+        class="pointer-events-none absolute inset-px rounded-[1.4rem] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        :style="metricHighlightStyle"
+      />
       <div class="relative space-y-4">
         <slot name="metric" :metric="metric">
           <StatPill
@@ -16,7 +20,7 @@
             :tone="metric.tone ?? 'primary'"
           />
         </slot>
-        <p v-if="metric.description" class="relative text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+        <p v-if="metric.description" class="relative text-sm leading-relaxed" :style="descriptionStyle">
           <slot name="description" :metric="metric">{{ metric.description }}</slot>
         </p>
       </div>
@@ -68,4 +72,25 @@ const listClasses = computed(() => [
   gapMap[props.gap],
   columnMap[props.columns],
 ])
+
+const { surfaceColor, borderColor, shadow, gradient, textColor, tokens } = useUiTokens()
+
+const metricStyle = computed(() => ({
+  backgroundColor: surfaceColor('elevated'),
+  color: textColor('primary'),
+  borderColor: borderColor('soft'),
+  boxShadow: shadow('soft'),
+  '--metric-hover-border': borderColor('strong'),
+  '--metric-hover-shadow': shadow('strong'),
+  backdropFilter: 'blur(8px)',
+}))
+
+const metricHighlightStyle = computed(() => ({
+  backgroundImage: gradient('spotlight'),
+  backgroundColor: tokens.value.accents.highlight,
+}))
+
+const descriptionStyle = computed(() => ({
+  color: textColor('muted'),
+}))
 </script>

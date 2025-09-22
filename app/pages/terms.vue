@@ -16,22 +16,24 @@
           v-for="section in sections"
           :key="section.title"
           :ui="cardUi"
+          :style="cardStyle"
         >
           <div class="space-y-4">
-            <h2 class="text-2xl font-semibold text-slate-900 dark:text-slate-50">{{ section.title }}</h2>
+            <h2 class="text-2xl font-semibold" :style="headingStyle">{{ section.title }}</h2>
             <p
               v-for="paragraph in section.paragraphs"
               :key="paragraph"
-              class="text-base leading-relaxed text-slate-600 dark:text-slate-300"
+              class="text-base leading-relaxed"
+              :style="paragraphStyle"
             >
               {{ paragraph }}
             </p>
           </div>
         </UCard>
 
-        <UCard :ui="cardUi">
+        <UCard :ui="cardUi" :style="cardStyle">
           <div class="space-y-4">
-            <p class="text-base leading-relaxed text-slate-600 dark:text-slate-300">
+            <p class="text-base leading-relaxed" :style="paragraphStyle">
               {{ contact.prompt }}
               <AppLinkButton :href="contactHref" variant="link" size="sm">
                 {{ contact.email }}
@@ -69,8 +71,25 @@ const contact = content.contact
 
 const contactHref = computed(() => `mailto:${contact.email}`)
 
+const { surfaceColor, borderColor, shadow, textColor } = useUiTokens()
+
+const cardStyle = computed(() => ({
+  backgroundColor: surfaceColor('elevated'),
+  borderColor: borderColor('soft'),
+  boxShadow: shadow('soft'),
+  color: textColor('primary'),
+}))
+
+const headingStyle = computed(() => ({
+  color: textColor('primary'),
+}))
+
+const paragraphStyle = computed(() => ({
+  color: textColor('muted'),
+}))
+
 const cardUi = {
-  base: 'relative overflow-hidden rounded-3xl border border-slate-200/70 bg-white/95 p-8 shadow-lg shadow-slate-200/60 dark:border-slate-900/70 dark:bg-slate-950/60 dark:shadow-slate-950/60',
+  base: 'relative overflow-hidden rounded-3xl border p-8 transition-colors duration-300',
   body: 'space-y-4 p-0'
 } as const
 </script>

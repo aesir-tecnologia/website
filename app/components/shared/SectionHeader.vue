@@ -3,15 +3,16 @@
     <div :class="contentClasses">
       <div
         v-if="icon"
-        class="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-300/20 via-primary-400/15 to-transparent text-primary-500 shadow-lg shadow-primary-200/40 dark:from-primary-500/20 dark:via-primary-400/10 dark:text-primary-300 dark:shadow-primary-950/30"
+        class="flex h-12 w-12 items-center justify-center rounded-2xl border transition-colors"
+        :style="iconStyle"
       >
         <UIcon :name="icon" class="h-6 w-6" aria-hidden="true" />
       </div>
-      <p v-if="eyebrow" class="text-sm font-semibold uppercase tracking-wide text-primary-500 dark:text-primary-400">{{ eyebrow }}</p>
-      <component :is="headingTag" class="text-balance font-semibold tracking-tight text-3xl sm:text-4xl text-slate-900 dark:text-slate-50">
+      <p v-if="eyebrow" class="text-sm font-semibold uppercase tracking-wide" :style="eyebrowStyle">{{ eyebrow }}</p>
+      <component :is="headingTag" class="text-balance font-semibold tracking-tight text-3xl sm:text-4xl" :style="titleStyle">
         <slot name="title">{{ title }}</slot>
       </component>
-      <p v-if="description" class="text-base leading-relaxed text-slate-600 dark:text-slate-300">
+      <p v-if="description" class="text-base leading-relaxed" :style="descriptionStyle">
         <slot name="description">{{ description }}</slot>
       </p>
     </div>
@@ -44,6 +45,32 @@ const props = withDefaults(defineProps<{
 })
 
 const headingTag = computed(() => props.level)
+
+const { textColor, gradient, tone, tokens } = useUiTokens()
+
+const iconStyle = computed(() => {
+  const accentTone = tone('accent')
+
+  return {
+    backgroundImage: gradient('accent'),
+    backgroundColor: accentTone.background,
+    color: tokens.value.text.onAccent,
+    borderColor: accentTone.border,
+    boxShadow: tokens.value.accents.glowShadow,
+  }
+})
+
+const eyebrowStyle = computed(() => ({
+  color: textColor('accent'),
+}))
+
+const titleStyle = computed(() => ({
+  color: textColor('primary'),
+}))
+
+const descriptionStyle = computed(() => ({
+  color: textColor('muted'),
+}))
 
 const wrapperClasses = computed(() => [
   'flex flex-col gap-6 sm:gap-8',

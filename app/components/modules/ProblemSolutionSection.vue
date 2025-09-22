@@ -11,15 +11,15 @@
         :icon="icon"
       />
       <ContentGrid :columns="2">
-        <UCard :ui="cardUi">
+        <UCard :ui="cardUi" :style="cardStyle">
           <div class="space-y-4">
-            <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-50">{{ challengeTitle }}</h3>
+            <h3 class="text-xl font-semibold" :style="titleStyle">{{ challengeTitle }}</h3>
             <BulletList :items="challenges" />
           </div>
         </UCard>
-        <UCard :ui="cardUi">
+        <UCard :ui="cardUi" :style="cardStyle">
           <div class="space-y-4">
-            <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-50">{{ impactTitle }}</h3>
+            <h3 class="text-xl font-semibold" :style="titleStyle">{{ impactTitle }}</h3>
             <BulletList :items="impacts" />
           </div>
         </UCard>
@@ -29,6 +29,7 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import BackgroundVariant from '~/components/ui/BackgroundVariant.vue'
 import BaseSection from '~/components/shared/BaseSection.vue'
 import SectionHeader from '~/components/shared/SectionHeader.vue'
@@ -60,12 +61,27 @@ const props = withDefaults(defineProps<{
   icon: undefined,
   variant: 'default',
   background: true,
-  backgroundTone: 'indigo',
+  backgroundTone: 'primary',
   backgroundAlign: 'top',
 })
 
+const { surfaceColor, borderColor, shadow, textColor } = useUiTokens()
+
+const cardStyle = computed(() => ({
+  backgroundColor: surfaceColor('elevated'),
+  borderColor: borderColor('soft'),
+  boxShadow: shadow('soft'),
+  color: textColor('primary'),
+  '--problem-card-hover-border': borderColor('strong'),
+  '--problem-card-hover-shadow': shadow('strong'),
+}))
+
+const titleStyle = computed(() => ({
+  color: textColor('primary'),
+}))
+
 const cardUi = {
-  base: 'relative overflow-hidden rounded-3xl border border-slate-200/70 bg-white/90 p-8 shadow-lg shadow-slate-200/60 dark:border-slate-900/60 dark:bg-slate-950/40 dark:shadow-slate-950/50',
+  base: 'relative overflow-hidden rounded-3xl border p-8 transition duration-300 hover:[border-color:var(--problem-card-hover-border)] hover:[box-shadow:var(--problem-card-hover-shadow)]',
   body: 'space-y-4 p-0'
 } as const
 

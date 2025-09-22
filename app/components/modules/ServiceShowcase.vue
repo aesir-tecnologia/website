@@ -21,6 +21,7 @@
           v-for="service in services"
           :key="service.id ?? service.title"
           :ui="cardUi"
+          :style="cardStyle"
         >
           <div class="flex h-full flex-col gap-5">
             <Tag v-if="service.focus" tone="primary">{{ service.focus }}</Tag>
@@ -35,14 +36,14 @@
             </div>
 
             <div class="space-y-2">
-              <h3 class="text-2xl font-semibold text-slate-900 dark:text-slate-50">{{ service.title }}</h3>
-              <p v-if="service.description" class="text-base leading-relaxed text-slate-600 dark:text-slate-300">{{ service.description }}</p>
+              <h3 class="text-2xl font-semibold" :style="titleStyle">{{ service.title }}</h3>
+              <p v-if="service.description" class="text-base leading-relaxed" :style="descriptionStyle">{{ service.description }}</p>
             </div>
             <div class="mt-auto flex flex-wrap items-center gap-3">
               <AppButton :to="service.to" size="md" variant="soft">
                 {{ service.cta }}
               </AppButton>
-              <span v-if="service.meta" class="text-sm text-slate-500 dark:text-slate-400">{{ service.meta }}</span>
+              <span v-if="service.meta" class="text-sm" :style="metaStyle">{{ service.meta }}</span>
             </div>
           </div>
         </UCard>
@@ -52,6 +53,7 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import BackgroundVariant from '~/components/ui/BackgroundVariant.vue'
 import AppButton from '~/components/ui/AppButton.vue'
 import Tag from '~/components/ui/Tag.vue'
@@ -111,11 +113,34 @@ const props = withDefaults(defineProps<{
   gap: 'default',
   variant: 'gradient',
   background: true,
-  backgroundTone: 'sky',
+  backgroundTone: 'accent',
 })
 
+const { surfaceColor, borderColor, shadow, textColor } = useUiTokens()
+
+const cardStyle = computed(() => ({
+  backgroundColor: surfaceColor('elevated'),
+  borderColor: borderColor('soft'),
+  boxShadow: shadow('soft'),
+  color: textColor('primary'),
+  '--service-card-hover-border': borderColor('strong'),
+  '--service-card-hover-shadow': shadow('strong'),
+}))
+
+const titleStyle = computed(() => ({
+  color: textColor('primary'),
+}))
+
+const descriptionStyle = computed(() => ({
+  color: textColor('muted'),
+}))
+
+const metaStyle = computed(() => ({
+  color: textColor('muted'),
+}))
+
 const cardUi = {
-  base: 'relative overflow-hidden rounded-3xl border border-slate-200/70 bg-white/90 p-8 shadow-xl shadow-slate-200/50 transition duration-300 hover:border-primary-400/40 hover:shadow-primary-200/40 dark:border-slate-900/60 dark:bg-slate-950/50 dark:shadow-slate-950/50 dark:hover:border-primary-500/40 dark:hover:shadow-primary-900/30',
+  base: 'relative overflow-hidden rounded-3xl border p-8 transition duration-300 hover:[border-color:var(--service-card-hover-border)] hover:[box-shadow:var(--service-card-hover-shadow)]',
   body: 'flex h-full flex-col gap-5 p-0'
 } as const
 

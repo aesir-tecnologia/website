@@ -26,15 +26,15 @@
 
     <BaseSection id="differentiation" variant="default">
       <ContentGrid :columns="2">
-        <UCard>
+        <UCard :ui="infoCardUi" :style="infoCardStyle">
           <div class="space-y-4">
-            <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-50">{{ differentiation.title }}</h3>
+            <h3 class="text-xl font-semibold" :style="infoCardTitleStyle">{{ differentiation.title }}</h3>
             <BulletList :items="differentiationItems" />
           </div>
         </UCard>
-        <UCard>
+        <UCard :ui="infoCardUi" :style="infoCardStyle">
           <div class="space-y-4">
-            <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-50">{{ audiences.title }}</h3>
+            <h3 class="text-xl font-semibold" :style="infoCardTitleStyle">{{ audiences.title }}</h3>
             <BulletList :items="audienceItems" />
           </div>
         </UCard>
@@ -44,6 +44,7 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import BaseSection from '~/components/shared/BaseSection.vue'
 import SectionHeader from '~/components/shared/SectionHeader.vue'
 import ContentGrid from '~/components/shared/ContentGrid.vue'
@@ -51,6 +52,24 @@ import FeatureGrid from '~/components/shared/FeatureGrid.vue'
 import BulletList from '~/components/shared/BulletList.vue'
 import ProcessTimeline from '~/components/modules/ProcessTimeline.vue'
 import { useProcessContent } from '~/composables/useProcessContent'
+
+const { surfaceColor, borderColor, shadow, textColor } = useUiTokens()
+
+const infoCardStyle = computed(() => ({
+  backgroundColor: surfaceColor('elevated'),
+  borderColor: borderColor('soft'),
+  boxShadow: shadow('soft'),
+  color: textColor('primary'),
+}))
+
+const infoCardTitleStyle = computed(() => ({
+  color: textColor('primary'),
+}))
+
+const infoCardUi = {
+  base: 'relative overflow-hidden rounded-3xl border p-6 transition-colors duration-300',
+  body: 'space-y-4 p-0'
+} as const
 
 const content = useProcessContent()
 

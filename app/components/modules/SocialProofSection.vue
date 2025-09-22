@@ -23,14 +23,19 @@
           </AppLinkButton>
         </template>
       </FeatureGrid>
-      <UCard v-if="testimonial" :ui="testimonialUi">
+      <UCard v-if="testimonial" :ui="testimonialUi" :style="testimonialStyle">
         <div class="space-y-4 text-center">
-          <UIcon name="i-lucide-quote" class="mx-auto h-10 w-10 text-primary-500 dark:text-primary-300" aria-hidden="true" />
-          <blockquote class="text-2xl font-medium leading-relaxed text-slate-900 dark:text-slate-100">
+          <UIcon
+            name="i-lucide-quote"
+            class="mx-auto h-10 w-10"
+            :style="quoteIconStyle"
+            aria-hidden="true"
+          />
+          <blockquote class="text-2xl font-medium leading-relaxed" :style="testimonialQuoteStyle">
             {{ testimonial.quote }}
           </blockquote>
-          <div class="space-y-1 text-sm text-slate-600 dark:text-slate-300">
-            <p class="font-semibold text-slate-900 dark:text-slate-100">{{ testimonial.author }}</p>
+          <div class="space-y-1 text-sm" :style="testimonialMetaStyle">
+            <p class="font-semibold" :style="testimonialAuthorStyle">{{ testimonial.author }}</p>
             <p v-if="testimonial.role">{{ testimonial.role }}</p>
           </div>
         </div>
@@ -93,14 +98,40 @@ const props = withDefaults(defineProps<{
   gap: 'default',
   variant: 'default',
   background: true,
-  backgroundTone: 'violet',
+  backgroundTone: 'accent',
   backgroundAlign: 'top',
 })
 
 const features = computed(() => props.features)
 
+const { surfaceColor, borderColor, shadow, textColor, gradient, tokens } = useUiTokens()
+
+const testimonialStyle = computed(() => ({
+  backgroundImage: gradient('accent'),
+  backgroundColor: surfaceColor('accent'),
+  borderColor: borderColor('accent'),
+  boxShadow: shadow('strong'),
+  color: textColor('inverse'),
+}))
+
+const quoteIconStyle = computed(() => ({
+  color: tokens.value.text.onAccent,
+}))
+
+const testimonialQuoteStyle = computed(() => ({
+  color: textColor('inverse'),
+}))
+
+const testimonialMetaStyle = computed(() => ({
+  color: textColor('muted'),
+}))
+
+const testimonialAuthorStyle = computed(() => ({
+  color: textColor('inverse'),
+}))
+
 const testimonialUi = {
-  base: 'relative overflow-hidden rounded-3xl border border-primary-400/40 bg-gradient-to-b from-primary-100/50 via-white/80 to-white/70 p-10 shadow-xl shadow-primary-200/40 dark:border-primary-500/40 dark:from-primary-500/20 dark:via-slate-950/60 dark:to-slate-900/50 dark:shadow-primary-900/40',
+  base: 'relative overflow-hidden rounded-3xl border p-10 transition-colors duration-300',
   body: 'space-y-4 p-0'
 } as const
 

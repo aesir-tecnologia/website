@@ -1,5 +1,8 @@
 <template>
-  <header class="sticky top-0 z-50 border-b border-slate-200/70 bg-white/90 text-slate-900 backdrop-blur-lg dark:border-slate-800/60 dark:bg-[#0A1F44] dark:text-slate-100">
+  <header
+    class="sticky top-0 z-50 border-b backdrop-blur-lg transition-colors"
+    :style="headerStyle"
+  >
     <UContainer class="flex items-center justify-between gap-4 py-4">
       <NuxtLink :to="brandLink" class="text-base font-semibold tracking-[0.04em] text-inherit">
         {{ brand.name }}
@@ -92,6 +95,15 @@ import { useSiteNavigation } from '~/composables/useSiteNavigation'
 const route = useRoute()
 const colorMode = useColorMode()
 const isMobileMenuOpen = ref(false)
+
+const { surfaceColor, borderColor, textColor, shadow } = useUiTokens()
+
+const headerStyle = computed(() => ({
+  backgroundColor: surfaceColor('elevated'),
+  borderColor: borderColor('soft'),
+  color: textColor('primary'),
+  boxShadow: shadow('soft'),
+}))
 
 const { brand, links, cta } = useSiteNavigation()
 

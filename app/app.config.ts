@@ -1,14 +1,14 @@
 export default defineAppConfig({
   ui: {
     colors: {
-      primary: '#007BFF',
-      secondary: 'slate',
-      accent: 'slate',
-      neutral: 'slate',
-      info: 'sky',
-      success: 'emerald',
-      warning: 'amber',
-      error: 'rose'
+      primary: '#0A1F44',
+      secondary: '#132A5C',
+      accent: '#D4AF37',
+      neutral: '#B0B0B0',
+      info: '#4A90E2',
+      success: '#3AA76D',
+      warning: '#F2A900',
+      error: '#D64550'
     },
     button: {
       defaultVariants: {
@@ -16,58 +16,196 @@ export default defineAppConfig({
       }
     },
     tokens: {
+      palette: {
+        primary: '#0A1F44',
+        primaryDark: '#07152E',
+        primaryMuted: '#1C2F57',
+        accent: '#D4AF37',
+        accentSoft: '#E6C86F',
+        accentDeep: '#9F8324',
+        neutral: '#B0B0B0',
+        neutralSoft: '#D8D8D8',
+        neutralDeep: '#6F6F6F'
+      },
       body: {
-        light: '#f8fafc',
-        dark: '#0f172a'
+        light: '#F5F7FB',
+        dark: '#050B1D'
       },
       surfaces: {
-        900: '#0f172a',
-        850: 'rgba(15, 23, 42, 0.85)',
-        800: 'rgba(15, 23, 42, 0.8)',
-        750: 'rgba(15, 23, 42, 0.75)',
-        600: 'rgba(15, 23, 42, 0.6)',
-        400: 'rgba(15, 23, 42, 0.4)',
-        300: 'rgba(15, 23, 42, 0.3)',
-        950: 'rgba(15, 23, 42, 0.95)'
+        base: {
+          light: '#FFFFFF',
+          dark: 'rgba(10, 31, 68, 0.95)'
+        },
+        elevated: {
+          light: 'rgba(255, 255, 255, 0.96)',
+          dark: 'rgba(10, 31, 68, 0.85)'
+        },
+        muted: {
+          light: '#EEF1F7',
+          dark: 'rgba(10, 31, 68, 0.65)'
+        },
+        subtle: {
+          light: '#F7F9FC',
+          dark: 'rgba(10, 31, 68, 0.5)'
+        },
+        accent: {
+          light: 'rgba(212, 175, 55, 0.18)',
+          dark: 'rgba(212, 175, 55, 0.28)'
+        },
+        overlay: {
+          light: 'rgba(10, 31, 68, 0.08)',
+          dark: 'rgba(2, 7, 20, 0.65)'
+        }
       },
       borders: {
-        soft: 'rgba(148, 163, 184, 0.2)',
-        mid: 'rgba(148, 163, 184, 0.25)',
-        strong: 'rgba(148, 163, 184, 0.4)',
-        emphasis: 'rgba(148, 163, 184, 0.8)'
+        soft: {
+          light: 'rgba(10, 31, 68, 0.14)',
+          dark: 'rgba(212, 175, 55, 0.2)'
+        },
+        strong: {
+          light: 'rgba(10, 31, 68, 0.24)',
+          dark: 'rgba(212, 175, 55, 0.45)'
+        },
+        accent: '#D4AF37'
       },
       text: {
-        primary: '#e2e8f0',
-        subtle: 'rgba(226, 232, 240, 0.85)',
-        muted: 'rgba(226, 232, 240, 0.75)',
-        soft: 'rgba(226, 232, 240, 0.7)',
-        secondary: 'rgba(226, 232, 240, 0.8)',
-        inverse: '#f8fafc'
+        primary: {
+          light: '#0A1F44',
+          dark: '#F3F6FE'
+        },
+        muted: {
+          light: 'rgba(10, 31, 68, 0.72)',
+          dark: 'rgba(240, 243, 255, 0.75)'
+        },
+        subtle: {
+          light: 'rgba(10, 31, 68, 0.6)',
+          dark: 'rgba(242, 244, 255, 0.6)'
+        },
+        inverse: {
+          light: '#F4F6FE',
+          dark: '#0A1F44'
+        },
+        accent: '#D4AF37',
+        onAccent: '#241803'
       },
       accents: {
-        highlight: 'rgba(30, 64, 175, 0.25)',
-        primary500: '#38bdf8',
-        primary400: '#22d3ee',
-        secondary500: '#6366f1',
-        secondary400: '#7c3aed',
-        accent500: '#2dd4bf',
-        primaryContrast: '#0f172a',
-        primaryOutline: 'rgba(56, 189, 248, 0.5)',
-        primaryGlow: '0 20px 40px rgba(56, 189, 248, 0.25)',
-        secondaryOutline: 'rgba(59, 130, 246, 0.45)',
-        secondarySurface: 'rgba(37, 99, 235, 0.12)',
-        accentSurface: 'rgba(45, 212, 191, 0.08)',
-        textFocus: 'rgba(148, 163, 184, 0.9)',
-        glowShadow: '0 40px 80px rgba(15, 23, 42, 0.35)'
+        primary500: '#0A1F44',
+        primary400: '#132A5C',
+        accent500: '#D4AF37',
+        accent400: '#E6C86F',
+        neutral500: '#B0B0B0',
+        highlight: 'rgba(212, 175, 55, 0.22)',
+        outline: 'rgba(212, 175, 55, 0.4)',
+        glowShadow: '0 40px 80px rgba(10, 31, 68, 0.32)'
+      },
+      tones: {
+        primary: {
+          background: {
+            light: 'rgba(10, 31, 68, 0.08)',
+            dark: 'rgba(10, 31, 68, 0.35)'
+          },
+          border: {
+            light: 'rgba(10, 31, 68, 0.2)',
+            dark: 'rgba(10, 31, 68, 0.5)'
+          },
+          text: {
+            light: '#0A1F44',
+            dark: '#F3F6FE'
+          }
+        },
+        accent: {
+          background: {
+            light: 'rgba(212, 175, 55, 0.18)',
+            dark: 'rgba(212, 175, 55, 0.3)'
+          },
+          border: {
+            light: 'rgba(212, 175, 55, 0.35)',
+            dark: 'rgba(212, 175, 55, 0.5)'
+          },
+          text: {
+            light: '#241803',
+            dark: '#1F1405'
+          }
+        },
+        neutral: {
+          background: {
+            light: 'rgba(176, 176, 176, 0.18)',
+            dark: 'rgba(176, 176, 176, 0.28)'
+          },
+          border: {
+            light: 'rgba(176, 176, 176, 0.35)',
+            dark: 'rgba(176, 176, 176, 0.45)'
+          },
+          text: {
+            light: '#2F2F2F',
+            dark: '#EEEEEE'
+          }
+        },
+        secondary: {
+          background: {
+            light: 'rgba(19, 42, 92, 0.18)',
+            dark: 'rgba(19, 42, 92, 0.32)'
+          },
+          border: {
+            light: 'rgba(19, 42, 92, 0.35)',
+            dark: 'rgba(19, 42, 92, 0.55)'
+          },
+          text: {
+            light: '#0A1F44',
+            dark: '#E6ECFF'
+          }
+        }
+      },
+      backgrounds: {
+        primary: {
+          radial: 'rgba(10, 31, 68, 0.28)',
+          linear: 'rgba(10, 31, 68, 0.18)'
+        },
+        accent: {
+          radial: 'rgba(212, 175, 55, 0.3)',
+          linear: 'rgba(212, 175, 55, 0.18)'
+        },
+        neutral: {
+          radial: 'rgba(176, 176, 176, 0.24)',
+          linear: 'rgba(176, 176, 176, 0.16)'
+        }
+      },
+      gradients: {
+        hero: {
+          light: 'radial-gradient(circle at 12% 0%, rgba(10, 31, 68, 0.18), transparent 55%), linear-gradient(165deg, rgba(255, 255, 255, 0.95), rgba(245, 247, 251, 0.98))',
+          dark: 'radial-gradient(circle at 18% 5%, rgba(212, 175, 55, 0.24), transparent 60%), linear-gradient(165deg, rgba(10, 31, 68, 0.94), rgba(8, 18, 45, 0.98))'
+        },
+        accent: {
+          light: 'linear-gradient(120deg, rgba(212, 175, 55, 0.18), rgba(10, 31, 68, 0.08))',
+          dark: 'linear-gradient(120deg, rgba(212, 175, 55, 0.28), rgba(10, 31, 68, 0.35))'
+        },
+        spotlight: {
+          light: 'radial-gradient(circle at 25% 20%, rgba(212, 175, 55, 0.2), transparent 60%)',
+          dark: 'radial-gradient(circle at 25% 20%, rgba(212, 175, 55, 0.3), transparent 65%)'
+        }
+      },
+      shadows: {
+        soft: {
+          light: '0 24px 45px rgba(10, 31, 68, 0.15)',
+          dark: '0 24px 45px rgba(0, 0, 0, 0.45)'
+        },
+        strong: {
+          light: '0 48px 80px rgba(10, 31, 68, 0.22)',
+          dark: '0 48px 80px rgba(0, 0, 0, 0.55)'
+        },
+        glow: {
+          light: '0 0 0 3px rgba(212, 175, 55, 0.3)',
+          dark: '0 0 0 3px rgba(212, 175, 55, 0.4)'
+        }
       },
       appShell: {
         lightBackground: [
-          'radial-gradient(circle at top, rgba(56, 189, 248, 0.18), transparent 60%)',
-          'linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(248, 250, 252, 1))'
+          'radial-gradient(circle at 12% 0%, rgba(10, 31, 68, 0.12), transparent 55%)',
+          'linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(245, 247, 251, 1))'
         ],
         darkBackground: [
-          'radial-gradient(circle at top, rgba(30, 64, 175, 0.25), transparent 60%)',
-          '#0f172a'
+          'radial-gradient(circle at 18% 5%, rgba(212, 175, 55, 0.22), transparent 60%)',
+          '#050B1D'
         ]
       }
     }
