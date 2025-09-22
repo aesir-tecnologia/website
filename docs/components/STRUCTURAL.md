@@ -2,6 +2,11 @@
 
 Task 4 introduces a baseline set of structural components backed by Nuxt UI primitives. They replace bespoke section markup while staying ahead of the upcoming localization effort. Task 6 adds utility atoms (documented in `docs/components/UTILITIES.md`) that pair with these layouts for CTAs, backgrounds, and imagery, Task 7 layers on form patterns described in `docs/components/FORMS.md`, and Task 8 centralises copy in the composables listed in `docs/components/CONTENT.md`.
 
+## Adoption Notes (Task 13)
+- Home, Services, About, Process, and Contact routes now exclusively compose these primitives; refer to `docs/qa/` captures for parity checks.
+- Privacy and Terms pages wrap Markdown output with `BaseSection` + `SectionHeader` so legal copy inherits shared spacing and dark-mode tokens.
+- When introducing a new pattern, start with `BaseSection` variants before extending CSS — Task 13 removed the remaining bespoke utility classes.
+
 ## BaseSection
 - **Purpose:** Wrap content blocks with consistent spacing, background variants, and responsive container widths.
 - **Key props:**

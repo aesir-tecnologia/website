@@ -2,6 +2,11 @@
 
 Task 8 centralises marketing copy in typed composables so pages and modules no longer duplicate inline arrays. All composables return frozen config objects – mutate at the source instead of per component.
 
+## Adoption Notes (Task 13)
+- Every migrated page consumes these composables; update copy sources here (and `docs/COPY-*.md`) to keep locales in sync.
+- When adding new modules, expose content via a dedicated composable so analytics, QA, and localisation follow the same contract.
+- Document any schema changes in `docs/components/MODULES.md` and surface them through the contributor checklist before merging.
+
 ## Site-Wide
 - **`useSiteNavigation()`** → `{ brand, links, cta }`
   - `brand`: `{ name, to, tagline? }` already locale-aware.

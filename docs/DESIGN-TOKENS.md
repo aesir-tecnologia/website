@@ -23,8 +23,8 @@ Canonical tokens that drive the Nuxt UI theme (`app/app.config.ts`) and supporti
 - Eyebrow/utility accents reuse `var(--aesir-primary-500)` for brand emphasis.
 
 ## Layout & Spacing
-- **Container width** – `var(--aesir-container)` (`min(1120px, 100% - 3rem)`) with mobile override at `<=640px`.
-- Section rhythm keeps `4rem` vertical padding (`.section-inner`), shrinking to `3rem` on small screens.
+- **Container width** – `BaseSection` defaults to a `max-w-6xl` `UContainer` with `px-6 sm:px-8` padding; variants expose `narrow`, `wide`, and `full` widths.
+- Section rhythm follows `BaseSection` padding presets (`tight: py-12 sm:py-16`, `default: py-16 sm:py-20`, `relaxed: py-20 sm:py-24`).
 - Global box-sizing reset applied via `*, *::before, *::after { box-sizing: border-box; }`.
 
 ## Components & Effects

@@ -5,7 +5,7 @@
   - Header uses `UNavigationMenu`, `UContainer`, and two `UButton` instances; routes defined inline via a computed `navigationItems` array and `useRoute()` for active state highlighting.
   - Mobile navigation relies on an `isMobileMenuOpen` ref toggled by a ghost button; `USlideover` hosts the vertical menu and contact CTA. A `watch` on `route.path` closes the menu after navigation.
   - Footer content is hard-coded with links to `/privacy` and `/terms`; copy references vibe-coding positioning.
-- Global styles (inline `<style>` block) set typography (`Inter` font stack), dark background (`#0f172a`), and reusable containers/sections (`.app-shell`, `.container`, `.site-header`, `.site-footer`).
+- Global styles (inline `<style>` block) set typography (`Inter` font stack), light/dark background, and the AppShell gradient; legacy container/section utilities were removed after Task 13 cleanup.
 
 ## Route Inventory & Content Dependencies
 - **Home (`app/pages/index.vue`)**
@@ -56,20 +56,17 @@
   - Accent gradients: `#38bdf8`, `#6366f1`, `#22d3ee`, `#7c3aed`, `#2dd4bf`, plus teal/purple overlays via rgba.
   - Neutral borders: `rgba(148,163,184,0.2–0.8)`.
 - **Spacing & Layout Tokens**:
-  - `.container`: `min(1120px, 100% - 3rem)` width; mobile adjustment to `100% - 2.5rem` below 640px.
-  - Section rhythm now driven by shared `BaseSection` defaults (`padding: default`, `width: default`); legacy `.page` wrappers remain on routes not yet migrated.
-  - Grids: `.grid` base gap `2rem` with responsive `auto-fit` templates for 2/3/4 column layouts.
+  - Section rhythm now driven by shared `BaseSection` defaults (`padding: default`, `width: default`) paired with `UContainer` width presets.
+  - Grid spacing handled by `ContentGrid` variants and Tailwind utilities scoped within modules.
 - **Utility/Structural Classes**:
-  - `.section`, `.section-inner`, `.section--gradient`, `.section--dark`, `.section--testimonial` still power unmigrated routes; the homepage now composes `BaseSection`, `SectionHeader`, and module wrappers (`HeroSection`, `ProblemSolutionSection`, `ServiceShowcase`, `ProcessTimeline`, `TechnologyMarquee`, `SocialProofSection`).
-  - `.card` variants (`--muted`, `--highlight`, `--bright`) continue supporting legacy pages; module cards lean on Nuxt UI (`UCard`) styles.
-  - Button utilities `.btn`, `.btn--primary`, `.btn--ghost` manage CTA styling outside of Nuxt UI components.
+  - Legacy `.section`, `.card`, `.grid`, and `.btn` utilities have been removed; modules now compose `BaseSection`, `SectionHeader`, `ContentGrid`, Nuxt UI cards, and bespoke button components.
 - **Responsive Behaviour**:
-  - BaseSection + ContentGrid handle breakpoints for migrated sections; remaining media queries cover legacy hero layout and container width adjustments.
+  - Breakpoints are fully managed through shared components and Tailwind utilities; no custom media queries remain in `main.css`.
 
 ## Global Utility & Behaviour Notes
 - Navigation menu state is handled globally in `app/app.vue`; ensures mobile slide-over closes on route change.
-- Shared components now live under `app/components/` (layout primitives, shared sections, marketing modules); remaining legacy pages still render handcrafted CSS structures until their migration tasks land.
-- Tailwind utilities are available through Nuxt UI, but the codebase still relies mainly on handcrafted classes from `main.css` on unmigrated routes.
+- Shared components now live under `app/components/` (layout primitives, shared sections, marketing modules); all routes consume this system following the legal page migration.
+- Tailwind utilities are available through Nuxt UI, and `main.css` now focuses on global tokens plus the AppShell background treatment.
 - `useSeoMeta` invoked in every page to set title/description.
 - Forms and CTAs link to internal routes; no API integrations or composables for data fetching yet.
 
