@@ -1,5 +1,5 @@
 <template>
-  <header class="sticky top-0 z-50 border-b border-slate-200/70 bg-white/90 text-slate-900 backdrop-blur-lg dark:border-[color:var(--aesir-border-soft)] dark:bg-[color:var(--aesir-surface-850)]/90 dark:text-[color:var(--aesir-text-primary)]">
+  <header class="sticky top-0 z-50 border-b border-slate-200/70 bg-white/90 text-slate-900 backdrop-blur-lg dark:border-slate-800/60 dark:bg-[#0A1F44] dark:text-slate-100">
     <UContainer class="flex items-center justify-between gap-4 py-4">
       <NuxtLink :to="brandLink" class="text-base font-semibold tracking-[0.04em] text-inherit">
         {{ brand.name }}

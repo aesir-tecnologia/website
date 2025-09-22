@@ -1,26 +1,27 @@
 # Design Tokens
 
-Canonical tokens that drive the Nuxt UI theme (`app/app.config.ts`) and supporting CSS (`app/assets/css/main.css`). Values mirror the discovery inventory and will be the contract for upcoming component work.
+Canonical tokens live in `app/app.config.ts` (`ui.tokens`) and are consumed via `useAppConfig()` inside shared components. Global CSS (`app/assets/css/main.css`) only carries the reset and font stack now that tokens are centralised in the config. Values mirror the discovery inventory and remain the contract for upcoming component work.
 
 ## Palette
-- **Primary (`var(--aesir-primary-500)`)** – `#38bdf8` (sky) with hover blend `var(--aesir-primary-400)` `#22d3ee`; gradients pair with secondary (`#6366f1` / `#7c3aed`).
-- **Secondary (`var(--aesir-secondary-500)`)** – `#6366f1` indigo accent; hover `var(--aesir-secondary-400)` `#7c3aed`.
-- **Accent (`var(--aesir-accent-500)`)** – `#2dd4bf` used in highlight cards and supporting gradients.
-- **Neutral (`var(--aesir-text-primary)` / `--aesir-text-muted` / `--aesir-text-soft`)** – Slate tints mapped to body copy, muted copy, and captions.
-- **Outlines** – `var(--aesir-primary-outline)` and `var(--aesir-secondary-outline)` for emphasis borders; `var(--aesir-border-soft|strong|emphasis)` govern structural dividers.
-- **Contrast** – `var(--aesir-primary-contrast)` `#0f172a` ensures CTA text retains legibility on bright gradients.
+- **Primary (`ui.tokens.accents.primary500`)** – `#38bdf8` (sky) with hover blend `ui.tokens.accents.primary400` (`#22d3ee`); gradients pair with secondary (`#6366f1` / `#7c3aed`).
+- **Secondary (`ui.tokens.accents.secondary500`)** – `#6366f1` indigo accent; hover `ui.tokens.accents.secondary400` (`#7c3aed`).
+- **Accent (`ui.tokens.accents.accent500`)** – `#2dd4bf` used in highlight cards and supporting gradients.
+- **Neutral (`ui.tokens.text.primary | muted | soft`)** – Slate tints mapped to body copy, muted copy, and captions.
+- **Outlines** – `ui.tokens.accents.primaryOutline` and `ui.tokens.accents.secondaryOutline` for emphasis borders; `ui.tokens.borders.soft | mid | strong | emphasis` govern structural dividers.
+- **Contrast** – `ui.tokens.accents.primaryContrast` (`#0f172a`) keeps CTA text readable on gradient backgrounds.
 
 ## Surfaces & Backgrounds
-- `var(--aesir-surface-900)` – global background.
-- `var(--aesir-surface-850)` / `--600` / `--750` – elevated surfaces for cards, slideover, and dark sections.
-- `var(--aesir-surface-950)` – footer background.
-- `var(--aesir-highlight)` – radial hero glow accent.
-- Accent surfaces: `var(--aesir-accent-surface)` (teal overlay) and `var(--aesir-secondary-surface)` (indigo overlay) for feature highlights.
+- `ui.tokens.body.light` / `ui.tokens.body.dark` – base page backgrounds for light/dark modes.
+- `ui.tokens.surfaces[850 | 750 | 600 | 400 | 300]` – elevated surfaces for cards, slideovers, and dark sections.
+- `ui.tokens.surfaces[950]` – footer surface.
+- `ui.tokens.accents.highlight` – radial hero glow accent.
+- Accent overlays: `ui.tokens.accents.accentSurface` (teal) and `ui.tokens.accents.secondarySurface` (indigo) for feature highlights.
+- `ui.tokens.appShell.lightBackground` / `darkBackground` – gradient stacks used by `AppShell` to render the page backdrop.
 
 ## Typography
 - **Font family** – `var(--font-sans)` → `Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif` and applied globally via Tailwind v4 `@theme`.
-- Text roles map to `--aesir-text-primary`, `--aesir-text-subtle`, `--aesir-text-muted`, `--aesir-text-secondary`, and `--aesir-text-soft` to distinguish headings, leads, body, and captions.
-- Eyebrow/utility accents reuse `var(--aesir-primary-500)` for brand emphasis.
+- Text roles map to `ui.tokens.text.primary | subtle | muted | secondary | soft` to distinguish headings, leads, body, and captions.
+- Eyebrow/utility accents reuse `ui.tokens.accents.primary500` for brand emphasis.
 
 ## Layout & Spacing
 - **Container width** – `BaseSection` defaults to a `max-w-6xl` `UContainer` with `px-6 sm:px-8` padding; variants expose `narrow`, `wide`, and `full` widths.
@@ -28,10 +29,10 @@ Canonical tokens that drive the Nuxt UI theme (`app/app.config.ts`) and supporti
 - Global box-sizing reset applied via `*, *::before, *::after { box-sizing: border-box; }`.
 
 ## Components & Effects
-- **Buttons** – default gradient `linear-gradient(135deg, var(--aesir-primary-500), var(--aesir-secondary-500))`, hover shifts to `var(--aesir-primary-400)`/`var(--aesir-secondary-400)`, with glow `var(--aesir-primary-glow)`.
-- **Cards** – use surface tokens with variant overlays: muted (`--surface-600`), highlight (`--accent-surface`), bright (`--secondary-surface`). Borders rely on outline tokens.
-- **Checklist / Icon accents** – checkmarks and CTA links reuse `var(--aesir-primary-500)` for continuity.
-- **Shadow** – `var(--aesir-glow-shadow)` (0 40px 80px rgba(15, 23, 42, 0.35)) anchors elevated panels.
+- **Buttons** – default gradient `linear-gradient(135deg, ui.tokens.accents.primary500, ui.tokens.accents.secondary500)`, hover shifts to the `primary400` / `secondary400` tones, with glow `ui.tokens.accents.primaryGlow`.
+- **Cards** – use surface tokens with variant overlays: muted (`ui.tokens.surfaces[600]`), highlight (`ui.tokens.accents.accentSurface`), bright (`ui.tokens.accents.secondarySurface`). Borders rely on the `ui.tokens.borders.*` set.
+- **Checklist / Icon accents** – checkmarks and CTA links reuse `ui.tokens.accents.primary500`.
+- **Shadow** – `ui.tokens.accents.glowShadow` (0 40px 80px rgba(15, 23, 42, 0.35)) anchors elevated panels.
 - **Icons** – Install `@iconify-json/lucide` (already added as a dev dependency) so `UIcon` can resolve the full Lucide set without hitting the network at runtime.
 
 ## Nuxt UI Theme Mapping
