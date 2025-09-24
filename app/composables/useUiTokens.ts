@@ -1,4 +1,4 @@
-import { computed, type ComputedRef } from 'vue'
+import { computed, onMounted, type ComputedRef, watch } from 'vue'
 
 type Mode = 'light' | 'dark'
 
@@ -248,12 +248,38 @@ export const useUiTokens = () => {
   const appConfig = useAppConfig()
   const colorMode = useColorMode()
 
+  const resolvedMode = useState<Mode>('ui-resolved-color-mode', () =>
+    colorMode.value === 'dark' ? 'dark' : 'light'
+  )
+
+  const hasRegisteredWatcher = useState('ui-color-mode-watcher-registered', () => false)
+
+  if (import.meta.client && !hasRegisteredWatcher.value) {
+    hasRegisteredWatcher.value = true
+
+    onMounted(() => {
+      const syncMode = () => {
+        resolvedMode.value = colorMode.value === 'dark' ? 'dark' : 'light'
+      }
+
+      syncMode()
+
+      watch(
+        () => colorMode.value,
+        () => {
+          syncMode()
+        },
+        { flush: 'post' }
+      )
+    })
+  }
+
   const mergedTokens = computed(() => {
     const provided = (appConfig.ui?.tokens ?? {}) as Partial<typeof defaultTokens>
     return deepMergeTokens(defaultTokens, provided)
   })
 
-  const mode = computed<Mode>(() => (colorMode.value === 'dark' ? 'dark' : 'light'))
+  const mode = computed<Mode>(() => resolvedMode.value)
 
   const surfaceColor = (key: keyof typeof defaultTokens.surfaces) =>
     resolveModeValue(mergedTokens.value.surfaces[key], mode.value)

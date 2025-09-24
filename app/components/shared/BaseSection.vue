@@ -53,7 +53,7 @@ const withContainer = computed(() => props.container)
 
 const { surfaceColor, borderColor, gradient, shadow, textColor } = useUiTokens()
 
-const variantStyles = computed<Record<SectionVariant, Record<string, string>>>((() => ({
+const variantStyles = computed<Record<SectionVariant, Record<string, string>>>(() => ({
   default: {
     backgroundColor: 'transparent',
     color: textColor('primary'),
@@ -81,7 +81,7 @@ const variantStyles = computed<Record<SectionVariant, Record<string, string>>>((
     boxShadow: shadow('soft'),
     backdropFilter: 'blur(8px)',
   },
-}))())
+}))
 
 const sectionStyle = computed(() => ({
   ...variantStyles.value[props.variant],
