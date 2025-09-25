@@ -18,6 +18,13 @@ export default defineNuxtConfig({
     '@nuxtjs/seo'
   ],
 
+  colorMode: {
+    preference: 'dark',
+    fallback: 'dark',
+    storage: 'cookie',
+    storageKey: 'aesir-color-mode'
+  },
+
   ui: {
     theme: {
       colors: ['primary', 'secondary', 'accent', 'neutral', 'info', 'success', 'warning', 'error']

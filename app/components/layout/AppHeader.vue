@@ -16,18 +16,6 @@
       />
 
       <div class="flex items-center gap-3">
-        <ClientOnly>
-          <UButton
-            variant="ghost"
-            color="neutral"
-            class="hidden md:inline-flex"
-            :aria-label="colorModeAriaLabel"
-            @click="toggleColorMode"
-          >
-            <UIcon :name="colorModeIcon" class="size-5" />
-          </UButton>
-        </ClientOnly>
-
         <UButton
           v-if="contactLink"
           class="hidden md:inline-flex"
@@ -66,21 +54,6 @@
             :label="contactLink.label"
             @click="isMobileMenuOpen = false"
           />
-
-          <ClientOnly>
-            <UButton
-              variant="ghost"
-              color="neutral"
-              :aria-label="colorModeAriaLabel"
-              class="justify-start"
-              @click="toggleColorMode"
-            >
-              <div class="flex items-center gap-3">
-                <UIcon :name="colorModeIcon" class="size-5" />
-                <span>{{ colorModeToggleLabel }}</span>
-              </div>
-            </UButton>
-          </ClientOnly>
         </div>
       </template>
     </USlideover>
@@ -93,7 +66,6 @@ import type { NavigationMenuItem } from '@nuxt/ui'
 import { useSiteNavigation } from '~/composables/useSiteNavigation'
 
 const route = useRoute()
-const colorMode = useColorMode()
 const isMobileMenuOpen = ref(false)
 
 const { surfaceColor, borderColor, textColor, shadow } = useUiTokens()
@@ -124,18 +96,15 @@ const navigationItems = computed<NavigationMenuItem[]>(() =>
   })
 )
 
-const contactLink = computed(() => cta.value)
+const contactLink = useState('app-header-contact-link', () => cta.value)
 
-const colorModeIsDark = computed(() => colorMode.value === 'dark')
-
-const colorModeIcon = computed(() => (colorModeIsDark.value ? 'i-lucide-moon-star' : 'i-lucide-sun'))
-
-const colorModeToggleLabel = computed(() => (colorModeIsDark.value ? 'Switch to light mode' : 'Switch to dark mode'))
-const colorModeAriaLabel = colorModeToggleLabel
-
-const toggleColorMode = () => {
-  colorMode.preference = colorModeIsDark.value ? 'light' : 'dark'
-}
+watch(
+  cta,
+  (value) => {
+    contactLink.value = value
+  },
+  { immediate: true }
+)
 
 watch(
   () => route.path,

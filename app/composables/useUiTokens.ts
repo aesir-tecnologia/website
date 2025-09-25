@@ -249,7 +249,7 @@ export const useUiTokens = () => {
   const colorMode = useColorMode()
 
   const resolvedMode = useState<Mode>('ui-resolved-color-mode', () =>
-    colorMode.value === 'dark' ? 'dark' : 'light'
+    colorMode.value === 'light' ? 'light' : 'dark'
   )
 
   const hasRegisteredWatcher = useState('ui-color-mode-watcher-registered', () => false)
@@ -259,7 +259,7 @@ export const useUiTokens = () => {
 
     onMounted(() => {
       const syncMode = () => {
-        resolvedMode.value = colorMode.value === 'dark' ? 'dark' : 'light'
+        resolvedMode.value = colorMode.value === 'light' ? 'light' : 'dark'
       }
 
       syncMode()
