@@ -1,4 +1,5 @@
 import { computed, unref, type MaybeRefOrGetter } from 'vue'
+import { useUiTokens } from '~/composables/useUiTokens'
 
 type AppImagePreset = 'default' | 'hero' | 'feature' | 'avatar' | 'logo' | 'testimonial'
 
@@ -15,6 +16,7 @@ type AppImageOptions = {
   densities?: string
   modifiers?: Record<string, unknown>
   wrapperClass?: string
+  wrapperStyle?: Record<string, string>
   imgClass?: string
 }
 
@@ -29,7 +31,7 @@ const presetConfig: Record<AppImagePreset, AppImageOptions> = {
     loading: 'lazy',
     decoding: 'async',
     fit: 'cover',
-    wrapperClass: 'overflow-hidden rounded-3xl bg-slate-200/30 dark:bg-slate-800/30',
+    wrapperClass: 'overflow-hidden rounded-3xl border',
     imgClass: 'h-full w-full object-cover',
   },
   hero: {
@@ -40,7 +42,7 @@ const presetConfig: Record<AppImagePreset, AppImageOptions> = {
     loading: 'lazy',
     decoding: 'async',
     fit: 'cover',
-    wrapperClass: 'overflow-hidden rounded-[2.5rem] bg-slate-200/20 dark:bg-slate-800/40',
+    wrapperClass: 'overflow-hidden rounded-[2.5rem] border',
     imgClass: 'h-full w-full object-cover',
   },
   feature: {
@@ -49,7 +51,7 @@ const presetConfig: Record<AppImagePreset, AppImageOptions> = {
     format: 'webp',
     placeholder: true,
     fit: 'cover',
-    wrapperClass: 'overflow-hidden rounded-3xl bg-slate-200/20 dark:bg-slate-800/40',
+    wrapperClass: 'overflow-hidden rounded-3xl border',
     imgClass: 'h-full w-full object-cover',
   },
   avatar: {
@@ -60,7 +62,7 @@ const presetConfig: Record<AppImagePreset, AppImageOptions> = {
     format: 'webp',
     placeholder: true,
     fit: 'cover',
-    wrapperClass: 'overflow-hidden rounded-full border border-slate-200/60 dark:border-slate-800/60',
+    wrapperClass: 'overflow-hidden rounded-full border',
     imgClass: 'h-full w-full object-cover',
   },
   logo: {
@@ -69,7 +71,7 @@ const presetConfig: Record<AppImagePreset, AppImageOptions> = {
     format: 'png',
     placeholder: false,
     fit: 'contain',
-    wrapperClass: 'flex items-center justify-center rounded-xl bg-white/90 p-4 shadow-sm shadow-slate-200/20 dark:bg-slate-900/80 dark:shadow-slate-950/40',
+    wrapperClass: 'flex items-center justify-center rounded-xl border p-4 shadow-sm',
     imgClass: 'h-full w-full object-contain',
   },
   testimonial: {
@@ -78,7 +80,7 @@ const presetConfig: Record<AppImagePreset, AppImageOptions> = {
     format: 'webp',
     placeholder: true,
     fit: 'cover',
-    wrapperClass: 'overflow-hidden rounded-3xl bg-slate-200/20 dark:bg-slate-900/40',
+    wrapperClass: 'overflow-hidden rounded-3xl border',
     imgClass: 'h-full w-full object-cover',
   },
 }
@@ -87,6 +89,44 @@ export const useAppImage = (
   preset: MaybeRefOrGetter<AppImagePreset> = 'default',
   overrides: MaybeRefOrGetter<AppImageOverrides> = {}
 ) => {
+  const { surfaceColor, borderColor, shadow } = useUiTokens()
+
+  const buildWrapperStyle = (name: AppImagePreset): Record<string, string> => {
+    switch (name) {
+      case 'logo':
+        return {
+          backgroundColor: surfaceColor('elevated'),
+          borderColor: borderColor('soft'),
+          boxShadow: shadow('soft'),
+        }
+      case 'avatar':
+        return {
+          backgroundColor: surfaceColor('muted'),
+          borderColor: borderColor('soft'),
+        }
+      case 'testimonial':
+        return {
+          backgroundColor: surfaceColor('muted'),
+          borderColor: borderColor('soft'),
+        }
+      case 'hero':
+        return {
+          backgroundColor: surfaceColor('muted'),
+          borderColor: borderColor('soft'),
+        }
+      case 'feature':
+        return {
+          backgroundColor: surfaceColor('muted'),
+          borderColor: borderColor('soft'),
+        }
+      default:
+        return {
+          backgroundColor: surfaceColor('muted'),
+          borderColor: borderColor('soft'),
+        }
+    }
+  }
+
   return computed(() => {
     const resolvedPreset = unref(preset)
     const resolvedOverrides = unref(overrides)
@@ -96,6 +136,7 @@ export const useAppImage = (
       ...presetConfig.default,
       ...config,
       ...resolvedOverrides,
+      wrapperStyle: buildWrapperStyle(resolvedPreset),
     }
   })
 }

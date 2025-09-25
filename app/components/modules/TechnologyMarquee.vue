@@ -11,9 +11,12 @@
         align="center"
         :icon="icon"
       />
-      <div class="relative w-full overflow-hidden rounded-3xl border border-slate-200/60 bg-white/80 py-6 dark:border-slate-900/60 dark:bg-slate-950/60">
+      <div
+        class="relative w-full overflow-hidden rounded-3xl border py-6 transition-colors"
+        :style="marqueeContainerStyle"
+      >
         <div
-          class="flex gap-12 whitespace-nowrap py-2 font-medium text-slate-700 motion-reduce:animate-none dark:text-slate-200"
+          class="flex gap-12 whitespace-nowrap py-2 font-medium motion-reduce:animate-none"
           :style="trackStyles"
           :class="['animate-[marquee_var(--marquee-duration)_linear_infinite]', { 'pause-on-hover': pauseOnHover }]"
           aria-hidden="true"
@@ -21,13 +24,14 @@
           <span
             v-for="(tech, index) in loopItems"
             :key="`${tech}-${index}`"
-            class="flex items-center text-lg tracking-wide text-slate-800/80 dark:text-slate-100/90"
+            class="flex items-center text-lg tracking-wide"
+            :style="itemStyle"
           >
             {{ tech }}
           </span>
         </div>
       </div>
-      <p v-if="caption" class="text-sm text-slate-400">
+      <p v-if="caption" class="text-sm" :style="captionStyle">
         {{ caption }}
       </p>
     </div>
@@ -64,7 +68,7 @@ const props = withDefaults(defineProps<{
   speed: 28,
   variant: 'dark',
   background: true,
-  backgroundTone: 'teal',
+  backgroundTone: 'neutral',
   pauseOnHover: true,
 })
 
@@ -72,6 +76,23 @@ const loopItems = computed(() => [...props.items, ...props.items])
 
 const trackStyles = computed(() => ({
   '--marquee-duration': `${Math.max(props.speed, 12)}s`
+}))
+
+const { surfaceColor, borderColor, textColor } = useUiTokens()
+
+const marqueeContainerStyle = computed(() => ({
+  backgroundColor: surfaceColor('elevated'),
+  borderColor: borderColor('soft'),
+  color: textColor('primary'),
+  backdropFilter: 'blur(12px)',
+}))
+
+const itemStyle = computed(() => ({
+  color: textColor('primary'),
+}))
+
+const captionStyle = computed(() => ({
+  color: textColor('subtle'),
 }))
 
 const variant = props.variant

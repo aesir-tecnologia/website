@@ -15,24 +15,25 @@
           v-for="(step, index) in steps"
           :key="step.id ?? step.title ?? index"
           :ui="stepCardUi"
+          :style="stepCardStyle"
         >
           <div class="flex h-full flex-col gap-4">
             <div class="flex items-center gap-3">
               <IconBadge tone="primary">
                 {{ (index + 1).toString().padStart(2, '0') }}
               </IconBadge>
-              <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-50">{{ step.title }}</h3>
+              <h3 class="text-xl font-semibold" :style="stepTitleStyle">{{ step.title }}</h3>
             </div>
             <BulletList :items="step.items" />
           </div>
         </UCard>
       </ContentGrid>
 
-      <UCard v-if="highlight" :ui="highlightCardUi">
+      <UCard v-if="highlight" :ui="highlightCardUi" :style="highlightCardStyle">
         <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div class="space-y-1">
-            <p class="text-sm font-semibold uppercase tracking-[0.3em] text-primary-200/80">{{ highlight.eyebrow ?? 'Best fit' }}</p>
-            <h3 class="text-2xl font-semibold text-slate-50">{{ highlight.title }}</h3>
+            <p class="text-sm font-semibold uppercase tracking-[0.3em]" :style="highlightEyebrowStyle">{{ highlight.eyebrow ?? 'Best fit' }}</p>
+            <h3 class="text-2xl font-semibold" :style="highlightTitleStyle">{{ highlight.title }}</h3>
           </div>
           <BulletList :items="highlight.items" class="md:max-w-2xl" />
         </div>
@@ -42,6 +43,7 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import BackgroundVariant from '~/components/ui/BackgroundVariant.vue'
 import IconBadge from '~/components/ui/IconBadge.vue'
 import BaseSection from '~/components/shared/BaseSection.vue'
@@ -92,16 +94,47 @@ const props = withDefaults(defineProps<{
   gap: 'default',
   variant: 'default',
   background: true,
-  backgroundTone: 'sky',
+  backgroundTone: 'primary',
 })
 
+const { surfaceColor, borderColor, shadow, textColor, gradient, tokens } = useUiTokens()
+
+const stepCardStyle = computed(() => ({
+  backgroundColor: surfaceColor('elevated'),
+  borderColor: borderColor('soft'),
+  boxShadow: shadow('soft'),
+  color: textColor('primary'),
+  '--process-card-hover-border': borderColor('strong'),
+  '--process-card-hover-shadow': shadow('strong'),
+}))
+
+const stepTitleStyle = computed(() => ({
+  color: textColor('primary'),
+}))
+
+const highlightCardStyle = computed(() => ({
+  backgroundImage: gradient('accent'),
+  backgroundColor: surfaceColor('accent'),
+  borderColor: borderColor('accent'),
+  boxShadow: shadow('strong'),
+  color: textColor('inverse'),
+}))
+
+const highlightEyebrowStyle = computed(() => ({
+  color: tokens.value.text.onAccent,
+}))
+
+const highlightTitleStyle = computed(() => ({
+  color: textColor('inverse'),
+}))
+
 const stepCardUi = {
-  base: 'relative overflow-hidden rounded-3xl border border-slate-200/70 bg-white/90 p-6 shadow-lg shadow-slate-200/50 transition duration-300 hover:border-primary-400/40 hover:shadow-primary-200/40 dark:border-slate-900/60 dark:bg-slate-950/40 dark:shadow-slate-950/50 dark:hover:border-primary-500/40 dark:hover:shadow-primary-900/30',
+  base: 'relative overflow-hidden rounded-3xl border p-6 transition duration-300 hover:[border-color:var(--process-card-hover-border)] hover:[box-shadow:var(--process-card-hover-shadow)]',
   body: 'flex h-full flex-col gap-4 p-0'
 } as const
 
 const highlightCardUi = {
-  base: 'relative overflow-hidden rounded-3xl border border-primary-400/40 bg-gradient-to-r from-primary-200/40 via-white/70 to-primary-50/40 p-6 shadow-xl shadow-primary-200/40 dark:border-primary-500/30 dark:from-primary-500/20 dark:via-slate-950/40 dark:to-slate-900/30 dark:shadow-primary-900/40',
+  base: 'relative overflow-hidden rounded-3xl border p-6 transition-colors duration-300',
   body: 'flex flex-col gap-6 p-0'
 } as const
 

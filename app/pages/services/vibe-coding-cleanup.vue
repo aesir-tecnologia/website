@@ -19,15 +19,15 @@
       <div class="space-y-10">
         <SectionHeader :title="problems.primary.title" :description="problems.primary.description" />
         <ContentGrid :columns="2">
-          <UCard>
+          <UCard :ui="infoCardUi" :style="infoCardStyle">
             <div class="space-y-4">
-              <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-50">{{ problems.primary.title }}</h3>
+              <h3 class="text-xl font-semibold" :style="textStyles.primary">{{ problems.primary.title }}</h3>
               <BulletList :items="problems.primary.items" />
             </div>
           </UCard>
-          <UCard>
+          <UCard :ui="infoCardUi" :style="infoCardStyle">
             <div class="space-y-4">
-              <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-50">{{ problems.secondary.title }}</h3>
+              <h3 class="text-xl font-semibold" :style="textStyles.primary">{{ problems.secondary.title }}</h3>
               <BulletList :items="problems.secondary.items" />
             </div>
           </UCard>
@@ -55,13 +55,13 @@
       <div class="space-y-10">
         <SectionHeader :title="values.headline" align="center" />
         <ContentGrid :columns="3">
-          <UCard v-for="value in values.valueProps" :key="value">
-            <p class="text-base leading-relaxed text-slate-600 dark:text-slate-300">{{ value }}</p>
+          <UCard v-for="value in values.valueProps" :key="value" :ui="infoCardUi" :style="infoCardStyle">
+            <p class="text-base leading-relaxed" :style="textStyles.muted">{{ value }}</p>
           </UCard>
         </ContentGrid>
         <ContentGrid :columns="3">
-          <UCard v-for="message in values.targetMessages" :key="message">
-            <p class="text-base leading-relaxed text-slate-600 dark:text-slate-300">{{ message }}</p>
+          <UCard v-for="message in values.targetMessages" :key="message" :ui="infoCardUi" :style="infoCardStyle">
+            <p class="text-base leading-relaxed" :style="textStyles.muted">{{ message }}</p>
           </UCard>
         </ContentGrid>
       </div>
@@ -75,11 +75,17 @@
           :description="ctas.description"
         />
         <ContentGrid :columns="2">
-          <UCard v-for="card in ctas.cards" :key="card.title" class="h-full">
+          <UCard
+            v-for="card in ctas.cards"
+            :key="card.title"
+            :ui="infoCardUi"
+            :style="infoCardStyle"
+            class="h-full"
+          >
             <div class="flex h-full flex-col gap-5">
               <div class="space-y-3">
-                <h3 class="text-2xl font-semibold text-slate-900 dark:text-slate-50">{{ card.title }}</h3>
-                <p class="text-base leading-relaxed text-slate-600 dark:text-slate-300">{{ card.description }}</p>
+                <h3 class="text-2xl font-semibold" :style="textStyles.primary">{{ card.title }}</h3>
+                <p class="text-base leading-relaxed" :style="textStyles.muted">{{ card.description }}</p>
               </div>
               <AppButton :to="card.to" size="md" :variant="card.cta === 'Request Audit' ? 'solid' : 'soft'">
                 {{ card.cta }}
@@ -93,6 +99,7 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import BaseSection from '~/components/shared/BaseSection.vue'
 import SectionHeader from '~/components/shared/SectionHeader.vue'
 import ContentGrid from '~/components/shared/ContentGrid.vue'
@@ -100,6 +107,21 @@ import BulletList from '~/components/shared/BulletList.vue'
 import AppButton from '~/components/ui/AppButton.vue'
 import ProcessTimeline from '~/components/modules/ProcessTimeline.vue'
 import { useServiceContent } from '~/composables/useServicesContent'
+import { useTextStyles } from '~/composables/useTextStyles'
+
+const { surfaceColor, borderColor, shadow } = useUiTokens()
+const textStyles = useTextStyles()
+
+const infoCardStyle = computed(() => ({
+  backgroundColor: surfaceColor('elevated'),
+  borderColor: borderColor('soft'),
+  boxShadow: shadow('soft'),
+}))
+
+const infoCardUi = {
+  base: 'relative overflow-hidden rounded-3xl border p-6 transition-colors duration-300',
+  body: 'space-y-4 p-0'
+} as const
 
 const service = useServiceContent('vibe-coding-cleanup')
 

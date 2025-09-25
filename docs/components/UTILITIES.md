@@ -2,6 +2,11 @@
 
 Task 6 introduces a set of atomic components that wrap Nuxt UI primitives so modules stay consistent and backgrounds/imagery are centrally managed.
 
+## Adoption Notes (Task 13)
+- These atoms replace every legacy utility class that was removed during the CSS cleanup; prefer them over bespoke Tailwind overrides.
+- Dark/light parity for gradients now lives here — update `BackgroundVariant` tokens instead of adding page-scoped gradients.
+- Any missing state should be added via `app.config.ts` theme tokens first so design decisions remain centralised.
+
 ## AppButton
 - **Purpose:** Default CTA treatment for marketing modules and shared layouts.
 - **Props:** Mirrors `UButton` (`to`, `href`, `variant`, `color`, `size`, `icon`, `trailingIcon`, `block`), forwarding events and attributes transparently.

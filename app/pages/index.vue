@@ -61,11 +61,12 @@
             v-for="cta in finalCtaCards"
             :key="cta.title"
             :ui="finalCtaCardUi"
+            :style="finalCtaCardStyle"
           >
             <div class="flex h-full flex-col gap-5">
               <div class="space-y-3">
-                <h3 class="text-2xl font-semibold text-slate-900 dark:text-slate-50">{{ cta.title }}</h3>
-                <p class="text-base leading-relaxed text-slate-600 dark:text-slate-300">{{ cta.description }}</p>
+                <h3 class="text-2xl font-semibold" :style="finalCtaTitleStyle">{{ cta.title }}</h3>
+                <p class="text-base leading-relaxed" :style="finalCtaDescriptionStyle">{{ cta.description }}</p>
               </div>
               <AppButton :to="cta.to" size="md" class="mt-auto">{{ cta.cta }}</AppButton>
             </div>
@@ -77,6 +78,7 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import HeroSection from '~/components/modules/HeroSection.vue'
 import ProblemSolutionSection from '~/components/modules/ProblemSolutionSection.vue'
 import ServiceShowcase from '~/components/modules/ServiceShowcase.vue'
@@ -134,8 +136,25 @@ const finalCtaCards: FinalCtaCard[] = finalCta.items.map((cta) => ({
   to: cta.to
 }))
 
+const { surfaceColor, borderColor, shadow, textColor } = useUiTokens()
+
+const finalCtaCardStyle = computed(() => ({
+  backgroundColor: surfaceColor('elevated'),
+  borderColor: borderColor('soft'),
+  boxShadow: shadow('soft'),
+  color: textColor('primary'),
+}))
+
+const finalCtaTitleStyle = computed(() => ({
+  color: textColor('primary'),
+}))
+
+const finalCtaDescriptionStyle = computed(() => ({
+  color: textColor('muted'),
+}))
+
 const finalCtaCardUi = {
-  base: 'relative overflow-hidden rounded-3xl border border-slate-200/70 bg-white/95 p-8 shadow-xl shadow-slate-200/60 dark:border-slate-900/70 dark:bg-slate-950/50 dark:shadow-slate-950/70',
+  base: 'relative overflow-hidden rounded-3xl border p-8 transition-colors duration-300',
   body: 'h-full p-0'
 } as const
 </script>

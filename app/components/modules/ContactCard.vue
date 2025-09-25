@@ -1,10 +1,10 @@
 <template>
-  <UCard :ui="cardUi">
+  <UCard :ui="cardUi" :style="cardStyle">
     <div class="space-y-6">
       <header class="space-y-2">
         <Tag v-if="eyebrow" tone="accent" size="md">{{ eyebrow }}</Tag>
-        <h3 class="text-2xl font-semibold text-slate-900 dark:text-slate-50">{{ title }}</h3>
-        <p v-if="description" class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">{{ description }}</p>
+        <h3 class="text-2xl font-semibold" :style="titleStyle">{{ title }}</h3>
+        <p v-if="description" class="text-sm leading-relaxed" :style="descriptionStyle">{{ description }}</p>
       </header>
 
       <UForm :state="state" :validate="validate" class="space-y-5" @submit="handleSubmit">
@@ -50,7 +50,7 @@
             <AppButton type="submit" size="lg" :loading="isSubmitting">
               {{ submitLabel }}
             </AppButton>
-            <p class="text-sm text-slate-500 dark:text-slate-400">We respond within one business day.</p>
+            <p class="text-sm" :style="supportingTextStyle">We respond within one business day.</p>
           </div>
 
           <transition name="fade">
@@ -123,8 +123,29 @@ const handleSubmit = async (event: Parameters<typeof submit>[0]) => {
   }
 }
 
+const { surfaceColor, borderColor, shadow, textColor } = useUiTokens()
+
+const cardStyle = computed(() => ({
+  backgroundColor: surfaceColor('elevated'),
+  borderColor: borderColor('soft'),
+  boxShadow: shadow('soft'),
+  color: textColor('primary'),
+}))
+
+const titleStyle = computed(() => ({
+  color: textColor('primary'),
+}))
+
+const descriptionStyle = computed(() => ({
+  color: textColor('muted'),
+}))
+
+const supportingTextStyle = computed(() => ({
+  color: textColor('subtle'),
+}))
+
 const cardUi = {
-  base: 'relative overflow-hidden rounded-3xl border border-slate-200/70 bg-white/95 p-8 shadow-xl shadow-slate-200/60 dark:border-slate-900/70 dark:bg-slate-950/60 dark:shadow-slate-950/70',
+  base: 'relative overflow-hidden rounded-3xl border p-8 transition-colors duration-300',
   body: 'space-y-6 p-0'
 } as const
 

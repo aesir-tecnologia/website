@@ -2,6 +2,11 @@
 
 Task 7 modernises the contact experience with Nuxt UI form primitives and shared atoms so validation, state changes, and accessibility stay consistent across future interactive work.
 
+## Adoption Notes (Task 13)
+- Contact page now relies solely on these form components; CTA sections on Home and Services embed `ContactCard` variants where applicable.
+- No legacy form styles remain after Task 13 cleanup — any new workflow should extend `useContactForm` to keep validation and analytics hooks aligned.
+- Localisation strings should continue to live in `docs/COPY-*.md`; when locales expand, surface translated labels through the content composables powering these modules.
+
 ## ContactCard
 - **Purpose:** Renders the marketing contact form inside the `/contact` page (and future reuse) with Nuxt UI controls wrapped by shared `Tag`, `AppButton`, and gradient card styling.
 - **Props:**

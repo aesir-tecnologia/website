@@ -1,5 +1,5 @@
 <template>
-  <component :is="tag" :id="id" :class="sectionClasses">
+  <component :is="tag" :id="id" :class="sectionClasses" :style="sectionStyle">
     <slot name="background" />
     <UContainer v-if="withContainer" :class="containerClasses">
       <slot />
@@ -35,14 +35,6 @@ const props = withDefaults(defineProps<{
 
 const tag = computed(() => props.as)
 
-const variantMap: Record<SectionVariant, string> = {
-  default: 'bg-transparent',
-  muted: 'backdrop-blur-sm bg-slate-100/80 ring-1 ring-slate-200/60 dark:bg-slate-900/40 dark:ring-slate-800/60',
-  dark: 'bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100',
-  gradient: 'bg-gradient-to-b from-white via-primary-100/10 to-white dark:from-slate-950/0 dark:via-slate-950/60 dark:to-slate-950',
-  accent: 'ring-1 ring-primary-300/40 bg-primary-100/25 dark:bg-primary-500/10 dark:ring-primary-500/20',
-}
-
 const paddingMap: Record<SectionPadding, string> = {
   none: 'py-0',
   tight: 'py-12 sm:py-16',
@@ -59,10 +51,49 @@ const widthMap: Record<SectionWidth, string> = {
 
 const withContainer = computed(() => props.container)
 
+const { surfaceColor, borderColor, gradient, shadow, textColor } = useUiTokens()
+
+const variantStyles = computed<Record<SectionVariant, Record<string, string>>>(() => ({
+  default: {
+    backgroundColor: 'transparent',
+    color: textColor('primary'),
+  },
+  muted: {
+    backgroundColor: surfaceColor('muted'),
+    color: textColor('primary'),
+    borderColor: borderColor('soft'),
+    boxShadow: shadow('soft'),
+    backdropFilter: 'blur(12px)',
+  },
+  dark: {
+    backgroundColor: surfaceColor('base'),
+    color: textColor('inverse'),
+  },
+  gradient: {
+    backgroundImage: gradient('hero'),
+    backgroundColor: surfaceColor('subtle'),
+    color: textColor('primary'),
+  },
+  accent: {
+    backgroundColor: surfaceColor('accent'),
+    color: textColor('primary'),
+    borderColor: borderColor('accent'),
+    boxShadow: shadow('soft'),
+    backdropFilter: 'blur(8px)',
+  },
+}))
+
+const sectionStyle = computed(() => ({
+  ...variantStyles.value[props.variant],
+  transition: 'background-color 200ms ease, color 200ms ease, box-shadow 200ms ease'
+}))
+
+const variantHasBorder = computed(() => ['muted', 'accent'].includes(props.variant))
+
 const sectionClasses = computed(() => [
   'relative isolate w-full overflow-hidden',
-  variantMap[props.variant],
   paddingMap[props.padding],
+  variantHasBorder.value ? 'border' : null,
 ])
 
 const containerClasses = computed(() => [

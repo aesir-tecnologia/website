@@ -2,6 +2,11 @@
 
 Task 8 centralises marketing copy in typed composables so pages and modules no longer duplicate inline arrays. All composables return frozen config objects – mutate at the source instead of per component.
 
+## Adoption Notes (Task 13+)
+- Every migrated page consumes these composables; update copy sources here (and `docs/COPY-*.md`) to keep locales in sync.
+- When adding new modules, expose content via a dedicated composable so analytics, QA, and localisation follow the same contract.
+- Document any schema changes in `docs/components/MODULES.md` and surface them through the contributor checklist before merging.
+
 ## Site-Wide
 - **`useSiteNavigation()`** → `{ brand, links, cta }`
   - `brand`: `{ name, to, tagline? }` already locale-aware.
@@ -37,7 +42,14 @@ Task 8 centralises marketing copy in typed composables so pages and modules no l
 - Supplies hero copy/email, project inquiry + engagement model metadata, form configuration (project types), consultation CTA details, and schedule copy.
 - Designed to pair with `ContactCard` + `useContactForm` (Task 7) so additional forms can reuse the same data contract.
 
+## Legal (`useLegalContent`)
+- Handles copy for `/privacy` and `/terms` routes.
+- Returns `{ seo, hero, sections, contact }` objects defined in `app/data/content/legal.ts`.
+  - `sections`: array of `{ title, paragraphs }` rendered in shared `BaseSection` + `UCard` layouts.
+  - `contact`: `{ prompt, email, suffix, ctaLabel }` used for inline messaging and CTA buttons.
+- Eliminates the old markdown dependency so legal pages share the same component system as marketing routes.
+
 ### Usage Guidelines
 1. Import composables inside page-level `<script setup>` blocks; destructure locally for readability.
 2. Update content in `app/data/content/*.ts` – avoid sprinkling strings throughout Vue files.
-3. When adding new marketing copy, prefer extending the relevant data module before consuming it in templates.
+3. When adding new marketing or legal copy, prefer extending the relevant data module before consuming it in templates.

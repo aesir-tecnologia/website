@@ -1,5 +1,10 @@
 # Nuxt UI & Shared Component Adoption Plan
 
+## Status Update
+- Tasks 1–14 are complete; documentation, QA evidence, and handoff materials are now in place.
+- Legacy CSS audit concluded in Task 13 — surviving atoms are catalogued in `docs/components/UTILITIES.md`.
+- Visual baselines, Playwright MCP captures, and Lighthouse results are logged under `docs/qa/`, with the formal report maintained in `docs/qa/REPORT.md`.
+
 ## 1. Goals & Guardrails
 - Replace bespoke CSS-heavy markup with `@nuxt/ui` primitives to guarantee consistent styling, accessibility, and dark/light parity.
 - Centralize layout, navigation, and section patterns into shared components so every page reuses the same building blocks.
@@ -72,9 +77,11 @@
 - Phase 5: Remove legacy CSS classes once all pages consume shared components and run visual regression sweeps to confirm fidelity.
 
 ## 9. Deferred Backlog (Post-UI Refactor)
-- Revisit localization by syncing copy from `docs/COPY-*.md` into `@nuxtjs/i18n` resources and wiring locale switchers.
-- Layer in SEO defaults with `@nuxtjs/seo`, structured data recipes, and sitemap refinements.
-- Expand analytics and experimentation hooks once the shared components stabilize.
+- Revisit localization by syncing copy from `docs/COPY-*.md` into `@nuxtjs/i18n` resources, adding locale QA, and documenting variance within the contributor checklist.
+- Layer in SEO defaults with `@nuxtjs/seo`, structured data recipes, and sitemap refinements; ensure meta presets cover the legal routes migrated in Task 13.
+- Expand analytics and experimentation hooks once shared components stabilize, including tracking for CTA variants and marquee interactions.
+- Schedule an accessibility sweep (focus management, reduced-motion fallbacks) now that the component system is consistent.
+- Automate Playwright MCP baseline refreshes as part of release prep so docs/qa artefacts stay current.
 
 ## 10. Quality, Testing & Verification
 - Establish a component playground (Storybook or Nuxt UI preview route) to develop and document shared components in isolation.
@@ -84,6 +91,7 @@
 
 ## 11. Documentation & Governance
 - Maintain this plan (`PLAN.md`) as a living document, updating sections as milestones complete and new components emerge.
-- Add usage guidelines for each shared component in `docs/components/` with props, slots, and screenshot references.
-- Create a contributor checklist referencing linting, copy sync, accessibility, and visual regression checks before merging.
+- Keep usage guidelines for each shared component in `docs/components/` aligned with the live props/slots and note any deprecations after Task 13 cleanup.
+- Host the contributor checklist in `docs/CONTRIBUTOR-CHECKLIST.md`, covering linting, copy sync, accessibility, and visual QA expectations.
+- Record QA evidence and findings in `docs/qa/REPORT.md`, linking to Playwright artefacts and manual verification notes.
 - Schedule periodic reviews with stakeholders to confirm copy accuracy, design alignment, and upcoming feature needs.

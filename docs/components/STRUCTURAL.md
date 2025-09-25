@@ -2,6 +2,11 @@
 
 Task 4 introduces a baseline set of structural components backed by Nuxt UI primitives. They replace bespoke section markup while staying ahead of the upcoming localization effort. Task 6 adds utility atoms (documented in `docs/components/UTILITIES.md`) that pair with these layouts for CTAs, backgrounds, and imagery, Task 7 layers on form patterns described in `docs/components/FORMS.md`, and Task 8 centralises copy in the composables listed in `docs/components/CONTENT.md`.
 
+## Adoption Notes (Task 13+)
+- Home, Services, About, Process, Contact, Privacy, and Terms routes now exclusively compose these primitives; refer to `docs/qa/` captures for parity checks.
+- Legal pages were promoted from static markdown to the shared section + card system using `useLegalContent()`.
+- When introducing a new pattern, start with `BaseSection` variants before extending CSS — Task 13 removed the remaining bespoke utility classes.
+
 ## BaseSection
 - **Purpose:** Wrap content blocks with consistent spacing, background variants, and responsive container widths.
 - **Key props:**
@@ -33,7 +38,7 @@ Task 4 introduces a baseline set of structural components backed by Nuxt UI prim
 - **Key props:**
   - `features`: array of `{ title, description?, icon?, cta?, to?, external? }`.
   - `columns` / `gap`: forward to `ContentGrid` props.
-- **Usage notes:** defaults to Lucide icons via `@iconify-json/lucide`; ensure the dependency is installed (`npm i -D @iconify-json/lucide`) so offline builds retain icons. Override the `footer` slot for custom CTA layouts. Each card is wrapped in a gradient border + hover state to provide more hierarchy than the legacy `.card` styles.
+- **Usage notes:** Defaults to Lucide icons via `@iconify-json/lucide`; ensure the dependency is installed (`npm i -D @iconify-json/lucide`) so offline builds retain icons. Override the `footer` slot for custom CTA layouts. Each card is wrapped in a gradient border + hover state to provide more hierarchy than the legacy `.card` styles.
 
 ## MetricList
 - **Purpose:** Display proof points / KPIs in a consistent card layout.

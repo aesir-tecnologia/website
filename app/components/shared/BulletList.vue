@@ -5,12 +5,15 @@
       :key="item.id ?? item.label"
       class="flex items-start gap-4"
     >
-      <span class="mt-1 flex h-8 w-8 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-300/30 via-primary-400/15 to-transparent text-primary-600 shadow-lg shadow-primary-200/40 dark:from-primary-500/20 dark:via-primary-400/10 dark:text-primary-200 dark:shadow-primary-950/30">
+      <span
+        class="mt-1 flex h-8 w-8 items-center justify-center rounded-2xl border"
+        :style="iconStyle"
+      >
         <UIcon :name="item.icon ?? icon" class="h-4 w-4" aria-hidden="true" />
       </span>
       <div class="space-y-1">
-        <span class="block text-base font-semibold text-slate-900 dark:text-slate-100">{{ item.label }}</span>
-        <p v-if="item.description" class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">{{ item.description }}</p>
+        <span class="block text-base font-semibold" :style="labelStyle">{{ item.label }}</span>
+        <p v-if="item.description" class="text-sm leading-relaxed" :style="descriptionStyle">{{ item.description }}</p>
       </div>
     </li>
   </component>
@@ -49,6 +52,28 @@ const tag = computed(() => props.as)
 const listClasses = computed(() => [
   'space-y-4',
 ])
+
+const { textColor, gradient, tone, tokens } = useUiTokens()
+
+const iconStyle = computed(() => {
+  const accentTone = tone('accent')
+
+  return {
+    backgroundImage: gradient('accent'),
+    backgroundColor: accentTone.background,
+    color: tokens.value.text.onAccent,
+    borderColor: accentTone.border,
+    boxShadow: tokens.value.accents.glowShadow,
+  }
+})
+
+const labelStyle = computed(() => ({
+  color: textColor('primary'),
+}))
+
+const descriptionStyle = computed(() => ({
+  color: textColor('muted'),
+}))
 
 const normalizedItems = computed<NormalizedBulletItem[]>(() =>
   props.items.map((item) =>

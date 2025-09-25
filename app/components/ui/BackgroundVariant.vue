@@ -18,7 +18,7 @@ import { computed } from 'vue'
 
 type BackgroundVariant = 'hero' | 'radial' | 'process'
 
-type BackgroundTone = 'sky' | 'indigo' | 'violet' | 'teal'
+type BackgroundTone = 'primary' | 'accent' | 'neutral'
 
 type BackgroundAlignment = 'top' | 'center' | 'bottom'
 
@@ -36,25 +36,6 @@ const props = withDefaults(defineProps<{
   intensity: 'default',
 })
 
-const toneMap: Record<BackgroundTone, { radial: string; linear: string }> = {
-  sky: {
-    radial: 'rgba(56,189,248,0.14)',
-    linear: 'rgba(56,189,248,0.16)',
-  },
-  indigo: {
-    radial: 'rgba(99,102,241,0.12)',
-    linear: 'rgba(99,102,241,0.18)',
-  },
-  violet: {
-    radial: 'rgba(168,85,247,0.12)',
-    linear: 'rgba(168,85,247,0.18)',
-  },
-  teal: {
-    radial: 'rgba(45,212,191,0.12)',
-    linear: 'rgba(45,212,191,0.18)',
-  },
-}
-
 const fadeStops: Record<BackgroundIntensity, string> = {
   soft: '55%',
   default: '70%',
@@ -67,8 +48,10 @@ const alignLookup: Record<BackgroundAlignment, string> = {
   bottom: 'bottom',
 }
 
+const { tokens } = useUiTokens()
+
 const layers = computed(() => {
-  const color = toneMap[props.tone] ?? toneMap.sky
+  const color = tokens.value.backgrounds[props.tone] ?? tokens.value.backgrounds.primary
   const stop = fadeStops[props.intensity] ?? fadeStops.default
   const position = alignLookup[props.align] ?? 'center'
 

@@ -16,10 +16,10 @@
     </BaseSection>
 
     <BaseSection id="mission" variant="muted">
-      <UCard>
+      <UCard :ui="missionCardUi" :style="missionCardStyle">
         <div class="space-y-4">
-          <h2 class="text-2xl font-semibold text-slate-900 dark:text-slate-50">{{ mission.title }}</h2>
-          <p class="text-base leading-relaxed text-slate-600 dark:text-slate-300">{{ mission.description }}</p>
+          <h2 class="text-2xl font-semibold" :style="missionTitleStyle">{{ mission.title }}</h2>
+          <p class="text-base leading-relaxed" :style="missionDescriptionStyle">{{ mission.description }}</p>
         </div>
       </UCard>
     </BaseSection>
@@ -41,11 +41,34 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import AppButton from '~/components/ui/AppButton.vue'
 import BaseSection from '~/components/shared/BaseSection.vue'
 import SectionHeader from '~/components/shared/SectionHeader.vue'
 import FeatureGrid from '~/components/shared/FeatureGrid.vue'
 import { useAboutContent } from '~/composables/useAboutContent'
+
+const { surfaceColor, borderColor, shadow, textColor } = useUiTokens()
+
+const missionCardStyle = computed(() => ({
+  backgroundColor: surfaceColor('elevated'),
+  borderColor: borderColor('soft'),
+  boxShadow: shadow('soft'),
+  color: textColor('primary'),
+}))
+
+const missionTitleStyle = computed(() => ({
+  color: textColor('primary'),
+}))
+
+const missionDescriptionStyle = computed(() => ({
+  color: textColor('muted'),
+}))
+
+const missionCardUi = {
+  base: 'relative overflow-hidden rounded-3xl border p-8 transition-colors duration-300',
+  body: 'space-y-4 p-0'
+} as const
 
 const content = useAboutContent()
 

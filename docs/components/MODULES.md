@@ -2,6 +2,11 @@
 
 All modules below compose the structural primitives from Task 4. They accept typed props so page migrations can consume the Task 8 content composables (`docs/components/CONTENT.md`) or future localisation sources without touching markup.
 
+## Adoption Notes (Task 13+)
+- `HeroSection`, `ServiceShowcase`, `ProcessTimeline`, and `SocialProofSection` now power every migrated marketing route; check `docs/discovery.md` for canonical layouts.
+- Legal routes reuse structural primitives plus `useLegalContent()` for copy; marketing pages continue to rely on the modules listed below.
+- Extend modules via props or slots before adding new bespoke components so shared analytics, i18n, and QA hooks continue to apply.
+
 ## HeroSection
 - **Purpose:** Replace bespoke homepage hero with CTA buttons, bullet highlights, and a supporting feature list.
 - **Props:**

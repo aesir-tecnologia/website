@@ -1,11 +1,14 @@
 <template>
-  <footer class="border-t border-slate-200/70 bg-white text-slate-800 dark:border-[color:var(--aesir-border-soft)] dark:bg-[color:var(--aesir-surface-950)] dark:text-[color:var(--aesir-text-primary)]">
+  <footer
+    class="border-t transition-colors"
+    :style="footerStyle"
+  >
     <UContainer class="flex flex-col gap-4 py-8 sm:flex-row sm:items-center sm:justify-between">
       <div>
         <p class="text-sm font-semibold uppercase tracking-[0.08em]">
           {{ siteBrand.name }}
         </p>
-        <p class="mt-2 max-w-md text-sm text-slate-500 dark:text-[color:var(--aesir-text-soft)]">
+        <p class="mt-2 max-w-md text-sm" :style="taglineStyle">
           {{ siteBrand.tagline }}
         </p>
       </div>
@@ -15,7 +18,8 @@
           <li v-for="link in footerLinks" :key="link.to">
             <NuxtLink
               :to="link.to"
-              class="text-slate-500 transition-colors hover:text-slate-800 dark:text-[color:var(--aesir-text-muted)] dark:hover:text-[color:var(--aesir-text-inverse)]"
+              class="transition-colors hover:[color:var(--footer-link-hover)]"
+              :style="linkStyle"
             >
               {{ link.label }}
             </NuxtLink>
@@ -34,8 +38,26 @@ import { useSiteFooterLinks } from '~/composables/useSiteFooterLinks'
 const { brand } = useSiteNavigation()
 const footerLinks = useSiteFooterLinks()
 
+const { surfaceColor, borderColor, textColor } = useUiTokens()
+
 const siteBrand = computed(() => ({
   name: brand.value.name,
   tagline: brand.value.tagline ?? 'Transforming vibe-coded prototypes into production-ready products.'
+}))
+
+const footerStyle = computed(() => ({
+  backgroundColor: surfaceColor('base'),
+  borderColor: borderColor('soft'),
+  color: textColor('primary'),
+  transition: 'background-color 200ms ease, color 200ms ease'
+}))
+
+const taglineStyle = computed(() => ({
+  color: textColor('muted')
+}))
+
+const linkStyle = computed(() => ({
+  color: textColor('muted'),
+  '--footer-link-hover': textColor('primary')
 }))
 </script>

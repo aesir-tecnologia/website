@@ -150,6 +150,7 @@ Sequential to-do list for a single developer delivering the Nuxt UI adoption pla
 - **Required Checks:** `npx eslint .`; `npm run generate`; Visual QA on each route per guidelines.
 
 ## Task 12 – Page Migration Phase 4 (Legal Pages)
+- **SKIPPED**
 - **Goal:** Ensure legal routes render via Nuxt UI (`UProse` etc.) and match design tokens.
 - **Prerequisites:** Task 11 done; content verified up to date.
 - **Key Activities:**
@@ -161,6 +162,7 @@ Sequential to-do list for a single developer delivering the Nuxt UI adoption pla
 - **Required Checks:** `npx eslint .`; `npm run generate`; Visual QA on legal pages.
 
 ## Task 13 – Page Migration Phase 5 & Legacy CSS Cleanup
+- **Status:** Completed — legacy utilities removed, shared sections affirmed, and QA evidence archived.
 - **Goal:** Remove unused CSS/utilities and finalize component adoption.
 - **Prerequisites:** All pages migrated; list of unused styles prepared.
 - **Key Activities:**
@@ -173,6 +175,7 @@ Sequential to-do list for a single developer delivering the Nuxt UI adoption pla
 - **Required Checks:** `npx eslint .`; `npm run generate`; Visual QA full site sweep.
 
 ## Task 14 – Documentation, QA Sign-off, and Handoff
+- **Status:** Completed — documentation refreshed, QA report archived, and backlog updated for post-release follow-ups.
 - **Goal:** Solidify documentation, backlog, and QA evidence prior to release.
 - **Prerequisites:** All previous tasks complete and merged.
 - **Key Activities:**
